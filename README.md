@@ -25,128 +25,109 @@ Convenient object-oriented operations on strings
 
 ## Usage
 
- * Creating instances from any string
+Creating instances from any string:
 
-   ```php
-   new Str('Hello w☺rld')
-   // or
-   new Str('Hello w☺rld', 'UTF-8')
-   ```
+```php
+new Str('Hello w☺rld')
+// or
+new Str('Hello w☺rld', 'UTF-8')
+// or
+Str::from('Hello world')
+// or
+Str::from('Hello world', 'ISO-8859-1')
+```
 
- * Chaining methods
+Chaining methods:
 
-   ```php
-   new Str('Hello w☺rld')->containsIgnoreCase('W☺') // => bool(true)
-   // or
-   new Str('<b>Hello w☺rld</b>')->escapeForHtml()->containsIgnoreCase('<b>') // => bool(false)
-   ```
+```php
+new Str('Hello w☺rld')->containsIgnoreCase('W☺') // => bool(true)
+// or
+new Str('<b>Hello w☺rld</b>')->escapeForHtml()->containsIgnoreCase('<b>') // => bool(false)
+```
 
- * ```php
-   /**
-    * Static alternative to the constructor for easier chaining
-    *
-    * @param string $rawString the string to create an instance from
-    * @param string|null $charset the charset to use (one of the values listed by `mb_list_encodings`) or `null`
-    * @return static the new instance
-    */
-   public static function from($rawString, $charset = null);
-   ```
+Methods available on instances:
 
- * ```php
-   /**
-    * Returns whether this string starts with the supplied other string
-    *
-    * This operation is case-sensitive
-    *
-    * @param string $prefix the other string to search for
-    * @return bool whether the supplied other string can be found at the beginning of this string
-    */
-   public function startsWith($prefix);
-   ```
+```php
+/**
+ * Returns whether this string starts with the supplied other string
+ *
+ * This operation is case-sensitive
+ *
+ * @param string $prefix the other string to search for
+ * @return bool whether the supplied other string can be found at the beginning of this string
+ */
+public function startsWith($prefix);
 
- * ```php
-   /**
-    * Returns whether this string starts with the supplied other string
-    *
-    * This operation is case-insensitive
-    *
-    * @param string $prefix the other string to search for
-    * @return bool whether the supplied other string can be found at the beginning of this string
-    */
-   public function startsWithIgnoreCase($prefix);
-   ```
+/**
+ * Returns whether this string starts with the supplied other string
+ *
+ * This operation is case-insensitive
+ *
+ * @param string $prefix the other string to search for
+ * @return bool whether the supplied other string can be found at the beginning of this string
+ */
+public function startsWithIgnoreCase($prefix);
 
- * ```php
-   /**
-    * Returns whether this string contains the supplied other string
-    *
-    * This operation is case-sensitive
-    *
-    * @param string $infix the other string to search for
-    * @return bool whether the supplied other string is contained in this string
-    */
-   public function contains($infix);
-   ```
+/**
+ * Returns whether this string contains the supplied other string
+ *
+ * This operation is case-sensitive
+ *
+ * @param string $infix the other string to search for
+ * @return bool whether the supplied other string is contained in this string
+ */
+public function contains($infix);
 
- * ```php
-   /**
-    * Returns whether this string contains the supplied other string
-    *
-    * This operation is case-insensitive
-    *
-    * @param string $infix the other string to search for
-    * @return bool whether the supplied other string is contained in this string
-    */
-   public function containsIgnoreCase($infix);
-   ```
+/**
+ * Returns whether this string contains the supplied other string
+ *
+ * This operation is case-insensitive
+ *
+ * @param string $infix the other string to search for
+ * @return bool whether the supplied other string is contained in this string
+ */
+public function containsIgnoreCase($infix);
 
- * ```php
-   /**
-    * Returns whether this string ends with the supplied other string
-    *
-    * This operation is case-sensitive
-    *
-    * @param string $suffix the other string to search for
-    * @return bool whether the supplied other string can be found at the end of this string
-    */
-   public function endsWith($suffix);
-   ```
+/**
+ * Returns whether this string ends with the supplied other string
+ *
+ * This operation is case-sensitive
+ *
+ * @param string $suffix the other string to search for
+ * @return bool whether the supplied other string can be found at the end of this string
+ */
+public function endsWith($suffix);
 
- * ```php
-   /**
-    * Returns whether this string ends with the supplied other string
-    *
-    * This operation is case-insensitive
-    *
-    * @param string $suffix the other string to search for
-    * @return bool whether the supplied other string can be found at the end of this string
-    */
-   public function endsWithIgnoreCase($suffix);
-   ```
+/**
+ * Returns whether this string ends with the supplied other string
+ *
+ * This operation is case-insensitive
+ *
+ * @param string $suffix the other string to search for
+ * @return bool whether the supplied other string can be found at the end of this string
+ */
+public function endsWithIgnoreCase($suffix);
 
- * ```php
-   /**
-    * Escapes this string for safe use in HTML
-    *
-    * @return static this instance for chaining
-    */
-   public function escapeForHtml();
-   ```
+/**
+ * Escapes this string for safe use in HTML
+ *
+ * @return static this instance for chaining
+ */
+public function escapeForHtml();
 
- * Checking the length of an instance
+/**
+ * Alias of `count`
+ *
+ * @return int
+ */
+public function length();
+```
 
-   ```php
-   count($strInstance)
-   ```
+Checking the length of an instance:
 
- * ```php
-   /**
-    * Alias of `count`
-    *
-    * @return int
-    */
-   public function length();
-   ```
+```php
+count($strInstance)
+```
 
 ## Contributing
 
