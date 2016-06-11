@@ -25,24 +25,32 @@ Convenient object-oriented operations on strings
 
 ## Usage
 
-Creating instances from any string:
+Usually, you'll want to set up the following shorthand in your PHP code:
 
 ```php
-new Str('Hello w☺rld')
+function s($str, $charset = null) {
+    return new \Delight\Str\Str($str, $charset);
+}
+```
+
+This lets you create string objects by simply wrapping strings in `s(...)`.
+
+With that shorthand in place, creating instances from any string is as simple as this:
+
+```php
+s('Hello w☺rld')
 // or
-new Str('Hello w☺rld', 'UTF-8')
+s('Hello w☺rld', 'UTF-8')
 // or
-Str::from('Hello world')
-// or
-Str::from('Hello world', 'ISO-8859-1')
+s('Hello world', 'ISO-8859-1')
 ```
 
 Chaining methods:
 
 ```php
-new Str('Hello w☺rld')->containsIgnoreCase('W☺') // => bool(true)
+s('Hello w☺rld')->containsIgnoreCase('W☺') // => bool(true)
 // or
-new Str('<b>Hello w☺rld</b>')->escapeForHtml()->containsIgnoreCase('<b>') // => bool(false)
+s('<b>Hello w☺rld</b>')->escapeForHtml()->containsIgnoreCase('<b>') // => bool(false)
 ```
 
 Methods available on instances:
