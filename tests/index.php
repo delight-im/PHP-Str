@@ -61,6 +61,9 @@ assert(Str::from($testStr)->endsWithIgnoreCase('rL') === false);
 assert((string) Str::from($testStr)->toLowerCase() === 'hello hello w☺rld w☺rld');
 assert((string) Str::from($testStr)->toUpperCase() === 'HELLO HELLO W☺RLD W☺RLD');
 
+assert((string) Str::from($testStr)->replace('Hello') === '  w☺rld w☺rld');
+assert((string) Str::from($testStr)->replace('Hello', 'Bonjour') === 'Bonjour Bonjour w☺rld w☺rld');
+
 assert(count(Str::from($testStr)->split(' ')) === 4);
 assert(count(Str::from($testStr)->split(' ', 3)) === 3);
 assert(count(Str::from($testStr)->split(' ', 5)) === 4);

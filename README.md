@@ -131,6 +131,15 @@ public function toLowerCase();
 public function toUpperCase();
 
 /**
+ * Replaces all occurrences of the specified search string with the given replacement
+ *
+ * @param string $searchFor the string to search for
+ * @param string $replaceWith the string to use as the replacement (optional)
+ * @return static this instance for chaining
+ */
+public function replace($searchFor, $replaceWith = null);
+
+/**
  * Splits this string into an array of substrings at the specified delimiter
  *
  * @param string $delimiter the delimiter to split the string at
