@@ -100,7 +100,7 @@ final class Str implements \Countable {
 	public function endsWith($suffix) {
 		$other = new Str($suffix, $this->charset);
 
-		return mb_strpos($this->rawString, $suffix, 0, $this->charset) === ($this->length() - $other->length());
+		return mb_strrpos($this->rawString, $suffix, 0, $this->charset) === ($this->length() - $other->length());
 	}
 
 	/**
@@ -114,7 +114,7 @@ final class Str implements \Countable {
 	public function endsWithIgnoreCase($suffix) {
 		$other = new Str($suffix, $this->charset);
 
-		return mb_stripos($this->rawString, $suffix, 0, $this->charset) === ($this->length() - $other->length());
+		return mb_strripos($this->rawString, $suffix, 0, $this->charset) === ($this->length() - $other->length());
 	}
 
 	/**
