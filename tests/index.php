@@ -21,7 +21,7 @@ require __DIR__.'/../vendor/autoload.php';
 
 use Delight\Str\Str;
 
-$testStr = "Hello w☺rld";
+$testStr = "Hello Hello w☺rld w☺rld";
 
 assert(Str::from($testStr)->startsWith('He') === true);
 assert(Str::from($testStr)->startsWith('he') === false);
@@ -61,8 +61,8 @@ assert(Str::from($testStr)->endsWithIgnoreCase('rL') === false);
 assert((string) Str::from($testStr)->escapeForHtml() === $testStr);
 assert((string) Str::from('<b>'.$testStr.'</b>')->escapeForHtml() === '&lt;b&gt;'.$testStr.'&lt;/b&gt;');
 
-assert(count(Str::from($testStr)) === 11);
-assert(Str::from($testStr)->count() === 11);
-assert(Str::from($testStr)->length() === 11);
+assert(count(Str::from($testStr)) === 23);
+assert(Str::from($testStr)->count() === 23);
+assert(Str::from($testStr)->length() === 23);
 
 echo 'ALL TESTS PASSED';
