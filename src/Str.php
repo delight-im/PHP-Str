@@ -252,6 +252,22 @@ final class Str implements \Countable {
 		return $this;
 	}
 
+	/**
+	 * Normalizes all line endings in this string by using a single unified newline sequence (which may be specified manually)
+	 *
+	 * @param string|null $newlineSequence the target newline sequence to use (optional)
+	 * @return static this instance for chaining
+	 */
+	public function normalizeLineEndings($newlineSequence = null) {
+		if ($newlineSequence === null) {
+			$newlineSequence = "\n";
+		}
+
+		$this->rawString = preg_replace('/\R/u', $newlineSequence, $this->rawString);
+
+		return $this;
+	}
+
 	public function count() {
 		return mb_strlen($this->rawString, $this->charset);
 	}

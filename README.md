@@ -193,6 +193,14 @@ public function splitByRegex($delimiterPattern, $limit = null, $flags = null);
 public function escapeForHtml();
 
 /**
+ * Normalizes all line endings in this string by using a single unified newline sequence (which may be specified manually)
+ *
+ * @param string|null $newlineSequence the target newline sequence to use (optional)
+ * @return static this instance for chaining
+ */
+public function normalizeLineEndings($newlineSequence = null);
+
+/**
  * Alias of `count`
  *
  * @return int

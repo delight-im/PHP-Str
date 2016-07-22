@@ -91,6 +91,12 @@ assert(count(Str::from($testStr)->splitByRegex('/ (?=[A-Z])|(?<=[a-z]) (?!.*? )/
 assert((string) Str::from($testStr)->escapeForHtml() === $testStr);
 assert((string) Str::from('<b>'.$testStr.'</b>')->escapeForHtml() === '&lt;b&gt;'.$testStr.'&lt;/b&gt;');
 
+assert((string) Str::from($testStr)->normalizeLineEndings() === $testStr);
+assert((string) Str::from("a\r\nb\nc\rd".$testStr."a\r\nb\nc\rd")->normalizeLineEndings() === "a\nb\nc\nd".$testStr."a\nb\nc\nd");
+assert((string) Str::from("a\r\nb\nc\rd".$testStr."a\r\nb\nc\rd")->normalizeLineEndings("\r\n") === "a\r\nb\r\nc\r\nd".$testStr."a\r\nb\r\nc\r\nd");
+assert((string) Str::from("a\r\nb\nc\rd".$testStr."a\r\nb\nc\rd")->normalizeLineEndings("\r") === "a\rb\rc\rd".$testStr."a\rb\rc\rd");
+assert((string) Str::from("a\r\nb\nc\rd".$testStr."a\r\nb\nc\rd")->normalizeLineEndings("\n") === "a\nb\nc\nd".$testStr."a\nb\nc\nd");
+
 assert(count(Str::from($testStr)) === 23);
 assert(Str::from($testStr)->count() === 23);
 assert(Str::from($testStr)->length() === 23);
