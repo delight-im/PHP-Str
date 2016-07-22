@@ -64,3 +64,5 @@ assert((string) Str::from('<b>'.$testStr.'</b>')->escapeForHtml() === '&lt;b&gt;
 assert(count(Str::from($testStr)) === 11);
 assert(Str::from($testStr)->count() === 11);
 assert(Str::from($testStr)->length() === 11);
+
+echo 'ALL TESTS PASSED';
