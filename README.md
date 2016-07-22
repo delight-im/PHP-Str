@@ -117,6 +117,20 @@ public function endsWith($suffix);
 public function endsWithIgnoreCase($suffix);
 
 /**
+ * Converts this string to lowercase
+ *
+ * @return static this instance for chaining
+ */
+public function toLowerCase();
+
+/**
+ * Converts this string to uppercase
+ *
+ * @return static this instance for chaining
+ */
+public function toUpperCase();
+
+/**
  * Escapes this string for safe use in HTML
  *
  * @return static this instance for chaining

@@ -118,6 +118,28 @@ final class Str implements \Countable {
 	}
 
 	/**
+	 * Converts this string to lowercase
+	 *
+	 * @return static this instance for chaining
+	 */
+	public function toLowerCase() {
+		$this->rawString = mb_strtolower($this->rawString, $this->charset);
+
+		return $this;
+	}
+
+	/**
+	 * Converts this string to uppercase
+	 *
+	 * @return static this instance for chaining
+	 */
+	public function toUpperCase() {
+		$this->rawString = mb_strtoupper($this->rawString, $this->charset);
+
+		return $this;
+	}
+
+	/**
 	 * Escapes this string for safe use in HTML
 	 *
 	 * @return static this instance for chaining
