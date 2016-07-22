@@ -21,7 +21,7 @@ require __DIR__.'/../vendor/autoload.php';
 
 use Delight\Str\Str;
 
-$testStr = "Hello Hello w☺rld w☺rld";
+$testStr = 'Hello Hello w☺rld w☺rld';
 
 assert(Str::from($testStr)->startsWith('He') === true);
 assert(Str::from($testStr)->startsWith('he') === false);
