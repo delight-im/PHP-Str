@@ -25,7 +25,7 @@ Convenient object-oriented operations on strings
 
 ## Usage
 
-Usually, you'll want to set up the following shorthand in your PHP code:
+Usually, you'll want to set up the following shorthand in the global namespace of your PHP code:
 
 ```php
 function s($str, $charset = null) {
