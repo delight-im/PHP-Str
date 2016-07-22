@@ -61,6 +61,15 @@ assert(Str::from($testStr)->endsWithIgnoreCase('rL') === false);
 assert((string) Str::from($testStr)->toLowerCase() === 'hello hello w☺rld w☺rld');
 assert((string) Str::from($testStr)->toUpperCase() === 'HELLO HELLO W☺RLD W☺RLD');
 
+assert(count(Str::from($testStr)->split(' ')) === 4);
+assert(count(Str::from($testStr)->split(' ', 3)) === 3);
+assert(count(Str::from($testStr)->split(' ', 5)) === 4);
+assert(count(Str::from($testStr)->split(' Hello w☺rld ')) === 2);
+
+assert(count(Str::from($testStr)->splitByRegex('/ (?=[A-Z])|(?<=[a-z]) (?!.*? )/')) === 3);
+assert(count(Str::from($testStr)->splitByRegex('/ (?=[A-Z])|(?<=[a-z]) (?!.*? )/', 2)) === 2);
+assert(count(Str::from($testStr)->splitByRegex('/ (?=[A-Z])|(?<=[a-z]) (?!.*? )/', 4)) === 3);
+
 assert((string) Str::from($testStr)->escapeForHtml() === $testStr);
 assert((string) Str::from('<b>'.$testStr.'</b>')->escapeForHtml() === '&lt;b&gt;'.$testStr.'&lt;/b&gt;');
 

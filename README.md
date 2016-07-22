@@ -131,6 +131,25 @@ public function toLowerCase();
 public function toUpperCase();
 
 /**
+ * Splits this string into an array of substrings at the specified delimiter
+ *
+ * @param string $delimiter the delimiter to split the string at
+ * @param int|null $limit the maximum number of substrings to return (optional)
+ * @return static[] an array containing the substrings (which are instances of this class as well)
+ */
+public function split($delimiter, $limit = null);
+
+/**
+ * Splits this string into an array of substrings at the specified delimiter pattern
+ *
+ * @param string $delimiterPattern the regular expression (PCRE) to split the string at
+ * @param int|null $limit the maximum number of substrings to return (optional)
+ * @param int|null $flags any combination (bit-wise ORed) of PHP's `PREG_SPLIT_*` flags
+ * @return static[] an array containing the substrings (which are instances of this class as well)
+ */
+public function splitByRegex($delimiterPattern, $limit = null, $flags = null);
+
+/**
  * Escapes this string for safe use in HTML
  *
  * @return static this instance for chaining
