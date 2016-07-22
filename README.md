@@ -151,6 +151,12 @@ Checking the length of an instance:
 count($strInstance)
 ```
 
+Creating instances from all entries in an array:
+
+```php
+$instances = \Delight\Str\Str::fromArray($arrayOfStrings);
+```
+
 ## Contributing
 
 All contributions are welcome! If you wish to contribute, please create an issue first so that your feature, problem or question can be discussed.

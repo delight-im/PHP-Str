@@ -34,11 +34,28 @@ final class Str implements \Countable {
 	 * Static alternative to the constructor for easier chaining
 	 *
 	 * @param string $rawString the string to create an instance from
-	 * @param string|null $charset the charset to use (one of the values listed by `mb_list_encodings`) or `null`
+	 * @param string|null $charset the charset to use (one of the values listed by `mb_list_encodings`) (optional)
 	 * @return static the new instance
 	 */
 	public static function from($rawString, $charset = null) {
 		return new static($rawString, $charset);
+	}
+
+	/**
+	 * Variant of the static "constructor" that operates on arrays
+	 *
+	 * @param string[] $rawArray the array of strings to create instances from
+	 * @param string|null $charset the charset to use (one of the values listed by `mb_list_encodings`) (optional)
+	 * @return static[] the new instances
+	 */
+	public static function fromArray($rawArray, $charset = null) {
+		$output = array();
+
+		foreach ($rawArray as $rawEntry) {
+			$output[] = new static($rawEntry, $charset);
+		}
+
+		return $output;
 	}
 
 	/**
