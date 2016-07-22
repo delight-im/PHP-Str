@@ -22,41 +22,42 @@ require __DIR__.'/../vendor/autoload.php';
 use Delight\Str\Str;
 
 $testStr = 'Hello Hello w☺rld w☺rld';
+$testStrObj = Str::from($testStr);
 
-assert(Str::from($testStr)->startsWith('He') === true);
-assert(Str::from($testStr)->startsWith('he') === false);
-assert(Str::from($testStr)->startsWith('el') === false);
-assert(Str::from($testStr)->startsWith('El') === false);
-assert(Str::from($testStr)->startsWithIgnoreCase('He') === true);
-assert(Str::from($testStr)->startsWithIgnoreCase('he') === true);
-assert(Str::from($testStr)->startsWithIgnoreCase('el') === false);
-assert(Str::from($testStr)->startsWithIgnoreCase('El') === false);
+assert($testStrObj->startsWith('He') === true);
+assert($testStrObj->startsWith('he') === false);
+assert($testStrObj->startsWith('el') === false);
+assert($testStrObj->startsWith('El') === false);
+assert($testStrObj->startsWithIgnoreCase('He') === true);
+assert($testStrObj->startsWithIgnoreCase('he') === true);
+assert($testStrObj->startsWithIgnoreCase('el') === false);
+assert($testStrObj->startsWithIgnoreCase('El') === false);
 
-assert(Str::from($testStr)->contains('o w') === true);
-assert(Str::from($testStr)->contains('o W') === false);
-assert(Str::from($testStr)->contains('m') === false);
-assert(Str::from($testStr)->contains('M') === false);
-assert(Str::from($testStr)->contains('He') === true);
-assert(Str::from($testStr)->contains('he') === false);
-assert(Str::from($testStr)->contains('ld') === true);
-assert(Str::from($testStr)->contains('lD') === false);
-assert(Str::from($testStr)->containsIgnoreCase('o w') === true);
-assert(Str::from($testStr)->containsIgnoreCase('o W') === true);
-assert(Str::from($testStr)->containsIgnoreCase('m') === false);
-assert(Str::from($testStr)->containsIgnoreCase('M') === false);
-assert(Str::from($testStr)->containsIgnoreCase('He') === true);
-assert(Str::from($testStr)->containsIgnoreCase('he') === true);
-assert(Str::from($testStr)->containsIgnoreCase('ld') === true);
-assert(Str::from($testStr)->containsIgnoreCase('lD') === true);
+assert($testStrObj->contains('o w') === true);
+assert($testStrObj->contains('o W') === false);
+assert($testStrObj->contains('m') === false);
+assert($testStrObj->contains('M') === false);
+assert($testStrObj->contains('He') === true);
+assert($testStrObj->contains('he') === false);
+assert($testStrObj->contains('ld') === true);
+assert($testStrObj->contains('lD') === false);
+assert($testStrObj->containsIgnoreCase('o w') === true);
+assert($testStrObj->containsIgnoreCase('o W') === true);
+assert($testStrObj->containsIgnoreCase('m') === false);
+assert($testStrObj->containsIgnoreCase('M') === false);
+assert($testStrObj->containsIgnoreCase('He') === true);
+assert($testStrObj->containsIgnoreCase('he') === true);
+assert($testStrObj->containsIgnoreCase('ld') === true);
+assert($testStrObj->containsIgnoreCase('lD') === true);
 
-assert(Str::from($testStr)->endsWith('ld') === true);
-assert(Str::from($testStr)->endsWith('lD') === false);
-assert(Str::from($testStr)->endsWith('rl') === false);
-assert(Str::from($testStr)->endsWith('rL') === false);
-assert(Str::from($testStr)->endsWithIgnoreCase('ld') === true);
-assert(Str::from($testStr)->endsWithIgnoreCase('lD') === true);
-assert(Str::from($testStr)->endsWithIgnoreCase('rl') === false);
-assert(Str::from($testStr)->endsWithIgnoreCase('rL') === false);
+assert($testStrObj->endsWith('ld') === true);
+assert($testStrObj->endsWith('lD') === false);
+assert($testStrObj->endsWith('rl') === false);
+assert($testStrObj->endsWith('rL') === false);
+assert($testStrObj->endsWithIgnoreCase('ld') === true);
+assert($testStrObj->endsWithIgnoreCase('lD') === true);
+assert($testStrObj->endsWithIgnoreCase('rl') === false);
+assert($testStrObj->endsWithIgnoreCase('rL') === false);
 
 assert((string) Str::from(" \r\n".$testStr." \n")->trim() === $testStr);
 assert((string) Str::from(" \r\n".$testStr." \n")->trim('ab') === " \r\n".$testStr." \n");
@@ -73,32 +74,32 @@ assert((string) Str::from(" \r\n".$testStr." \n")->trimEnd('ab') === " \r\n".$te
 assert((string) Str::from("ab cd".$testStr." d c b a")->trimEnd('ab') === "ab cd".$testStr." d c b ");
 assert((string) Str::from("ab cd".$testStr." d c b a")->trimEnd('ab', true) === "ab cd".$testStr." d c");
 
-assert((string) Str::from($testStr)->toLowerCase() === 'hello hello w☺rld w☺rld');
-assert((string) Str::from($testStr)->toUpperCase() === 'HELLO HELLO W☺RLD W☺RLD');
+assert((string) $testStrObj->toLowerCase() === 'hello hello w☺rld w☺rld');
+assert((string) $testStrObj->toUpperCase() === 'HELLO HELLO W☺RLD W☺RLD');
 
-assert((string) Str::from($testStr)->replace('Hello') === '  w☺rld w☺rld');
-assert((string) Str::from($testStr)->replace('Hello', 'Bonjour') === 'Bonjour Bonjour w☺rld w☺rld');
+assert((string) $testStrObj->replace('Hello') === '  w☺rld w☺rld');
+assert((string) $testStrObj->replace('Hello', 'Bonjour') === 'Bonjour Bonjour w☺rld w☺rld');
 
-assert(count(Str::from($testStr)->split(' ')) === 4);
-assert(count(Str::from($testStr)->split(' ', 3)) === 3);
-assert(count(Str::from($testStr)->split(' ', 5)) === 4);
-assert(count(Str::from($testStr)->split(' Hello w☺rld ')) === 2);
+assert(count($testStrObj->split(' ')) === 4);
+assert(count($testStrObj->split(' ', 3)) === 3);
+assert(count($testStrObj->split(' ', 5)) === 4);
+assert(count($testStrObj->split(' Hello w☺rld ')) === 2);
 
-assert(count(Str::from($testStr)->splitByRegex('/ (?=[A-Z])|(?<=[a-z]) (?!.*? )/')) === 3);
-assert(count(Str::from($testStr)->splitByRegex('/ (?=[A-Z])|(?<=[a-z]) (?!.*? )/', 2)) === 2);
-assert(count(Str::from($testStr)->splitByRegex('/ (?=[A-Z])|(?<=[a-z]) (?!.*? )/', 4)) === 3);
+assert(count($testStrObj->splitByRegex('/ (?=[A-Z])|(?<=[a-z]) (?!.*? )/')) === 3);
+assert(count($testStrObj->splitByRegex('/ (?=[A-Z])|(?<=[a-z]) (?!.*? )/', 2)) === 2);
+assert(count($testStrObj->splitByRegex('/ (?=[A-Z])|(?<=[a-z]) (?!.*? )/', 4)) === 3);
 
-assert((string) Str::from($testStr)->escapeForHtml() === $testStr);
+assert((string) $testStrObj->escapeForHtml() === $testStr);
 assert((string) Str::from('<b>'.$testStr.'</b>')->escapeForHtml() === '&lt;b&gt;'.$testStr.'&lt;/b&gt;');
 
-assert((string) Str::from($testStr)->normalizeLineEndings() === $testStr);
+assert((string) $testStrObj->normalizeLineEndings() === $testStr);
 assert((string) Str::from("a\r\nb\nc\rd".$testStr."a\r\nb\nc\rd")->normalizeLineEndings() === "a\nb\nc\nd".$testStr."a\nb\nc\nd");
 assert((string) Str::from("a\r\nb\nc\rd".$testStr."a\r\nb\nc\rd")->normalizeLineEndings("\r\n") === "a\r\nb\r\nc\r\nd".$testStr."a\r\nb\r\nc\r\nd");
 assert((string) Str::from("a\r\nb\nc\rd".$testStr."a\r\nb\nc\rd")->normalizeLineEndings("\r") === "a\rb\rc\rd".$testStr."a\rb\rc\rd");
 assert((string) Str::from("a\r\nb\nc\rd".$testStr."a\r\nb\nc\rd")->normalizeLineEndings("\n") === "a\nb\nc\nd".$testStr."a\nb\nc\nd");
 
-assert(count(Str::from($testStr)) === 23);
-assert(Str::from($testStr)->count() === 23);
-assert(Str::from($testStr)->length() === 23);
+assert(count($testStrObj) === 23);
+assert($testStrObj->count() === 23);
+assert($testStrObj->length() === 23);
 
 echo 'ALL TESTS PASSED';

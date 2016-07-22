@@ -139,7 +139,7 @@ final class Str implements \Countable {
 	 *
 	 * @param string $charactersToRemove the characters to remove (optional)
 	 * @param bool $alwaysRemoveWhitespace whether to remove whitespace even if a custom list of characters is provided (optional)
-	 * @return static this instance for chaining
+	 * @return static a new instance of this class
 	 */
 	public function trim($charactersToRemove = null, $alwaysRemoveWhitespace = null) {
 		return $this->callTrimFunc('trim', $charactersToRemove, $alwaysRemoveWhitespace);
@@ -150,7 +150,7 @@ final class Str implements \Countable {
 	 *
 	 * @param string $charactersToRemove the characters to remove (optional)
 	 * @param bool $alwaysRemoveWhitespace whether to remove whitespace even if a custom list of characters is provided (optional)
-	 * @return static this instance for chaining
+	 * @return static a new instance of this class
 	 */
 	public function trimStart($charactersToRemove = null, $alwaysRemoveWhitespace = null) {
 		return $this->callTrimFunc('ltrim', $charactersToRemove, $alwaysRemoveWhitespace);
@@ -161,7 +161,7 @@ final class Str implements \Countable {
 	 *
 	 * @param string $charactersToRemove the characters to remove (optional)
 	 * @param bool $alwaysRemoveWhitespace whether to remove whitespace even if a custom list of characters is provided (optional)
-	 * @return static this instance for chaining
+	 * @return static a new instance of this class
 	 */
 	public function trimEnd($charactersToRemove = null, $alwaysRemoveWhitespace = null) {
 		return $this->callTrimFunc('rtrim', $charactersToRemove, $alwaysRemoveWhitespace);
@@ -170,23 +170,23 @@ final class Str implements \Countable {
 	/**
 	 * Converts this string to lowercase
 	 *
-	 * @return static this instance for chaining
+	 * @return static a new instance of this class
 	 */
 	public function toLowerCase() {
-		$this->rawString = mb_strtolower($this->rawString, $this->charset);
+		$rawString = mb_strtolower($this->rawString, $this->charset);
 
-		return $this;
+		return new static($rawString, $this->charset);
 	}
 
 	/**
 	 * Converts this string to uppercase
 	 *
-	 * @return static this instance for chaining
+	 * @return static a new instance of this class
 	 */
 	public function toUpperCase() {
-		$this->rawString = mb_strtoupper($this->rawString, $this->charset);
+		$rawString = mb_strtoupper($this->rawString, $this->charset);
 
-		return $this;
+		return new static($rawString, $this->charset);
 	}
 
 	/**
@@ -194,16 +194,16 @@ final class Str implements \Countable {
 	 *
 	 * @param string $searchFor the string to search for
 	 * @param string $replaceWith the string to use as the replacement (optional)
-	 * @return static this instance for chaining
+	 * @return static a new instance of this class
 	 */
 	public function replace($searchFor, $replaceWith = null) {
 		if ($replaceWith === null) {
 			$replaceWith = '';
 		}
 
-		$this->rawString = str_replace($searchFor, $replaceWith, $this->rawString);
+		$rawString = str_replace($searchFor, $replaceWith, $this->rawString);
 
-		return $this;
+		return new static($rawString, $this->charset);
 	}
 
 	/**
@@ -244,28 +244,28 @@ final class Str implements \Countable {
 	/**
 	 * Escapes this string for safe use in HTML
 	 *
-	 * @return static this instance for chaining
+	 * @return static a new instance of this class
 	 */
 	public function escapeForHtml() {
-		$this->rawString = htmlspecialchars($this->rawString, ENT_QUOTES, $this->charset);
+		$rawString = htmlspecialchars($this->rawString, ENT_QUOTES, $this->charset);
 
-		return $this;
+		return new static($rawString, $this->charset);
 	}
 
 	/**
 	 * Normalizes all line endings in this string by using a single unified newline sequence (which may be specified manually)
 	 *
 	 * @param string|null $newlineSequence the target newline sequence to use (optional)
-	 * @return static this instance for chaining
+	 * @return static a new instance of this class
 	 */
 	public function normalizeLineEndings($newlineSequence = null) {
 		if ($newlineSequence === null) {
 			$newlineSequence = "\n";
 		}
 
-		$this->rawString = preg_replace('/\R/u', $newlineSequence, $this->rawString);
+		$rawString = preg_replace('/\R/u', $newlineSequence, $this->rawString);
 
-		return $this;
+		return new static($rawString, $this->charset);
 	}
 
 	public function count() {
