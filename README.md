@@ -117,6 +117,33 @@ public function endsWith($suffix);
 public function endsWithIgnoreCase($suffix);
 
 /**
+ * Removes all whitespace or the specified characters from both sides of this string
+ *
+ * @param string $charactersToRemove the characters to remove (optional)
+ * @param bool $alwaysRemoveWhitespace whether to remove whitespace even if a custom list of characters is provided (optional)
+ * @return static this instance for chaining
+ */
+public function trim($charactersToRemove = null, $alwaysRemoveWhitespace = null);
+
+/**
+ * Removes all whitespace or the specified characters from the start of this string
+ *
+ * @param string $charactersToRemove the characters to remove (optional)
+ * @param bool $alwaysRemoveWhitespace whether to remove whitespace even if a custom list of characters is provided (optional)
+ * @return static this instance for chaining
+ */
+public function trimStart($charactersToRemove = null, $alwaysRemoveWhitespace = null);
+
+/**
+ * Removes all whitespace or the specified characters from the end of this string
+ *
+ * @param string $charactersToRemove the characters to remove (optional)
+ * @param bool $alwaysRemoveWhitespace whether to remove whitespace even if a custom list of characters is provided (optional)
+ * @return static this instance for chaining
+ */
+public function trimEnd($charactersToRemove = null, $alwaysRemoveWhitespace = null);
+
+/**
  * Converts this string to lowercase
  *
  * @return static this instance for chaining

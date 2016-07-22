@@ -135,6 +135,39 @@ final class Str implements \Countable {
 	}
 
 	/**
+	 * Removes all whitespace or the specified characters from both sides of this string
+	 *
+	 * @param string $charactersToRemove the characters to remove (optional)
+	 * @param bool $alwaysRemoveWhitespace whether to remove whitespace even if a custom list of characters is provided (optional)
+	 * @return static this instance for chaining
+	 */
+	public function trim($charactersToRemove = null, $alwaysRemoveWhitespace = null) {
+		return $this->callTrimFunc('trim', $charactersToRemove, $alwaysRemoveWhitespace);
+	}
+
+	/**
+	 * Removes all whitespace or the specified characters from the start of this string
+	 *
+	 * @param string $charactersToRemove the characters to remove (optional)
+	 * @param bool $alwaysRemoveWhitespace whether to remove whitespace even if a custom list of characters is provided (optional)
+	 * @return static this instance for chaining
+	 */
+	public function trimStart($charactersToRemove = null, $alwaysRemoveWhitespace = null) {
+		return $this->callTrimFunc('ltrim', $charactersToRemove, $alwaysRemoveWhitespace);
+	}
+
+	/**
+	 * Removes all whitespace or the specified characters from the end of this string
+	 *
+	 * @param string $charactersToRemove the characters to remove (optional)
+	 * @param bool $alwaysRemoveWhitespace whether to remove whitespace even if a custom list of characters is provided (optional)
+	 * @return static this instance for chaining
+	 */
+	public function trimEnd($charactersToRemove = null, $alwaysRemoveWhitespace = null) {
+		return $this->callTrimFunc('rtrim', $charactersToRemove, $alwaysRemoveWhitespace);
+	}
+
+	/**
 	 * Converts this string to lowercase
 	 *
 	 * @return static this instance for chaining
@@ -234,6 +267,22 @@ final class Str implements \Countable {
 
 	public function __toString() {
 		return $this->rawString;
+	}
+
+	private function callTrimFunc(callable $func, $charactersToRemove = null, $alwaysRemoveWhitespace = null) {
+		if ($alwaysRemoveWhitespace === null) {
+			$alwaysRemoveWhitespace = false;
+		}
+
+		if ($charactersToRemove === null || $alwaysRemoveWhitespace) {
+			if ($charactersToRemove === null) {
+				$charactersToRemove = '';
+			}
+
+			$charactersToRemove .= " \t\n\r\0\x0B";
+		}
+
+		return $func($this->rawString, $charactersToRemove);
 	}
 
 }

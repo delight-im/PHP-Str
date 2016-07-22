@@ -58,6 +58,21 @@ assert(Str::from($testStr)->endsWithIgnoreCase('lD') === true);
 assert(Str::from($testStr)->endsWithIgnoreCase('rl') === false);
 assert(Str::from($testStr)->endsWithIgnoreCase('rL') === false);
 
+assert((string) Str::from(" \r\n".$testStr." \n")->trim() === $testStr);
+assert((string) Str::from(" \r\n".$testStr." \n")->trim('ab') === " \r\n".$testStr." \n");
+assert((string) Str::from("ab cd".$testStr." d c b a")->trim('ab') === " cd".$testStr." d c b ");
+assert((string) Str::from("ab cd".$testStr." d c b a")->trim('ab', true) === "cd".$testStr." d c");
+
+assert((string) Str::from(" \r\n".$testStr." \n")->trimStart() === $testStr." \n");
+assert((string) Str::from(" \r\n".$testStr." \n")->trimStart('ab') === " \r\n".$testStr." \n");
+assert((string) Str::from("ab cd".$testStr." d c b a")->trimStart('ab') === " cd".$testStr." d c b a");
+assert((string) Str::from("ab cd".$testStr." d c b a")->trimStart('ab', true) === "cd".$testStr." d c b a");
+
+assert((string) Str::from(" \r\n".$testStr." \n")->trimEnd() === " \r\n".$testStr);
+assert((string) Str::from(" \r\n".$testStr." \n")->trimEnd('ab') === " \r\n".$testStr." \n");
+assert((string) Str::from("ab cd".$testStr." d c b a")->trimEnd('ab') === "ab cd".$testStr." d c b ");
+assert((string) Str::from("ab cd".$testStr." d c b a")->trimEnd('ab', true) === "ab cd".$testStr." d c");
+
 assert((string) Str::from($testStr)->toLowerCase() === 'hello hello w☺rld w☺rld');
 assert((string) Str::from($testStr)->toUpperCase() === 'HELLO HELLO W☺RLD W☺RLD');
 
