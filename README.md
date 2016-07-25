@@ -198,6 +198,26 @@ public function replaceFirst($searchFor, $replaceWith = null);
 public function replaceFirstIgnoreCase($searchFor, $replaceWith = null);
 
 /**
+ * Replaces the last occurrence of the specified search string with the given replacement
+ *
+ * @param string $searchFor the string to search for
+ * @param string $replaceWith the string to use as the replacement (optional)
+ * @return static a new instance of this class
+ */
+public function replaceLast($searchFor, $replaceWith = null);
+
+/**
+ * Replaces the last occurrence of the specified search string with the given replacement
+ *
+ * This operation is case-insensitive
+ *
+ * @param string $searchFor the string to search for
+ * @param string $replaceWith the string to use as the replacement (optional)
+ * @return static a new instance of this class
+ */
+public function replaceLastIgnoreCase($searchFor, $replaceWith = null);
+
+/**
  * Splits this string into an array of substrings at the specified delimiter
  *
  * @param string $delimiter the delimiter to split the string at
