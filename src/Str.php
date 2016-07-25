@@ -142,7 +142,7 @@ final class Str implements \Countable {
 	 * @return static a new instance of this class
 	 */
 	public function trim($charactersToRemove = null, $alwaysRemoveWhitespace = null) {
-		return $this->callTrimFunc('trim', $charactersToRemove, $alwaysRemoveWhitespace);
+		return $this->trimInternal('trim', $charactersToRemove, $alwaysRemoveWhitespace);
 	}
 
 	/**
@@ -153,7 +153,7 @@ final class Str implements \Countable {
 	 * @return static a new instance of this class
 	 */
 	public function trimStart($charactersToRemove = null, $alwaysRemoveWhitespace = null) {
-		return $this->callTrimFunc('ltrim', $charactersToRemove, $alwaysRemoveWhitespace);
+		return $this->trimInternal('ltrim', $charactersToRemove, $alwaysRemoveWhitespace);
 	}
 
 	/**
@@ -164,7 +164,7 @@ final class Str implements \Countable {
 	 * @return static a new instance of this class
 	 */
 	public function trimEnd($charactersToRemove = null, $alwaysRemoveWhitespace = null) {
-		return $this->callTrimFunc('rtrim', $charactersToRemove, $alwaysRemoveWhitespace);
+		return $this->trimInternal('rtrim', $charactersToRemove, $alwaysRemoveWhitespace);
 	}
 
 	/**
@@ -285,7 +285,7 @@ final class Str implements \Countable {
 		return $this->rawString;
 	}
 
-	private function callTrimFunc(callable $func, $charactersToRemove = null, $alwaysRemoveWhitespace = null) {
+	private function trimInternal(callable $func, $charactersToRemove = null, $alwaysRemoveWhitespace = null) {
 		if ($alwaysRemoveWhitespace === null) {
 			$alwaysRemoveWhitespace = false;
 		}
