@@ -59,7 +59,7 @@ s('Hello world', 'ISO-8859-1')
 public function startsWith($prefix);
 
 
-// -----------------------------------------------------------------------------
+////////////////////////////////////////////////////////////////////////////////
 
 
 /**
@@ -73,7 +73,7 @@ public function startsWith($prefix);
 public function startsWithIgnoreCase($prefix);
 
 
-// -----------------------------------------------------------------------------
+////////////////////////////////////////////////////////////////////////////////
 
 
 /**
@@ -87,7 +87,7 @@ public function startsWithIgnoreCase($prefix);
 public function contains($infix);
 
 
-// -----------------------------------------------------------------------------
+////////////////////////////////////////////////////////////////////////////////
 
 
 /**
@@ -101,7 +101,7 @@ public function contains($infix);
 public function containsIgnoreCase($infix);
 
 
-// -----------------------------------------------------------------------------
+////////////////////////////////////////////////////////////////////////////////
 
 
 /**
@@ -115,7 +115,7 @@ public function containsIgnoreCase($infix);
 public function endsWith($suffix);
 
 
-// -----------------------------------------------------------------------------
+////////////////////////////////////////////////////////////////////////////////
 
 
 /**
@@ -129,7 +129,7 @@ public function endsWith($suffix);
 public function endsWithIgnoreCase($suffix);
 
 
-// -----------------------------------------------------------------------------
+////////////////////////////////////////////////////////////////////////////////
 
 
 /**
@@ -142,7 +142,7 @@ public function endsWithIgnoreCase($suffix);
 public function trim($charactersToRemove = null, $alwaysRemoveWhitespace = null);
 
 
-// -----------------------------------------------------------------------------
+////////////////////////////////////////////////////////////////////////////////
 
 
 /**
@@ -155,7 +155,7 @@ public function trim($charactersToRemove = null, $alwaysRemoveWhitespace = null)
 public function trimStart($charactersToRemove = null, $alwaysRemoveWhitespace = null);
 
 
-// -----------------------------------------------------------------------------
+////////////////////////////////////////////////////////////////////////////////
 
 
 /**
@@ -168,7 +168,7 @@ public function trimStart($charactersToRemove = null, $alwaysRemoveWhitespace = 
 public function trimEnd($charactersToRemove = null, $alwaysRemoveWhitespace = null);
 
 
-// -----------------------------------------------------------------------------
+////////////////////////////////////////////////////////////////////////////////
 
 
 /**
@@ -179,7 +179,7 @@ public function trimEnd($charactersToRemove = null, $alwaysRemoveWhitespace = nu
 public function toLowerCase();
 
 
-// -----------------------------------------------------------------------------
+////////////////////////////////////////////////////////////////////////////////
 
 
 /**
@@ -190,7 +190,7 @@ public function toLowerCase();
 public function toUpperCase();
 
 
-// -----------------------------------------------------------------------------
+////////////////////////////////////////////////////////////////////////////////
 
 
 /**
@@ -203,7 +203,7 @@ public function toUpperCase();
 public function replace($searchFor, $replaceWith = null);
 
 
-// -----------------------------------------------------------------------------
+////////////////////////////////////////////////////////////////////////////////
 
 
 /**
@@ -218,7 +218,7 @@ public function replace($searchFor, $replaceWith = null);
 public function replaceIgnoreCase($searchFor, $replaceWith = null);
 
 
-// -----------------------------------------------------------------------------
+////////////////////////////////////////////////////////////////////////////////
 
 
 /**
@@ -231,7 +231,7 @@ public function replaceIgnoreCase($searchFor, $replaceWith = null);
 public function replaceFirst($searchFor, $replaceWith = null);
 
 
-// -----------------------------------------------------------------------------
+////////////////////////////////////////////////////////////////////////////////
 
 
 /**
@@ -246,7 +246,7 @@ public function replaceFirst($searchFor, $replaceWith = null);
 public function replaceFirstIgnoreCase($searchFor, $replaceWith = null);
 
 
-// -----------------------------------------------------------------------------
+////////////////////////////////////////////////////////////////////////////////
 
 
 /**
@@ -259,7 +259,7 @@ public function replaceFirstIgnoreCase($searchFor, $replaceWith = null);
 public function replaceLast($searchFor, $replaceWith = null);
 
 
-// -----------------------------------------------------------------------------
+////////////////////////////////////////////////////////////////////////////////
 
 
 /**
@@ -274,7 +274,7 @@ public function replaceLast($searchFor, $replaceWith = null);
 public function replaceLastIgnoreCase($searchFor, $replaceWith = null);
 
 
-// -----------------------------------------------------------------------------
+////////////////////////////////////////////////////////////////////////////////
 
 
 /**
@@ -287,7 +287,7 @@ public function replaceLastIgnoreCase($searchFor, $replaceWith = null);
 public function split($delimiter, $limit = null);
 
 
-// -----------------------------------------------------------------------------
+////////////////////////////////////////////////////////////////////////////////
 
 
 /**
@@ -301,7 +301,7 @@ public function split($delimiter, $limit = null);
 public function splitByRegex($delimiterPattern, $limit = null, $flags = null);
 
 
-// -----------------------------------------------------------------------------
+////////////////////////////////////////////////////////////////////////////////
 
 
 /**
@@ -316,7 +316,7 @@ public function splitByRegex($delimiterPattern, $limit = null, $flags = null);
 public function between($start, $end);
 
 
-// -----------------------------------------------------------------------------
+////////////////////////////////////////////////////////////////////////////////
 
 
 /**
@@ -327,7 +327,7 @@ public function between($start, $end);
 public function escapeForHtml();
 
 
-// -----------------------------------------------------------------------------
+////////////////////////////////////////////////////////////////////////////////
 
 
 /**
