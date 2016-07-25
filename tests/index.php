@@ -105,6 +105,10 @@ assert(count($testStrObj->splitByRegex('/ (?=[A-Z])|(?<=[a-z]) (?!.*? )/')) === 
 assert(count($testStrObj->splitByRegex('/ (?=[A-Z])|(?<=[a-z]) (?!.*? )/', 2)) === 2);
 assert(count($testStrObj->splitByRegex('/ (?=[A-Z])|(?<=[a-z]) (?!.*? )/', 4)) === 3);
 
+assert((string) $testStrObj->between('Hello', 'w☺rld') === ' Hello w☺rld ');
+assert((string) $testStrObj->between('w☺rld', 'w☺rld') === ' ');
+assert((string) $testStrObj->between('w☺rld', 'Hello') === '');
+
 assert((string) $testStrObj->escapeForHtml() === $testStr);
 assert((string) Str::from('<b>'.$testStr.'</b>')->escapeForHtml() === '&lt;b&gt;'.$testStr.'&lt;/b&gt;');
 

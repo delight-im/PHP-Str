@@ -237,6 +237,17 @@ public function split($delimiter, $limit = null);
 public function splitByRegex($delimiterPattern, $limit = null, $flags = null);
 
 /**
+ * Returns the part of this string between the two specified substrings
+ *
+ * If there are multiple occurrences, the part with the maximum length will be returned
+ *
+ * @param string $start the substring whose first occurrence should delimit the start
+ * @param string $end the substring whose last occurrence should delimit the end
+ * @return static a new instance of this class
+ */
+public function between($start, $end);
+
+/**
  * Escapes this string for safe use in HTML
  *
  * @return static this instance for chaining

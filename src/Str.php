@@ -297,6 +297,32 @@ final class Str implements \Countable {
 	}
 
 	/**
+	 * Returns the part of this string between the two specified substrings
+	 *
+	 * If there are multiple occurrences, the part with the maximum length will be returned
+	 *
+	 * @param string $start the substring whose first occurrence should delimit the start
+	 * @param string $end the substring whose last occurrence should delimit the end
+	 * @return static a new instance of this class
+	 */
+	public function between($start, $end) {
+		$beforeStart = mb_strpos($this->rawString, $start, 0, $this->charset);
+
+		$rawString = '';
+
+		if ($beforeStart !== false) {
+			$afterStart = $beforeStart + mb_strlen($start, $this->charset);
+			$beforeEnd = mb_strrpos($this->rawString, $end, $afterStart, $this->charset);
+
+			if ($beforeEnd !== false) {
+				$rawString = mb_substr($this->rawString, $afterStart, $beforeEnd - $afterStart, $this->charset);
+			}
+		}
+
+		return new static($rawString, $this->charset);
+	}
+
+	/**
 	 * Escapes this string for safe use in HTML
 	 *
 	 * @return static a new instance of this class
