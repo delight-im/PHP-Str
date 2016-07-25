@@ -45,15 +45,7 @@ s('Hello w☺rld', 'UTF-8')
 s('Hello world', 'ISO-8859-1')
 ```
 
-Chaining methods:
-
-```php
-s('Hello w☺rld')->containsIgnoreCase('W☺') // => bool(true)
-// or
-s('<b>Hello w☺rld</b>')->escapeForHtml()->containsIgnoreCase('<b>') // => bool(false)
-```
-
-Methods available on instances:
+### Available methods
 
 ```php
 /**
@@ -66,6 +58,10 @@ Methods available on instances:
  */
 public function startsWith($prefix);
 
+
+// -----------------------------------------------------------------------------
+
+
 /**
  * Returns whether this string starts with the supplied other string
  *
@@ -75,6 +71,10 @@ public function startsWith($prefix);
  * @return bool whether the supplied other string can be found at the beginning of this string
  */
 public function startsWithIgnoreCase($prefix);
+
+
+// -----------------------------------------------------------------------------
+
 
 /**
  * Returns whether this string contains the supplied other string
@@ -86,6 +86,10 @@ public function startsWithIgnoreCase($prefix);
  */
 public function contains($infix);
 
+
+// -----------------------------------------------------------------------------
+
+
 /**
  * Returns whether this string contains the supplied other string
  *
@@ -95,6 +99,10 @@ public function contains($infix);
  * @return bool whether the supplied other string is contained in this string
  */
 public function containsIgnoreCase($infix);
+
+
+// -----------------------------------------------------------------------------
+
 
 /**
  * Returns whether this string ends with the supplied other string
@@ -106,6 +114,10 @@ public function containsIgnoreCase($infix);
  */
 public function endsWith($suffix);
 
+
+// -----------------------------------------------------------------------------
+
+
 /**
  * Returns whether this string ends with the supplied other string
  *
@@ -116,6 +128,10 @@ public function endsWith($suffix);
  */
 public function endsWithIgnoreCase($suffix);
 
+
+// -----------------------------------------------------------------------------
+
+
 /**
  * Removes all whitespace or the specified characters from both sides of this string
  *
@@ -124,6 +140,10 @@ public function endsWithIgnoreCase($suffix);
  * @return static this instance for chaining
  */
 public function trim($charactersToRemove = null, $alwaysRemoveWhitespace = null);
+
+
+// -----------------------------------------------------------------------------
+
 
 /**
  * Removes all whitespace or the specified characters from the start of this string
@@ -134,6 +154,10 @@ public function trim($charactersToRemove = null, $alwaysRemoveWhitespace = null)
  */
 public function trimStart($charactersToRemove = null, $alwaysRemoveWhitespace = null);
 
+
+// -----------------------------------------------------------------------------
+
+
 /**
  * Removes all whitespace or the specified characters from the end of this string
  *
@@ -143,6 +167,10 @@ public function trimStart($charactersToRemove = null, $alwaysRemoveWhitespace = 
  */
 public function trimEnd($charactersToRemove = null, $alwaysRemoveWhitespace = null);
 
+
+// -----------------------------------------------------------------------------
+
+
 /**
  * Converts this string to lowercase
  *
@@ -150,12 +178,20 @@ public function trimEnd($charactersToRemove = null, $alwaysRemoveWhitespace = nu
  */
 public function toLowerCase();
 
+
+// -----------------------------------------------------------------------------
+
+
 /**
  * Converts this string to uppercase
  *
  * @return static this instance for chaining
  */
 public function toUpperCase();
+
+
+// -----------------------------------------------------------------------------
+
 
 /**
  * Replaces all occurrences of the specified search string with the given replacement
@@ -165,6 +201,10 @@ public function toUpperCase();
  * @return static this instance for chaining
  */
 public function replace($searchFor, $replaceWith = null);
+
+
+// -----------------------------------------------------------------------------
+
 
 /**
  * Replaces all occurrences of the specified search string with the given replacement
@@ -177,6 +217,10 @@ public function replace($searchFor, $replaceWith = null);
  */
 public function replaceIgnoreCase($searchFor, $replaceWith = null);
 
+
+// -----------------------------------------------------------------------------
+
+
 /**
  * Replaces the first occurrence of the specified search string with the given replacement
  *
@@ -185,6 +229,10 @@ public function replaceIgnoreCase($searchFor, $replaceWith = null);
  * @return static a new instance of this class
  */
 public function replaceFirst($searchFor, $replaceWith = null);
+
+
+// -----------------------------------------------------------------------------
+
 
 /**
  * Replaces the first occurrence of the specified search string with the given replacement
@@ -197,6 +245,10 @@ public function replaceFirst($searchFor, $replaceWith = null);
  */
 public function replaceFirstIgnoreCase($searchFor, $replaceWith = null);
 
+
+// -----------------------------------------------------------------------------
+
+
 /**
  * Replaces the last occurrence of the specified search string with the given replacement
  *
@@ -205,6 +257,10 @@ public function replaceFirstIgnoreCase($searchFor, $replaceWith = null);
  * @return static a new instance of this class
  */
 public function replaceLast($searchFor, $replaceWith = null);
+
+
+// -----------------------------------------------------------------------------
+
 
 /**
  * Replaces the last occurrence of the specified search string with the given replacement
@@ -217,6 +273,10 @@ public function replaceLast($searchFor, $replaceWith = null);
  */
 public function replaceLastIgnoreCase($searchFor, $replaceWith = null);
 
+
+// -----------------------------------------------------------------------------
+
+
 /**
  * Splits this string into an array of substrings at the specified delimiter
  *
@@ -225,6 +285,10 @@ public function replaceLastIgnoreCase($searchFor, $replaceWith = null);
  * @return static[] an array containing the substrings (which are instances of this class as well)
  */
 public function split($delimiter, $limit = null);
+
+
+// -----------------------------------------------------------------------------
+
 
 /**
  * Splits this string into an array of substrings at the specified delimiter pattern
@@ -235,6 +299,10 @@ public function split($delimiter, $limit = null);
  * @return static[] an array containing the substrings (which are instances of this class as well)
  */
 public function splitByRegex($delimiterPattern, $limit = null, $flags = null);
+
+
+// -----------------------------------------------------------------------------
+
 
 /**
  * Returns the part of this string between the two specified substrings
@@ -247,12 +315,20 @@ public function splitByRegex($delimiterPattern, $limit = null, $flags = null);
  */
 public function between($start, $end);
 
+
+// -----------------------------------------------------------------------------
+
+
 /**
  * Escapes this string for safe use in HTML
  *
  * @return static this instance for chaining
  */
 public function escapeForHtml();
+
+
+// -----------------------------------------------------------------------------
+
 
 /**
  * Normalizes all line endings in this string by using a single unified newline sequence (which may be specified manually)
@@ -261,22 +337,17 @@ public function escapeForHtml();
  * @return static this instance for chaining
  */
 public function normalizeLineEndings($newlineSequence = null);
-
-/**
- * Alias of `count`
- *
- * @return int
- */
-public function length();
 ```
 
-Checking the length of an instance:
+### Checking the length of a string
 
 ```php
-count($strInstance)
+$length = count($strInstance);
+// or
+$length = $strInstance->length();
 ```
 
-Creating instances from all entries in an array:
+### Creating instances from all entries in an array
 
 ```php
 $instances = \Delight\Str\Str::fromArray($arrayOfStrings);
