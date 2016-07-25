@@ -47,6 +47,29 @@ s('Hello world', 'ISO-8859-1')
 
 ### Available methods
 
+ * `startsWith`
+ * `startsWithIgnoreCase`
+ * `contains`
+ * `containsIgnoreCase`
+ * `endsWith`
+ * `endsWithIgnoreCase`
+ * `trim`
+ * `trimStart`
+ * `trimEnd`
+ * `toLowerCase`
+ * `toUpperCase`
+ * `replace`
+ * `replaceIgnoreCase`
+ * `replaceFirst`
+ * `replaceFirstIgnoreCase`
+ * `replaceLast`
+ * `replaceLastIgnoreCase`
+ * `split`
+ * `splitByRegex`
+ * `between`
+ * `escapeForHtml`
+ * `normalizeLineEndings`
+
 ```php
 /**
  * Returns whether this string starts with the supplied other string
