@@ -118,6 +118,15 @@ assert((string) $testStrObj->between('Hello', 'w☺rld') === ' Hello w☺rld ');
 assert((string) $testStrObj->between('w☺rld', 'w☺rld') === ' ');
 assert((string) $testStrObj->between('w☺rld', 'Hello') === '');
 
+assert((string) $testStrObj->afterFirst('Hello') === ' Hello w☺rld w☺rld');
+assert((string) $testStrObj->afterFirst('o H') === 'ello w☺rld w☺rld');
+assert((string) $testStrObj->afterFirst('d w☺rl') === 'd');
+assert((string) $testStrObj->afterFirst('w☺rld') === ' w☺rld');
+assert((string) $testStrObj->afterLast('Hello') === ' w☺rld w☺rld');
+assert((string) $testStrObj->afterLast('o H') === 'ello w☺rld w☺rld');
+assert((string) $testStrObj->afterLast('d w☺rl') === 'd');
+assert((string) $testStrObj->afterLast('w☺rld') === '');
+
 assert((string) $testStrObj->escapeForHtml() === $testStr);
 assert((string) Str::from('<b>'.$testStr.'</b>')->escapeForHtml() === '&lt;b&gt;'.$testStr.'&lt;/b&gt;');
 

@@ -343,6 +343,26 @@ final class Str implements \Countable {
 	}
 
 	/**
+	 * Returns the part of this string *after* the *first* occurrence of the search string
+	 *
+	 * @param string $search the search string that should delimit the start
+	 * @return static a new instance of this class
+	 */
+	public function afterFirst($search) {
+		return $this->sideInternal('mb_strpos', $search, 1);
+	}
+
+	/**
+	 * Returns the part of this string *after* the *last* occurrence of the search string
+	 *
+	 * @param string $search the search string that should delimit the start
+	 * @return static a new instance of this class
+	 */
+	public function afterLast($search) {
+		return $this->sideInternal('mb_strrpos', $search, 1);
+	}
+
+	/**
 	 * Escapes this string for safe use in HTML
 	 *
 	 * @return static a new instance of this class

@@ -69,6 +69,8 @@ s('Hello world', 'ISO-8859-1')
  * `beforeFirst`
  * `beforeLast`
  * `between`
+ * `afterFirst`
+ * `afterLast`
  * `escapeForHtml`
  * `normalizeLineEndings`
 
@@ -363,6 +365,30 @@ public function beforeLast($search);
  * @return static a new instance of this class
  */
 public function between($start, $end);
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+/**
+ * Returns the part of this string *after* the *first* occurrence of the search string
+ *
+ * @param string $search the search string that should delimit the start
+ * @return static a new instance of this class
+ */
+public function afterFirst($search);
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+/**
+ * Returns the part of this string *after* the *last* occurrence of the search string
+ *
+ * @param string $search the search string that should delimit the start
+ * @return static a new instance of this class
+ */
+public function afterLast($search);
 
 
 ////////////////////////////////////////////////////////////////////////////////
