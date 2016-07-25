@@ -214,6 +214,30 @@ final class Str implements \Countable {
 	}
 
 	/**
+	 * Replaces the first occurrence of the specified search string with the given replacement
+	 *
+	 * @param string $searchFor the string to search for
+	 * @param string $replaceWith the string to use as the replacement (optional)
+	 * @return static a new instance of this class
+	 */
+	public function replaceFirst($searchFor, $replaceWith = null) {
+		return $this->replaceOneInternal('mb_strpos', $searchFor, $replaceWith);
+	}
+
+	/**
+	 * Replaces the first occurrence of the specified search string with the given replacement
+	 *
+	 * This operation is case-insensitive
+	 *
+	 * @param string $searchFor the string to search for
+	 * @param string $replaceWith the string to use as the replacement (optional)
+	 * @return static a new instance of this class
+	 */
+	public function replaceFirstIgnoreCase($searchFor, $replaceWith = null) {
+		return $this->replaceOneInternal('mb_stripos', $searchFor, $replaceWith);
+	}
+
+	/**
 	 * Splits this string into an array of substrings at the specified delimiter
 	 *
 	 * @param string $delimiter the delimiter to split the string at
@@ -316,6 +340,23 @@ final class Str implements \Countable {
 		$rawString = $func($searchFor, $replaceWith, $this->rawString);
 
 		return new static($rawString, $this->charset);
+	}
+
+	private function replaceOneInternal(callable $func, $searchFor, $replaceWith = null) {
+		$pos = $func($this->rawString, $searchFor, 0, $this->charset);
+
+		if ($pos === false) {
+			return $this;
+		}
+		else {
+			if ($replaceWith === null) {
+				$replaceWith = '';
+			}
+
+			$rawString = substr_replace($this->rawString, $replaceWith, $pos, mb_strlen($searchFor, $this->charset));
+
+			return new static($rawString, $this->charset);
+		}
 	}
 
 }

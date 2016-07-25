@@ -86,6 +86,11 @@ assert((string) $testStrObj->replaceIgnoreCase('hello') === '  w☺rld w☺rld')
 assert((string) $testStrObj->replaceIgnoreCase('Hello', 'Bonjour') === 'Bonjour Bonjour w☺rld w☺rld');
 assert((string) $testStrObj->replaceIgnoreCase('hello', 'Bonjour') === 'Bonjour Bonjour w☺rld w☺rld');
 
+assert((string) $testStrObj->replaceFirst('Hello', 'Bonjour') === 'Bonjour Hello w☺rld w☺rld');
+assert((string) $testStrObj->replaceFirst('hello', 'Bonjour') === $testStr);
+assert((string) $testStrObj->replaceFirstIgnoreCase('Hello', 'Bonjour') === 'Bonjour Hello w☺rld w☺rld');
+assert((string) $testStrObj->replaceFirstIgnoreCase('hello', 'Bonjour') === 'Bonjour Hello w☺rld w☺rld');
+
 assert(count($testStrObj->split(' ')) === 4);
 assert(count($testStrObj->split(' ', 3)) === 3);
 assert(count($testStrObj->split(' ', 5)) === 4);
