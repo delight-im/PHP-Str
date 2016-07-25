@@ -297,6 +297,26 @@ final class Str implements \Countable {
 	}
 
 	/**
+	 * Returns the part of this string *before* the *first* occurrence of the search string
+	 *
+	 * @param string $search the search string that should delimit the end
+	 * @return static a new instance of this class
+	 */
+	public function beforeFirst($search) {
+		return $this->sideInternal('mb_strpos', $search, -1);
+	}
+
+	/**
+	 * Returns the part of this string *before* the *last* occurrence of the search string
+	 *
+	 * @param string $search the search string that should delimit the end
+	 * @return static a new instance of this class
+	 */
+	public function beforeLast($search) {
+		return $this->sideInternal('mb_strrpos', $search, -1);
+	}
+
+	/**
 	 * Returns the part of this string between the two specified substrings
 	 *
 	 * If there are multiple occurrences, the part with the maximum length will be returned
@@ -407,6 +427,28 @@ final class Str implements \Countable {
 
 			return new static($rawString, $this->charset);
 		}
+	}
+
+	private function sideInternal(callable $func, $substr, $direction) {
+		$startPos = $func($this->rawString, $substr, 0, $this->charset);
+
+		if ($startPos !== false) {
+			if ($direction === -1) {
+				$offset = 0;
+				$length = $startPos;
+			}
+			else {
+				$offset = $startPos + mb_strlen($substr, $this->charset);
+				$length = null;
+			}
+
+			$rawString = mb_substr($this->rawString, $offset, $length, $this->charset);
+		}
+		else {
+			$rawString = '';
+		}
+
+		return new static($rawString, $this->charset);
 	}
 
 }

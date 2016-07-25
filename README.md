@@ -66,6 +66,8 @@ s('Hello world', 'ISO-8859-1')
  * `replaceLastIgnoreCase`
  * `split`
  * `splitByRegex`
+ * `beforeFirst`
+ * `beforeLast`
  * `between`
  * `escapeForHtml`
  * `normalizeLineEndings`
@@ -322,6 +324,30 @@ public function split($delimiter, $limit = null);
  * @return static[] an array containing the substrings (which are instances of this class as well)
  */
 public function splitByRegex($delimiterPattern, $limit = null, $flags = null);
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+/**
+ * Returns the part of this string *before* the *first* occurrence of the search string
+ *
+ * @param string $search the search string that should delimit the end
+ * @return static a new instance of this class
+ */
+public function beforeFirst($search);
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+/**
+ * Returns the part of this string *before* the *last* occurrence of the search string
+ *
+ * @param string $search the search string that should delimit the end
+ * @return static a new instance of this class
+ */
+public function beforeLast($search);
 
 
 ////////////////////////////////////////////////////////////////////////////////

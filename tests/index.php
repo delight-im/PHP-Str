@@ -105,6 +105,15 @@ assert(count($testStrObj->splitByRegex('/ (?=[A-Z])|(?<=[a-z]) (?!.*? )/')) === 
 assert(count($testStrObj->splitByRegex('/ (?=[A-Z])|(?<=[a-z]) (?!.*? )/', 2)) === 2);
 assert(count($testStrObj->splitByRegex('/ (?=[A-Z])|(?<=[a-z]) (?!.*? )/', 4)) === 3);
 
+assert((string) $testStrObj->beforeFirst('Hello') === '');
+assert((string) $testStrObj->beforeFirst('o H') === 'Hell');
+assert((string) $testStrObj->beforeFirst('d w☺rl') === 'Hello Hello w☺rl');
+assert((string) $testStrObj->beforeFirst('w☺rld') === 'Hello Hello ');
+assert((string) $testStrObj->beforeLast('Hello') === 'Hello ');
+assert((string) $testStrObj->beforeLast('o H') === 'Hell');
+assert((string) $testStrObj->beforeLast('d w☺rl') === 'Hello Hello w☺rl');
+assert((string) $testStrObj->beforeLast('w☺rld') === 'Hello Hello w☺rld ');
+
 assert((string) $testStrObj->between('Hello', 'w☺rld') === ' Hello w☺rld ');
 assert((string) $testStrObj->between('w☺rld', 'w☺rld') === ' ');
 assert((string) $testStrObj->between('w☺rld', 'Hello') === '');
