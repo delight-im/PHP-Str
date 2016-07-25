@@ -197,13 +197,20 @@ final class Str implements \Countable {
 	 * @return static a new instance of this class
 	 */
 	public function replace($searchFor, $replaceWith = null) {
-		if ($replaceWith === null) {
-			$replaceWith = '';
-		}
+		return $this->replaceInternal('str_replace', $searchFor, $replaceWith);
+	}
 
-		$rawString = str_replace($searchFor, $replaceWith, $this->rawString);
-
-		return new static($rawString, $this->charset);
+	/**
+	 * Replaces all occurrences of the specified search string with the given replacement
+	 *
+	 * This operation is case-insensitive
+	 *
+	 * @param string $searchFor the string to search for
+	 * @param string $replaceWith the string to use as the replacement (optional)
+	 * @return static a new instance of this class
+	 */
+	public function replaceIgnoreCase($searchFor, $replaceWith = null) {
+		return $this->replaceInternal('str_ireplace', $searchFor, $replaceWith);
 	}
 
 	/**
@@ -299,6 +306,16 @@ final class Str implements \Countable {
 		}
 
 		return $func($this->rawString, $charactersToRemove);
+	}
+
+	private function replaceInternal(callable $func, $searchFor, $replaceWith = null) {
+		if ($replaceWith === null) {
+			$replaceWith = '';
+		}
+
+		$rawString = $func($searchFor, $replaceWith, $this->rawString);
+
+		return new static($rawString, $this->charset);
 	}
 
 }
