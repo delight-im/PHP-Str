@@ -73,6 +73,8 @@ s('Hello world', 'ISO-8859-1')
  * `between`
  * `afterFirst`
  * `afterLast`
+ * `compareTo`
+ * `compareToIgnoreCase`
  * `escapeForHtml`
  * `normalizeLineEndings`
  * `reverse`
@@ -416,6 +418,34 @@ public function afterFirst($search);
  * @return static a new instance of this class
  */
 public function afterLast($search);
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+/**
+ * Compares this string to another string
+ *
+ * @param string $other the other string to compare to
+ * @param bool|null $human whether to use human sorting for numbers (e.g. `2` before `10`) (optional)
+ * @return int an indication whether this string is lexicographically less than (< 0), equal (= 0) or greater (> 0)
+ */
+public function compareTo($other, $human = null);
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+/**
+ * Compares this string to another string
+ *
+ * This operation is case-sensitive
+ *
+ * @param string $other the other string to compare to
+ * @param bool|null $human whether to use human sorting for numbers (e.g. `2` before `10`) (optional)
+ * @return int an indication whether this string is lexicographically less than (< 0), equal (= 0) or greater (> 0)
+ */
+public function compareToIgnoreCase($other, $human = null);
 
 
 ////////////////////////////////////////////////////////////////////////////////

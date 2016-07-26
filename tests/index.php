@@ -143,6 +143,44 @@ assert((string) $testStrObj->afterLast('o H') === 'ello w☺rld w☺rld');
 assert((string) $testStrObj->afterLast('d w☺rl') === 'd');
 assert((string) $testStrObj->afterLast('w☺rld') === '');
 
+assert($testStrObj->compareTo('g') < 0);
+assert($testStrObj->compareTo('G') > 0);
+assert($testStrObj->compareTo('hey') < 0);
+assert($testStrObj->compareTo('Hey') < 0);
+assert($testStrObj->compareTo('i') < 0);
+assert($testStrObj->compareTo('I') < 0);
+assert(Str::from('Chapter 2')->compareTo('chapter 2') < 0);
+assert(Str::from('Chapter 2')->compareTo('Chapter 2') === 0);
+assert(Str::from('Chapter 2')->compareTo('chapter 5') < 0);
+assert(Str::from('Chapter 2')->compareTo('Chapter 5') < 0);
+assert(Str::from('Chapter 2')->compareTo('chapter 10') < 0);
+assert(Str::from('Chapter 2')->compareTo('Chapter 10') > 0);
+assert(Str::from('Chapter 2')->compareTo('chapter 2', true) < 0);
+assert(Str::from('Chapter 2')->compareTo('Chapter 2', true) === 0);
+assert(Str::from('Chapter 2')->compareTo('chapter 5', true) < 0);
+assert(Str::from('Chapter 2')->compareTo('Chapter 5', true) < 0);
+assert(Str::from('Chapter 2')->compareTo('chapter 10', true) < 0);
+assert(Str::from('Chapter 2')->compareTo('Chapter 10', true) < 0);
+
+assert($testStrObj->compareToIgnoreCase('g') > 0);
+assert($testStrObj->compareToIgnoreCase('G') > 0);
+assert($testStrObj->compareToIgnoreCase('hey') < 0);
+assert($testStrObj->compareToIgnoreCase('Hey') < 0);
+assert($testStrObj->compareToIgnoreCase('i') < 0);
+assert($testStrObj->compareToIgnoreCase('I') < 0);
+assert(Str::from('Chapter 2')->compareToIgnoreCase('chapter 2') === 0);
+assert(Str::from('Chapter 2')->compareToIgnoreCase('Chapter 2') === 0);
+assert(Str::from('Chapter 2')->compareToIgnoreCase('chapter 5') < 0);
+assert(Str::from('Chapter 2')->compareToIgnoreCase('Chapter 5') < 0);
+assert(Str::from('Chapter 2')->compareToIgnoreCase('chapter 10') > 0);
+assert(Str::from('Chapter 2')->compareToIgnoreCase('Chapter 10') > 0);
+assert(Str::from('Chapter 2')->compareToIgnoreCase('chapter 2', true) === 0);
+assert(Str::from('Chapter 2')->compareToIgnoreCase('Chapter 2', true) === 0);
+assert(Str::from('Chapter 2')->compareToIgnoreCase('chapter 5', true) < 0);
+assert(Str::from('Chapter 2')->compareToIgnoreCase('Chapter 5', true) < 0);
+assert(Str::from('Chapter 2')->compareToIgnoreCase('chapter 10', true) < 0);
+assert(Str::from('Chapter 2')->compareToIgnoreCase('Chapter 10', true) < 0);
+
 assert((string) $testStrObj->escapeForHtml() === $testStr);
 assert((string) Str::from('<b>'.$testStr.'</b>')->escapeForHtml() === '&lt;b&gt;'.$testStr.'&lt;/b&gt;');
 
