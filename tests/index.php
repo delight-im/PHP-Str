@@ -136,6 +136,8 @@ assert((string) Str::from("a\r\nb\nc\rd".$testStr."a\r\nb\nc\rd")->normalizeLine
 assert((string) Str::from("a\r\nb\nc\rd".$testStr."a\r\nb\nc\rd")->normalizeLineEndings("\r") === "a\rb\rc\rd".$testStr."a\rb\rc\rd");
 assert((string) Str::from("a\r\nb\nc\rd".$testStr."a\r\nb\nc\rd")->normalizeLineEndings("\n") === "a\nb\nc\nd".$testStr."a\nb\nc\nd");
 
+assert((string) $testStrObj->reverse() === 'dlr☺w dlr☺w olleH olleH');
+
 assert(count($testStrObj) === 23);
 assert($testStrObj->count() === 23);
 assert($testStrObj->length() === 23);

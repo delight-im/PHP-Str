@@ -389,6 +389,22 @@ final class Str implements \Countable {
 		return new static($rawString, $this->charset);
 	}
 
+	/**
+	 * Reverses this string
+	 *
+	 * @return static a new instance of this class
+	 */
+	public function reverse() {
+		if (preg_match_all('/./us', $this->rawString, $matches)) {
+			$rawString = join('', array_reverse($matches[0]));
+
+			return new static($rawString, $this->charset);
+		}
+		else {
+			return $this;
+		}
+	}
+
 	public function count() {
 		return mb_strlen($this->rawString, $this->charset);
 	}

@@ -73,6 +73,7 @@ s('Hello world', 'ISO-8859-1')
  * `afterLast`
  * `escapeForHtml`
  * `normalizeLineEndings`
+ * `reverse`
 
 ```php
 /**
@@ -412,6 +413,17 @@ public function escapeForHtml();
  * @return static this instance for chaining
  */
 public function normalizeLineEndings($newlineSequence = null);
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+/**
+ * Reverses this string
+ *
+ * @return static a new instance of this class
+ */
+public function reverse();
 ```
 
 ### Checking the length of a string
