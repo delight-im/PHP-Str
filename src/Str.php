@@ -530,7 +530,7 @@ final class Str implements \Countable {
 		return $this->rawString;
 	}
 
-	private function trimInternal(callable $func, $charactersToRemove = null, $alwaysRemoveWhitespace = null) {
+	private function trimInternal(callable $func, $charactersToRemove = null, $alwaysRemoveWhitespace) {
 		if ($alwaysRemoveWhitespace === null) {
 			$alwaysRemoveWhitespace = false;
 		}
@@ -546,7 +546,7 @@ final class Str implements \Countable {
 		return $func($this->rawString, $charactersToRemove);
 	}
 
-	private function replaceInternal(callable $func, $searchFor, $replaceWith = null) {
+	private function replaceInternal(callable $func, $searchFor, $replaceWith) {
 		if ($replaceWith === null) {
 			$replaceWith = '';
 		}
@@ -556,7 +556,7 @@ final class Str implements \Countable {
 		return new static($rawString, $this->charset);
 	}
 
-	private function replaceOneInternal(callable $func, $searchFor, $replaceWith = null) {
+	private function replaceOneInternal(callable $func, $searchFor, $replaceWith) {
 		$pos = $func($this->rawString, $searchFor, 0, $this->charset);
 
 		if ($pos === false) {
