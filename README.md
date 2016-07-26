@@ -56,6 +56,8 @@ s('Hello world', 'ISO-8859-1')
  * `trim`
  * `trimStart`
  * `trimEnd`
+ * `start`
+ * `end`
  * `toLowerCase`
  * `toUpperCase`
  * `replace`
@@ -194,6 +196,30 @@ public function trimStart($charactersToRemove = null, $alwaysRemoveWhitespace = 
  * @return static this instance for chaining
  */
 public function trimEnd($charactersToRemove = null, $alwaysRemoveWhitespace = null);
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+/**
+ * Returns the first character or the specified number of characters from the start of this string
+ *
+ * @param int|null $length the number of characters to return from the start (optional)
+ * @return static a new instance of this class
+ */
+public function start($length = null);
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+/**
+ * Returns the last character or the specified number of characters from the end of this string
+ *
+ * @param int|null $length the number of characters to return from the end (optional)
+ * @return static a new instance of this class
+ */
+public function end($length = null);
 
 
 ////////////////////////////////////////////////////////////////////////////////

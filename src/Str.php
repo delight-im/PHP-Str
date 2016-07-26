@@ -168,6 +168,40 @@ final class Str implements \Countable {
 	}
 
 	/**
+	 * Returns the first character or the specified number of characters from the start of this string
+	 *
+	 * @param int|null $length the number of characters to return from the start (optional)
+	 * @return static a new instance of this class
+	 */
+	public function start($length = null) {
+		if ($length === null) {
+			$length = 1;
+		}
+
+		$rawString = mb_substr($this->rawString, 0, $length, $this->charset);
+
+		return new static($rawString, $this->charset);
+	}
+
+	/**
+	 * Returns the last character or the specified number of characters from the end of this string
+	 *
+	 * @param int|null $length the number of characters to return from the end (optional)
+	 * @return static a new instance of this class
+	 */
+	public function end($length = null) {
+		if ($length === null) {
+			$length = 1;
+		}
+
+		$offset = $this->length() - $length;
+
+		$rawString = mb_substr($this->rawString, $offset, null, $this->charset);
+
+		return new static($rawString, $this->charset);
+	}
+
+	/**
 	 * Converts this string to lowercase
 	 *
 	 * @return static a new instance of this class

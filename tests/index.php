@@ -74,6 +74,22 @@ assert((string) Str::from(" \r\n".$testStr." \n")->trimEnd('ab') === " \r\n".$te
 assert((string) Str::from("ab cd".$testStr." d c b a")->trimEnd('ab') === "ab cd".$testStr." d c b ");
 assert((string) Str::from("ab cd".$testStr." d c b a")->trimEnd('ab', true) === "ab cd".$testStr." d c");
 
+assert((string) $testStrObj->start() === 'H');
+assert((string) $testStrObj->start(0) === '');
+assert((string) $testStrObj->start(5) === 'Hello');
+assert((string) $testStrObj->start(11) === 'Hello Hello');
+assert((string) $testStrObj->start(13) === 'Hello Hello w');
+assert((string) $testStrObj->start(14) === 'Hello Hello w☺');
+assert((string) $testStrObj->start(15) === 'Hello Hello w☺r');
+
+assert((string) $testStrObj->end() === 'd');
+assert((string) $testStrObj->end(0) === '');
+assert((string) $testStrObj->end(5) === 'w☺rld');
+assert((string) $testStrObj->end(11) === 'w☺rld w☺rld');
+assert((string) $testStrObj->end(13) === 'o w☺rld w☺rld');
+assert((string) $testStrObj->end(14) === 'lo w☺rld w☺rld');
+assert((string) $testStrObj->end(15) === 'llo w☺rld w☺rld');
+
 assert((string) $testStrObj->toLowerCase() === 'hello hello w☺rld w☺rld');
 assert((string) $testStrObj->toUpperCase() === 'HELLO HELLO W☺RLD W☺RLD');
 
