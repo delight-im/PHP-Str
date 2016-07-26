@@ -73,6 +73,7 @@ s('Hello world', 'ISO-8859-1')
  * `between`
  * `afterFirst`
  * `afterLast`
+ * `matches`
  * `equals`
  * `equalsIgnoreCase`
  * `compareTo`
@@ -420,6 +421,20 @@ public function afterFirst($search);
  * @return static a new instance of this class
  */
 public function afterLast($search);
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+/**
+ * Matches this string against the specified regular expression (PCRE)
+ * 
+ * @param string $regex the regular expression (PCRE) to match against
+ * @param mixed|null $matches the array that should be filled with the matches (optional)
+ * @param bool|null $returnAll whether to return all matches and not only the first one (optional)
+ * @return bool whether this string matches the regular expression
+ */
+public function matches($regex, &$matches = null, $returnAll = null);
 
 
 ////////////////////////////////////////////////////////////////////////////////

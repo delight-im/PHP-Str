@@ -397,6 +397,23 @@ final class Str implements \Countable {
 	}
 
 	/**
+	 * Matches this string against the specified regular expression (PCRE)
+	 *
+	 * @param string $regex the regular expression (PCRE) to match against
+	 * @param mixed|null $matches the array that should be filled with the matches (optional)
+	 * @param bool|null $returnAll whether to return all matches and not only the first one (optional)
+	 * @return bool whether this string matches the regular expression
+	 */
+	public function matches($regex, &$matches = null, $returnAll = null) {
+		if ($returnAll) {
+			return preg_match_all($regex, $this->rawString, $matches) > 0;
+		}
+		else {
+			return preg_match($regex, $this->rawString, $matches) === 1;
+		}
+	}
+
+	/**
 	 * Returns whether this string matches the other string
 	 *
 	 * @param string $other the other string to compare with

@@ -143,6 +143,12 @@ assert((string) $testStrObj->afterLast('o H') === 'ello w☺rld w☺rld');
 assert((string) $testStrObj->afterLast('d w☺rl') === 'd');
 assert((string) $testStrObj->afterLast('w☺rld') === '');
 
+assert($testStrObj->matches('/(?:[a-z]+) ([a-z]+) (\S+) \S+/i') === true);
+assert($testStrObj->matches('/[a-z]+ [a-z]+ \S+ \S+/') === false);
+assert($testStrObj->matches('/[a-zA-Z]+ [a-zA-Z]+ \S+ \S+/') === true);
+assert($testStrObj->matches('/[a-z]/', $matches, true) === true);
+assert(count($matches[0]) === 16);
+
 assert(Str::from('bb')->equals('aa') === false);
 assert(Str::from('bb')->equals('b') === false);
 assert(Str::from('bb')->equals('bb') === true);
