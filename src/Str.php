@@ -397,6 +397,28 @@ final class Str implements \Countable {
 	}
 
 	/**
+	 * Returns whether this string matches the other string
+	 *
+	 * @param string $other the other string to compare with
+	 * @return bool whether the two strings are equal
+	 */
+	public function equals($other) {
+		return $this->compareTo($other) === 0;
+	}
+
+	/**
+	 * Returns whether this string matches the other string
+	 *
+	 * This operation is case-sensitive
+	 *
+	 * @param string $other the other string to compare with
+	 * @return bool whether the two strings are equal
+	 */
+	public function equalsIgnoreCase($other) {
+		return $this->compareToIgnoreCase($other) === 0;
+	}
+
+	/**
 	 * Compares this string to another string
 	 *
 	 * @param string $other the other string to compare to

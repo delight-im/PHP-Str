@@ -143,6 +143,28 @@ assert((string) $testStrObj->afterLast('o H') === 'ello w☺rld w☺rld');
 assert((string) $testStrObj->afterLast('d w☺rl') === 'd');
 assert((string) $testStrObj->afterLast('w☺rld') === '');
 
+assert(Str::from('bb')->equals('aa') === false);
+assert(Str::from('bb')->equals('b') === false);
+assert(Str::from('bb')->equals('bb') === true);
+assert(Str::from('bb')->equals('bbb') === false);
+assert(Str::from('bb')->equals('cc') === false);
+assert(Str::from('bb')->equals('AA') === false);
+assert(Str::from('bb')->equals('B') === false);
+assert(Str::from('bb')->equals('BB') === false);
+assert(Str::from('bb')->equals('BBB') === false);
+assert(Str::from('bb')->equals('CC') === false);
+
+assert(Str::from('bb')->equalsIgnoreCase('aa') === false);
+assert(Str::from('bb')->equalsIgnoreCase('b') === false);
+assert(Str::from('bb')->equalsIgnoreCase('bb') === true);
+assert(Str::from('bb')->equalsIgnoreCase('bbb') === false);
+assert(Str::from('bb')->equalsIgnoreCase('cc') === false);
+assert(Str::from('bb')->equalsIgnoreCase('AA') === false);
+assert(Str::from('bb')->equalsIgnoreCase('B') === false);
+assert(Str::from('bb')->equalsIgnoreCase('BB') === true);
+assert(Str::from('bb')->equalsIgnoreCase('BBB') === false);
+assert(Str::from('bb')->equalsIgnoreCase('CC') === false);
+
 assert($testStrObj->compareTo('g') < 0);
 assert($testStrObj->compareTo('G') > 0);
 assert($testStrObj->compareTo('hey') < 0);
