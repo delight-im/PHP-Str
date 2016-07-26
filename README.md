@@ -73,6 +73,8 @@ s('Hello world', 'ISO-8859-1')
  * `between`
  * `afterFirst`
  * `afterLast`
+ * `equals`
+ * `equalsIgnoreCase`
  * `compareTo`
  * `compareToIgnoreCase`
  * `escapeForHtml`
