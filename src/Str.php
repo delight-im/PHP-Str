@@ -46,7 +46,7 @@ final class Str implements \Countable {
 	 *
 	 * @param string[] $rawArray the array of strings to create instances from
 	 * @param string|null $charset the charset to use (one of the values listed by `mb_list_encodings`) (optional)
-	 * @return static[] the new instances
+	 * @return static[] the new instances of this class
 	 */
 	public static function fromArray($rawArray, $charset = null) {
 		$output = array();
@@ -324,7 +324,7 @@ final class Str implements \Countable {
 	 *
 	 * @param string $delimiter the delimiter to split the string at
 	 * @param int|null $limit the maximum number of substrings to return (optional)
-	 * @return static[] an array containing the substrings (which are instances of this class as well)
+	 * @return static[] the new instances of this class
 	 */
 	public function split($delimiter, $limit = null) {
 		if ($limit === null) {
@@ -340,7 +340,7 @@ final class Str implements \Countable {
 	 * @param string $delimiterPattern the regular expression (PCRE) to split the string at
 	 * @param int|null $limit the maximum number of substrings to return (optional)
 	 * @param int|null $flags any combination (bit-wise ORed) of PHP's `PREG_SPLIT_*` flags
-	 * @return static[] an array containing the substrings (which are instances of this class as well)
+	 * @return static[] the new instances of this class
 	 */
 	public function splitByRegex($delimiterPattern, $limit = null, $flags = null) {
 		if ($limit === null) {
