@@ -355,6 +355,32 @@ final class Str implements \Countable {
 	}
 
 	/**
+	 * Splits this string into its single words
+	 *
+	 * @param int|null the maximum number of words to return from the start (optional)
+	 * @return static[] the new instances of this class
+	 */
+	public function words($limit = null) {
+		// if a limit has been specified
+		if ($limit !== null) {
+			// get one entry more than requested
+			$limit += 1;
+		}
+
+		// split the string into words
+		$words = $this->splitByRegex('/[^\\w\']+/u', $limit, PREG_SPLIT_NO_EMPTY);
+
+		// if a limit has been specified
+		if ($limit !== null) {
+			// discard the last entry (which contains the remainder of the string)
+			array_pop($words);
+		}
+
+		// return the words
+		return $words;
+	}
+
+	/**
 	 * Returns the part of this string *before* the *first* occurrence of the search string
 	 *
 	 * @param string $search the search string that should delimit the end

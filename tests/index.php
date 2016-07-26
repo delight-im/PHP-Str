@@ -142,6 +142,10 @@ assert(count($testStrObj->splitByRegex('/ (?=[A-Z])|(?<=[a-z]) (?!.*? )/')) === 
 assert(count($testStrObj->splitByRegex('/ (?=[A-Z])|(?<=[a-z]) (?!.*? )/', 2)) === 2);
 assert(count($testStrObj->splitByRegex('/ (?=[A-Z])|(?<=[a-z]) (?!.*? )/', 4)) === 3);
 
+assert(count(Str::from('One, two; three and four! Five? It\'s six.')->words()) === 8);
+assert(count(Str::from('One, two; three and four! Five? It\'s six.')->words(4)) === 4);
+assert(implode(' + ', Str::from('One, two; three and four! Five? It\'s six.')->words(3)) === 'One + two + three');
+
 assert((string) $testStrObj->beforeFirst('Hello') === '');
 assert((string) $testStrObj->beforeFirst('o H') === 'Hell');
 assert((string) $testStrObj->beforeFirst('d w☺rl') === 'Hello Hello w☺rl');

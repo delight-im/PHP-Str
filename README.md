@@ -70,6 +70,7 @@ s('Hello world', 'ISO-8859-1')
  * `replaceLastIgnoreCase`
  * `split`
  * `splitByRegex`
+ * `words`
  * `beforeFirst`
  * `beforeLast`
  * `between`
@@ -388,6 +389,18 @@ public function split($delimiter, $limit = null);
  * @return static[] an array containing the substrings (which are instances of this class as well)
  */
 public function splitByRegex($delimiterPattern, $limit = null, $flags = null);
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+/**
+ * Splits this string into its single words
+ *
+ * @param int|null the maximum number of words to return from the start (optional)
+ * @return static[] the new instances of this class
+ */
+public function words($limit = null);
 
 
 ////////////////////////////////////////////////////////////////////////////////
