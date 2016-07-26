@@ -93,6 +93,27 @@ assert((string) $testStrObj->end(15) === 'llo w☺rld w☺rld');
 assert((string) $testStrObj->toLowerCase() === 'hello hello w☺rld w☺rld');
 assert((string) $testStrObj->toUpperCase() === 'HELLO HELLO W☺RLD W☺RLD');
 
+assert((string) $testStrObj->truncate(5) === 'He...');
+assert((string) $testStrObj->truncate(5, '…') === 'Hell…');
+assert((string) $testStrObj->truncate(5, '') === 'Hello');
+assert((string) $testStrObj->truncate(11) === 'Hello He...');
+assert((string) $testStrObj->truncate(13) === 'Hello Hell...');
+assert((string) $testStrObj->truncate(14) === 'Hello Hello...');
+assert((string) $testStrObj->truncate(15) === 'Hello Hello ...');
+assert((string) $testStrObj->truncate(22) === 'Hello Hello w☺rld w...');
+assert((string) $testStrObj->truncate(23) === 'Hello Hello w☺rld w☺rld');
+assert((string) $testStrObj->truncate(24) === 'Hello Hello w☺rld w☺rld');
+
+assert((string) $testStrObj->truncateSafely(5) === 'He...');
+assert((string) $testStrObj->truncateSafely(5, '…') === 'Hell…');
+assert((string) $testStrObj->truncateSafely(5, '') === 'Hello');
+assert((string) $testStrObj->truncateSafely(11) === 'Hello ...');
+assert((string) $testStrObj->truncateSafely(13) === 'Hello ...');
+assert((string) $testStrObj->truncateSafely(14) === 'Hello Hello...');
+assert((string) $testStrObj->truncateSafely(15) === 'Hello Hello ...');
+assert((string) $testStrObj->truncateSafely(23) === 'Hello Hello w☺rld w☺rld');
+assert((string) $testStrObj->truncateSafely(24) === 'Hello Hello w☺rld w☺rld');
+
 assert((string) $testStrObj->replace('Hello') === '  w☺rld w☺rld');
 assert((string) $testStrObj->replace('hello') === $testStr);
 assert((string) $testStrObj->replace('Hello', 'Bonjour') === 'Bonjour Bonjour w☺rld w☺rld');

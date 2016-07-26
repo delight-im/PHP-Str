@@ -60,6 +60,8 @@ s('Hello world', 'ISO-8859-1')
  * `end`
  * `toLowerCase`
  * `toUpperCase`
+ * `truncate`
+ * `truncateSafely`
  * `replace`
  * `replaceIgnoreCase`
  * `replaceFirst`
@@ -247,6 +249,34 @@ public function toLowerCase();
  * @return static this instance for chaining
  */
 public function toUpperCase();
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+/**
+ * Truncates this string so that it has at most the specified length
+ *
+ * @param int $maxLength the maximum length that this string may have (including any ellipsis)
+ * @param string|null $ellipsis the string to use as the ellipsis (optional)
+ * @return static a new instance of this class
+ */
+public function truncate($maxLength, $ellipsis = null);
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+/**
+ * Truncates this string so that it has at most the specified length
+ *
+ * This method tries *not* to break any words whenever possible
+ *
+ * @param int $maxLength the maximum length that this string may have (including any ellipsis)
+ * @param string|null $ellipsis the string to use as the ellipsis (optional)
+ * @return static a new instance of this class
+ */
+public function truncateSafely($maxLength, $ellipsis = null);
 
 
 ////////////////////////////////////////////////////////////////////////////////

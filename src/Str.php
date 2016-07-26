@@ -224,6 +224,30 @@ final class Str implements \Countable {
 	}
 
 	/**
+	 * Truncates this string so that it has at most the specified length
+	 *
+	 * @param int $maxLength the maximum length that this string may have (including any ellipsis)
+	 * @param string|null $ellipsis the string to use as the ellipsis (optional)
+	 * @return static a new instance of this class
+	 */
+	public function truncate($maxLength, $ellipsis = null) {
+		return $this->truncateInternal($maxLength, $ellipsis, false);
+	}
+
+	/**
+	 * Truncates this string so that it has at most the specified length
+	 *
+	 * This method tries *not* to break any words whenever possible
+	 *
+	 * @param int $maxLength the maximum length that this string may have (including any ellipsis)
+	 * @param string|null $ellipsis the string to use as the ellipsis (optional)
+	 * @return static a new instance of this class
+	 */
+	public function truncateSafely($maxLength, $ellipsis = null) {
+		return $this->truncateInternal($maxLength, $ellipsis, true);
+	}
+
+	/**
 	 * Replaces all occurrences of the specified search string with the given replacement
 	 *
 	 * @param string $searchFor the string to search for
@@ -544,6 +568,43 @@ final class Str implements \Countable {
 		}
 
 		return $func($this->rawString, $charactersToRemove);
+	}
+
+	private function truncateInternal($maxLength, $ellipsis, $safe) {
+		// if the string doesn't actually need to be truncated for the desired maximum length
+		if ($this->length() <= $maxLength) {
+			// return it unchanged
+			return $this;
+		}
+		// if the string does indeed need to be truncated
+		else {
+			// if no ellipsis string has been specified
+			if ($ellipsis === null) {
+				// assume three dots as the default
+				$ellipsis = '...';
+			}
+
+			// calculate the actual maximum length without the ellipsis
+			$maxLength -= mb_strlen($ellipsis, $this->charset);
+
+			// truncate the string to the desired length
+			$rawString = mb_substr($this->rawString, 0, $maxLength, $this->charset);
+
+			// if we don't want to break words
+			if ($safe) {
+				// if the truncated string *does* end *within* a word
+				if (!preg_match('/\\W/u', mb_substr($this->rawString, $maxLength - 1, 2, $this->charset))) {
+					// if there's some word boundary before
+					if (preg_match('/.*\\W/u', $rawString, $matches)) {
+						// truncate there instead
+						$rawString = $matches[0];
+					}
+				}
+			}
+
+			// return the correctly truncated string together with the ellipsis
+			return new static($rawString . $ellipsis, $this->charset);
+		}
 	}
 
 	private function replaceInternal(callable $func, $searchFor, $replaceWith) {
