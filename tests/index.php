@@ -74,13 +74,13 @@ assert((string) Str::from(" \r\n".$testStr." \n")->trimEnd('ab') === " \r\n".$te
 assert((string) Str::from("ab cd".$testStr." d c b a")->trimEnd('ab') === "ab cd".$testStr." d c b ");
 assert((string) Str::from("ab cd".$testStr." d c b a")->trimEnd('ab', true) === "ab cd".$testStr." d c");
 
-assert((string) $testStrObj->start() === 'H');
-assert((string) $testStrObj->start(0) === '');
-assert((string) $testStrObj->start(5) === 'Hello');
-assert((string) $testStrObj->start(11) === 'Hello Hello');
-assert((string) $testStrObj->start(13) === 'Hello Hello w');
-assert((string) $testStrObj->start(14) === 'Hello Hello w☺');
-assert((string) $testStrObj->start(15) === 'Hello Hello w☺r');
+assert((string) $testStrObj->first() === 'H');
+assert((string) $testStrObj->first(0) === '');
+assert((string) $testStrObj->first(5) === 'Hello');
+assert((string) $testStrObj->first(11) === 'Hello Hello');
+assert((string) $testStrObj->first(13) === 'Hello Hello w');
+assert((string) $testStrObj->first(14) === 'Hello Hello w☺');
+assert((string) $testStrObj->first(15) === 'Hello Hello w☺r');
 
 assert((string) $testStrObj->end() === 'd');
 assert((string) $testStrObj->end(0) === '');

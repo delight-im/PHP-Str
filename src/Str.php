@@ -172,8 +172,19 @@ final class Str implements \Countable {
 	 *
 	 * @param int|null $length the number of characters to return from the start (optional)
 	 * @return static a new instance of this class
+	 * @deprecated use `first` instead
 	 */
 	public function start($length = null) {
+		return $this->first($length);
+	}
+
+	/**
+	 * Returns the first character or the specified number of characters from the start of this string
+	 *
+	 * @param int|null $length the number of characters to return from the start (optional)
+	 * @return static a new instance of this class
+	 */
+	public function first($length = null) {
 		if ($length === null) {
 			$length = 1;
 		}
@@ -247,7 +258,7 @@ final class Str implements \Countable {
 	 * @return bool
 	 */
 	public function isCapitalized() {
-		return $this->start()->isUpperCase();
+		return $this->first()->isUpperCase();
 	}
 
 	/**
@@ -683,7 +694,7 @@ final class Str implements \Countable {
 
 		foreach ($words as $word) {
 			if (!$excludeLowerCase || $word->isCapitalized()) {
-				$rawString .= $word->start();
+				$rawString .= $word->first();
 			}
 		}
 

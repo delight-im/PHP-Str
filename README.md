@@ -56,7 +56,7 @@ s('Hello world', 'ISO-8859-1')
  * `trim`
  * `trimStart`
  * `trimEnd`
- * `start`
+ * `first`
  * `end`
  * `toLowerCase`
  * `isLowerCase`
@@ -225,7 +225,7 @@ public function trimEnd($charactersToRemove = null, $alwaysRemoveWhitespace = nu
  * @param int|null $length the number of characters to return from the start (optional)
  * @return static a new instance of this class
  */
-public function start($length = null);
+public function first($length = null);
 
 
 ////////////////////////////////////////////////////////////////////////////////
