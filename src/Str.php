@@ -614,6 +614,26 @@ final class Str implements \Countable {
 		}
 	}
 
+	/**
+	 * Turns this string into an acronym (abbreviation)
+	 *
+	 * @param bool|null $excludeLowerCase whether to exclude lowercase letters from the result (optional)
+	 * @return static a new instance of this class
+	 */
+	public function acronym($excludeLowerCase = null) {
+		$words = $this->words();
+
+		$rawString = '';
+
+		foreach ($words as $word) {
+			if (!$excludeLowerCase || $word->isCapitalized()) {
+				$rawString .= $word->start();
+			}
+		}
+
+		return new static($rawString, $this->charset);
+	}
+
 	public function count() {
 		return mb_strlen($this->rawString, $this->charset);
 	}

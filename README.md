@@ -89,6 +89,7 @@ s('Hello world', 'ISO-8859-1')
  * `escapeForHtml`
  * `normalizeLineEndings`
  * `reverse`
+ * `acronym`
 
 ```php
 /**
@@ -628,6 +629,18 @@ public function normalizeLineEndings($newlineSequence = null);
  * @return static a new instance of this class
  */
 public function reverse();
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+/**
+ * Turns this string into an acronym (abbreviation)
+ *
+ * @param bool|null $excludeLowerCase whether to exclude lowercase letters from the result (optional)
+ * @return static a new instance of this class
+ */
+public function acronym($excludeLowerCase = null);
 ```
 
 ### Checking the length of a string

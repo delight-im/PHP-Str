@@ -268,6 +268,11 @@ assert((string) Str::from("a\r\nb\nc\rd".$testStr."a\r\nb\nc\rd")->normalizeLine
 
 assert((string) $testStrObj->reverse() === 'dlr☺w dlr☺w olleH olleH');
 
+assert((string) Str::from('Hyper Text Markup Language')->acronym() === 'HTML');
+assert((string) Str::from('Cascading Style Sheets')->acronym() === 'CSS');
+assert((string) Str::from('PHP: Hypertext Preprocessor')->acronym() === 'PHP');
+assert((string) Str::from('Light Amplification by Stimulated Emission of Radiation')->acronym(true) === 'LASER');
+
 assert(count($testStrObj) === 23);
 assert($testStrObj->count() === 23);
 assert($testStrObj->length() === 23);
