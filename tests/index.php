@@ -146,11 +146,15 @@ assert((string) $testStrObj->replaceIgnoreCase('hello') === '  w☺rld w☺rld')
 assert((string) $testStrObj->replaceIgnoreCase('Hello', 'Bonjour') === 'Bonjour Bonjour w☺rld w☺rld');
 assert((string) $testStrObj->replaceIgnoreCase('hello', 'Bonjour') === 'Bonjour Bonjour w☺rld w☺rld');
 
+assert((string) $testStrObj->replaceFirst('el') === 'Hlo Hello w☺rld w☺rld');
+assert((string) $testStrObj->replaceFirst('el', 'eeel') === 'Heeello Hello w☺rld w☺rld');
 assert((string) $testStrObj->replaceFirst('Hello', 'Bonjour') === 'Bonjour Hello w☺rld w☺rld');
 assert((string) $testStrObj->replaceFirst('hello', 'Bonjour') === $testStr);
 assert((string) $testStrObj->replaceFirstIgnoreCase('Hello', 'Bonjour') === 'Bonjour Hello w☺rld w☺rld');
 assert((string) $testStrObj->replaceFirstIgnoreCase('hello', 'Bonjour') === 'Bonjour Hello w☺rld w☺rld');
 
+assert((string) $testStrObj->replaceLast('w') === 'Hello Hello w☺rld ☺rld');
+assert((string) $testStrObj->replaceLast('w', 'www') === 'Hello Hello w☺rld www☺rld');
 assert((string) $testStrObj->replaceLast('Hello', 'Bonjour') === 'Hello Bonjour w☺rld w☺rld');
 assert((string) $testStrObj->replaceLast('hello', 'Bonjour') === $testStr);
 assert((string) $testStrObj->replaceLastIgnoreCase('Hello', 'Bonjour') === 'Hello Bonjour w☺rld w☺rld');
