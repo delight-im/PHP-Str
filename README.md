@@ -71,8 +71,10 @@ s('Hello world', 'ISO-8859-1')
  * `replaceIgnoreCase`
  * `replaceFirst`
  * `replaceFirstIgnoreCase`
+ * `replacePrefix`
  * `replaceLast`
  * `replaceLastIgnoreCase`
+ * `replaceSuffix`
  * `split`
  * `splitByRegex`
  * `words`
@@ -403,6 +405,19 @@ public function replaceFirstIgnoreCase($searchFor, $replaceWith = null);
 
 
 /**
+ * Replaces the specified part in this string only if it starts with that part
+ *
+ * @param string $searchFor the string to search for
+ * @param string $replaceWith the string to use as the replacement (optional)
+ * @return static a new instance of this class
+ */
+public function replacePrefix($searchFor, $replaceWith = null);
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+/**
  * Replaces the last occurrence of the specified search string with the given replacement
  *
  * @param string $searchFor the string to search for
@@ -425,6 +440,19 @@ public function replaceLast($searchFor, $replaceWith = null);
  * @return static a new instance of this class
  */
 public function replaceLastIgnoreCase($searchFor, $replaceWith = null);
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+/**
+ * Replaces the specified part in this string only if it ends with that part
+ *
+ * @param string $searchFor the string to search for
+ * @param string $replaceWith the string to use as the replacement (optional)
+ * @return static a new instance of this class
+ */
+public function replaceSuffix($searchFor, $replaceWith = null);
 
 
 ////////////////////////////////////////////////////////////////////////////////

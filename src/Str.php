@@ -347,6 +347,22 @@ final class Str implements \Countable {
 	}
 
 	/**
+	 * Replaces the specified part in this string only if it starts with that part
+	 *
+	 * @param string $searchFor the string to search for
+	 * @param string $replaceWith the string to use as the replacement (optional)
+	 * @return static a new instance of this class
+	 */
+	public function replacePrefix($searchFor, $replaceWith = null) {
+		if ($this->startsWith($searchFor)) {
+			return $this->replaceFirst($searchFor, $replaceWith);
+		}
+		else {
+			return $this;
+		}
+	}
+
+	/**
 	 * Replaces the last occurrence of the specified search string with the given replacement
 	 *
 	 * @param string $searchFor the string to search for
@@ -368,6 +384,22 @@ final class Str implements \Countable {
 	 */
 	public function replaceLastIgnoreCase($searchFor, $replaceWith = null) {
 		return $this->replaceOneInternal('mb_strripos', $searchFor, $replaceWith);
+	}
+
+	/**
+	 * Replaces the specified part in this string only if it ends with that part
+	 *
+	 * @param string $searchFor the string to search for
+	 * @param string $replaceWith the string to use as the replacement (optional)
+	 * @return static a new instance of this class
+	 */
+	public function replaceSuffix($searchFor, $replaceWith = null) {
+		if ($this->endsWith($searchFor)) {
+			return $this->replaceLast($searchFor, $replaceWith);
+		}
+		else {
+			return $this;
+		}
 	}
 
 	/**

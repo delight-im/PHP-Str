@@ -153,12 +153,20 @@ assert((string) $testStrObj->replaceFirst('hello', 'Bonjour') === $testStr);
 assert((string) $testStrObj->replaceFirstIgnoreCase('Hello', 'Bonjour') === 'Bonjour Hello w☺rld w☺rld');
 assert((string) $testStrObj->replaceFirstIgnoreCase('hello', 'Bonjour') === 'Bonjour Hello w☺rld w☺rld');
 
+assert((string) $testStrObj->replacePrefix(' Hello') === 'Hello Hello w☺rld w☺rld');
+assert((string) $testStrObj->replacePrefix('Hello ') === 'Hello w☺rld w☺rld');
+assert((string) $testStrObj->replacePrefix('Hello ', 'Bonjour ') === 'Bonjour Hello w☺rld w☺rld');
+
 assert((string) $testStrObj->replaceLast('w') === 'Hello Hello w☺rld ☺rld');
 assert((string) $testStrObj->replaceLast('w', 'www') === 'Hello Hello w☺rld www☺rld');
 assert((string) $testStrObj->replaceLast('Hello', 'Bonjour') === 'Hello Bonjour w☺rld w☺rld');
 assert((string) $testStrObj->replaceLast('hello', 'Bonjour') === $testStr);
 assert((string) $testStrObj->replaceLastIgnoreCase('Hello', 'Bonjour') === 'Hello Bonjour w☺rld w☺rld');
 assert((string) $testStrObj->replaceLastIgnoreCase('hello', 'Bonjour') === 'Hello Bonjour w☺rld w☺rld');
+
+assert((string) $testStrObj->replaceSuffix('w☺rld ') === 'Hello Hello w☺rld w☺rld');
+assert((string) $testStrObj->replaceSuffix(' w☺rld') === 'Hello Hello w☺rld');
+assert((string) $testStrObj->replaceSuffix(' w☺rld', ' earth') === 'Hello Hello w☺rld earth');
 
 assert(count($testStrObj->split(' ')) === 4);
 assert(count($testStrObj->split(' ', 3)) === 3);
