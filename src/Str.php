@@ -725,7 +725,7 @@ final class Str implements \Countable {
 				$replaceWith = '';
 			}
 
-			$rawString = substr_replace($this->rawString, $replaceWith, $pos, mb_strlen($searchFor, $this->charset));
+			$rawString = mb_substr($this->rawString, 0, $pos, $this->charset) . $replaceWith . mb_substr($this->rawString, $pos + mb_strlen($searchFor, $this->charset), null, $this->charset);
 
 			return new static($rawString, $this->charset);
 		}
