@@ -275,6 +275,30 @@ final class Str implements \Countable {
 	}
 
 	/**
+	 * Counts the occurrences of the specified substring in this string
+	 *
+	 * @param string $substring the substring whose occurrences to count
+	 * @return int the number of occurrences
+	 */
+	public function count($substring = null) {
+		if ($substring === null) {
+			return mb_strlen($this->rawString, $this->charset);
+		}
+		else {
+			return mb_substr_count($this->rawString, $substring, $this->charset);
+		}
+	}
+
+	/**
+	 * Returns the length of this string
+	 *
+	 * @return int the number of characters
+	 */
+	public function length() {
+		return $this->count();
+	}
+
+	/**
 	 * Removes the specified number of characters from the start of this string
 	 *
 	 * @param int $length the number of characters to remove
@@ -664,19 +688,6 @@ final class Str implements \Countable {
 		}
 
 		return new static($rawString, $this->charset);
-	}
-
-	public function count() {
-		return mb_strlen($this->rawString, $this->charset);
-	}
-
-	/**
-	 * Alias of `count`
-	 *
-	 * @return int
-	 */
-	public function length() {
-		return $this->count();
 	}
 
 	public function __toString() {

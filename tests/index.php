@@ -123,6 +123,15 @@ assert((string) $testStrObj->truncateSafely(15) === 'Hello Hello ...');
 assert((string) $testStrObj->truncateSafely(23) === $testStr);
 assert((string) $testStrObj->truncateSafely(24) === $testStr);
 
+assert($testStrObj->count() === 23);
+assert($testStrObj->length() === 23);
+assert(count($testStrObj) === 23);
+
+assert($testStrObj->count('l') === 6);
+assert($testStrObj->count('lo') === 2);
+assert($testStrObj->count('☺') === 2);
+assert($testStrObj->count(' ') === 3);
+
 assert((string) $testStrObj->cutStart(0) === $testStr);
 assert((string) $testStrObj->cutStart(2) === 'llo Hello w☺rld w☺rld');
 assert((string) $testStrObj->cutStart(9) === 'lo w☺rld w☺rld');
@@ -284,9 +293,5 @@ assert((string) Str::from('Hyper Text Markup Language')->acronym() === 'HTML');
 assert((string) Str::from('Cascading Style Sheets')->acronym() === 'CSS');
 assert((string) Str::from('PHP: Hypertext Preprocessor')->acronym() === 'PHP');
 assert((string) Str::from('Light Amplification by Stimulated Emission of Radiation')->acronym(true) === 'LASER');
-
-assert(count($testStrObj) === 23);
-assert($testStrObj->count() === 23);
-assert($testStrObj->length() === 23);
 
 echo 'ALL TESTS PASSED';

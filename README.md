@@ -65,6 +65,8 @@ s('Hello world', 'ISO-8859-1')
  * `isCapitalized`
  * `truncate`
  * `truncateSafely`
+ * `count`
+ * `length`
  * `cutStart`
  * `cutEnd`
  * `replace`
@@ -319,6 +321,29 @@ public function truncate($maxLength, $ellipsis = null);
  * @return static a new instance of this class
  */
 public function truncateSafely($maxLength, $ellipsis = null);
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+/**
+ * Counts the occurrences of the specified substring in this string
+ *
+ * @param string $substring the substring whose occurrences to count
+ * @return int the number of occurrences
+ */
+public function count($substring = null);
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+/**
+ * Returns the length of this string
+ *
+ * @return int the number of characters
+ */
+public function length();
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -677,6 +702,8 @@ public function acronym($excludeLowerCase = null);
 $length = count($strInstance);
 // or
 $length = $strInstance->length();
+// or
+$length = $strInstance->count();
 ```
 
 ### Creating instances from all entries in an array
