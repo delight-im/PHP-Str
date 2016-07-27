@@ -82,13 +82,13 @@ assert((string) $testStrObj->first(13) === 'Hello Hello w');
 assert((string) $testStrObj->first(14) === 'Hello Hello w☺');
 assert((string) $testStrObj->first(15) === 'Hello Hello w☺r');
 
-assert((string) $testStrObj->end() === 'd');
-assert((string) $testStrObj->end(0) === '');
-assert((string) $testStrObj->end(5) === 'w☺rld');
-assert((string) $testStrObj->end(11) === 'w☺rld w☺rld');
-assert((string) $testStrObj->end(13) === 'o w☺rld w☺rld');
-assert((string) $testStrObj->end(14) === 'lo w☺rld w☺rld');
-assert((string) $testStrObj->end(15) === 'llo w☺rld w☺rld');
+assert((string) $testStrObj->last() === 'd');
+assert((string) $testStrObj->last(0) === '');
+assert((string) $testStrObj->last(5) === 'w☺rld');
+assert((string) $testStrObj->last(11) === 'w☺rld w☺rld');
+assert((string) $testStrObj->last(13) === 'o w☺rld w☺rld');
+assert((string) $testStrObj->last(14) === 'lo w☺rld w☺rld');
+assert((string) $testStrObj->last(15) === 'llo w☺rld w☺rld');
 
 assert((string) $testStrObj->toLowerCase() === 'hello hello w☺rld w☺rld');
 assert($testStrObj->isLowerCase() === false);

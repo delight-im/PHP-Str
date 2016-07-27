@@ -57,7 +57,7 @@ s('Hello world', 'ISO-8859-1')
  * `trimStart`
  * `trimEnd`
  * `first`
- * `end`
+ * `last`
  * `toLowerCase`
  * `isLowerCase`
  * `toUpperCase`
@@ -237,7 +237,7 @@ public function first($length = null);
  * @param int|null $length the number of characters to return from the end (optional)
  * @return static a new instance of this class
  */
-public function end($length = null);
+public function last($length = null);
 
 
 ////////////////////////////////////////////////////////////////////////////////

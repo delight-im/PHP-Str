@@ -199,8 +199,19 @@ final class Str implements \Countable {
 	 *
 	 * @param int|null $length the number of characters to return from the end (optional)
 	 * @return static a new instance of this class
+	 * @deprecated use `last` instead
 	 */
 	public function end($length = null) {
+		return $this->last($length);
+	}
+
+	/**
+	 * Returns the last character or the specified number of characters from the end of this string
+	 *
+	 * @param int|null $length the number of characters to return from the end (optional)
+	 * @return static a new instance of this class
+	 */
+	public function last($length = null) {
 		if ($length === null) {
 			$length = 1;
 		}
