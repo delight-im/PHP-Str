@@ -110,8 +110,8 @@ assert((string) $testStrObj->truncate(13) === 'Hello Hell...');
 assert((string) $testStrObj->truncate(14) === 'Hello Hello...');
 assert((string) $testStrObj->truncate(15) === 'Hello Hello ...');
 assert((string) $testStrObj->truncate(22) === 'Hello Hello w☺rld w...');
-assert((string) $testStrObj->truncate(23) === 'Hello Hello w☺rld w☺rld');
-assert((string) $testStrObj->truncate(24) === 'Hello Hello w☺rld w☺rld');
+assert((string) $testStrObj->truncate(23) === $testStr);
+assert((string) $testStrObj->truncate(24) === $testStr);
 
 assert((string) $testStrObj->truncateSafely(5) === 'He...');
 assert((string) $testStrObj->truncateSafely(5, '…') === 'Hell…');
@@ -120,17 +120,17 @@ assert((string) $testStrObj->truncateSafely(11) === 'Hello ...');
 assert((string) $testStrObj->truncateSafely(13) === 'Hello ...');
 assert((string) $testStrObj->truncateSafely(14) === 'Hello Hello...');
 assert((string) $testStrObj->truncateSafely(15) === 'Hello Hello ...');
-assert((string) $testStrObj->truncateSafely(23) === 'Hello Hello w☺rld w☺rld');
-assert((string) $testStrObj->truncateSafely(24) === 'Hello Hello w☺rld w☺rld');
+assert((string) $testStrObj->truncateSafely(23) === $testStr);
+assert((string) $testStrObj->truncateSafely(24) === $testStr);
 
-assert((string) $testStrObj->cutStart(0) === 'Hello Hello w☺rld w☺rld');
+assert((string) $testStrObj->cutStart(0) === $testStr);
 assert((string) $testStrObj->cutStart(2) === 'llo Hello w☺rld w☺rld');
 assert((string) $testStrObj->cutStart(9) === 'lo w☺rld w☺rld');
 assert((string) $testStrObj->cutStart(13) === '☺rld w☺rld');
 assert((string) $testStrObj->cutStart(14) === 'rld w☺rld');
 assert((string) $testStrObj->cutStart(15) === 'ld w☺rld');
 
-assert((string) $testStrObj->cutEnd(0) === 'Hello Hello w☺rld w☺rld');
+assert((string) $testStrObj->cutEnd(0) === $testStr);
 assert((string) $testStrObj->cutEnd(2) === 'Hello Hello w☺rld w☺r');
 assert((string) $testStrObj->cutEnd(9) === 'Hello Hello w☺');
 assert((string) $testStrObj->cutEnd(13) === 'Hello Hell');
@@ -153,7 +153,7 @@ assert((string) $testStrObj->replaceFirst('hello', 'Bonjour') === $testStr);
 assert((string) $testStrObj->replaceFirstIgnoreCase('Hello', 'Bonjour') === 'Bonjour Hello w☺rld w☺rld');
 assert((string) $testStrObj->replaceFirstIgnoreCase('hello', 'Bonjour') === 'Bonjour Hello w☺rld w☺rld');
 
-assert((string) $testStrObj->replacePrefix(' Hello') === 'Hello Hello w☺rld w☺rld');
+assert((string) $testStrObj->replacePrefix(' Hello') === $testStr);
 assert((string) $testStrObj->replacePrefix('Hello ') === 'Hello w☺rld w☺rld');
 assert((string) $testStrObj->replacePrefix('Hello ', 'Bonjour ') === 'Bonjour Hello w☺rld w☺rld');
 
@@ -164,7 +164,7 @@ assert((string) $testStrObj->replaceLast('hello', 'Bonjour') === $testStr);
 assert((string) $testStrObj->replaceLastIgnoreCase('Hello', 'Bonjour') === 'Hello Bonjour w☺rld w☺rld');
 assert((string) $testStrObj->replaceLastIgnoreCase('hello', 'Bonjour') === 'Hello Bonjour w☺rld w☺rld');
 
-assert((string) $testStrObj->replaceSuffix('w☺rld ') === 'Hello Hello w☺rld w☺rld');
+assert((string) $testStrObj->replaceSuffix('w☺rld ') === $testStr);
 assert((string) $testStrObj->replaceSuffix(' w☺rld') === 'Hello Hello w☺rld');
 assert((string) $testStrObj->replaceSuffix(' w☺rld', ' earth') === 'Hello Hello w☺rld earth');
 
