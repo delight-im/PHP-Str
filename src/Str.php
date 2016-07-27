@@ -213,6 +213,15 @@ final class Str implements \Countable {
 	}
 
 	/**
+	 * Returns whether this string is entirely lowercase
+	 *
+	 * @return bool
+	 */
+	public function isLowerCase() {
+		return $this->equals($this->toLowerCase());
+	}
+
+	/**
 	 * Converts this string to uppercase
 	 *
 	 * @return static a new instance of this class
@@ -221,6 +230,15 @@ final class Str implements \Countable {
 		$rawString = mb_strtoupper($this->rawString, $this->charset);
 
 		return new static($rawString, $this->charset);
+	}
+
+	/**
+	 * Returns whether this string is entirely uppercase
+	 *
+	 * @return bool
+	 */
+	public function isUpperCase() {
+		return $this->equals($this->toUpperCase());
 	}
 
 	/**

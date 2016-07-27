@@ -91,7 +91,11 @@ assert((string) $testStrObj->end(14) === 'lo w☺rld w☺rld');
 assert((string) $testStrObj->end(15) === 'llo w☺rld w☺rld');
 
 assert((string) $testStrObj->toLowerCase() === 'hello hello w☺rld w☺rld');
+assert($testStrObj->isLowerCase() === false);
+assert($testStrObj->toLowerCase()->isLowerCase() === true);
 assert((string) $testStrObj->toUpperCase() === 'HELLO HELLO W☺RLD W☺RLD');
+assert($testStrObj->isUpperCase() === false);
+assert($testStrObj->toUpperCase()->isUpperCase() === true);
 
 assert((string) $testStrObj->truncate(5) === 'He...');
 assert((string) $testStrObj->truncate(5, '…') === 'Hell…');

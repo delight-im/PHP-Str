@@ -59,7 +59,9 @@ s('Hello world', 'ISO-8859-1')
  * `start`
  * `end`
  * `toLowerCase`
+ * `isLowerCase`
  * `toUpperCase`
+ * `isUpperCase`
  * `truncate`
  * `truncateSafely`
  * `cutStart`
@@ -247,11 +249,33 @@ public function toLowerCase();
 
 
 /**
+ * Returns whether this string is entirely lowercase
+ *
+ * @return bool
+ */
+public function isLowerCase();
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+/**
  * Converts this string to uppercase
  *
  * @return static this instance for chaining
  */
 public function toUpperCase();
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+/**
+ * Returns whether this string is entirely uppercase
+ *
+ * @return bool
+ */
+public function isUpperCase();
 
 
 ////////////////////////////////////////////////////////////////////////////////
