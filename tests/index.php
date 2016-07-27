@@ -114,6 +114,20 @@ assert((string) $testStrObj->truncateSafely(15) === 'Hello Hello ...');
 assert((string) $testStrObj->truncateSafely(23) === 'Hello Hello w☺rld w☺rld');
 assert((string) $testStrObj->truncateSafely(24) === 'Hello Hello w☺rld w☺rld');
 
+assert((string) $testStrObj->cutStart(0) === 'Hello Hello w☺rld w☺rld');
+assert((string) $testStrObj->cutStart(2) === 'llo Hello w☺rld w☺rld');
+assert((string) $testStrObj->cutStart(9) === 'lo w☺rld w☺rld');
+assert((string) $testStrObj->cutStart(13) === '☺rld w☺rld');
+assert((string) $testStrObj->cutStart(14) === 'rld w☺rld');
+assert((string) $testStrObj->cutStart(15) === 'ld w☺rld');
+
+assert((string) $testStrObj->cutEnd(0) === 'Hello Hello w☺rld w☺rld');
+assert((string) $testStrObj->cutEnd(2) === 'Hello Hello w☺rld w☺r');
+assert((string) $testStrObj->cutEnd(9) === 'Hello Hello w☺');
+assert((string) $testStrObj->cutEnd(13) === 'Hello Hell');
+assert((string) $testStrObj->cutEnd(14) === 'Hello Hel');
+assert((string) $testStrObj->cutEnd(15) === 'Hello He');
+
 assert((string) $testStrObj->replace('Hello') === '  w☺rld w☺rld');
 assert((string) $testStrObj->replace('hello') === $testStr);
 assert((string) $testStrObj->replace('Hello', 'Bonjour') === 'Bonjour Bonjour w☺rld w☺rld');

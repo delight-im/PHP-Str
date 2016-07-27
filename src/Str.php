@@ -248,6 +248,30 @@ final class Str implements \Countable {
 	}
 
 	/**
+	 * Removes the specified number of characters from the start of this string
+	 *
+	 * @param int $length the number of characters to remove
+	 * @return static a new instance of this class
+	 */
+	public function cutStart($length) {
+		$rawString = mb_substr($this->rawString, $length, null, $this->charset);
+
+		return new static($rawString, $this->charset);
+	}
+
+	/**
+	 * Removes the specified number of characters from the end of this string
+	 *
+	 * @param int $length the number of characters to remove
+	 * @return static a new instance of this class
+	 */
+	public function cutEnd($length) {
+		$rawString = mb_substr($this->rawString, 0, $this->length() - $length, $this->charset);
+
+		return new static($rawString, $this->charset);
+	}
+
+	/**
 	 * Replaces all occurrences of the specified search string with the given replacement
 	 *
 	 * @param string $searchFor the string to search for

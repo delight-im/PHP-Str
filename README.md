@@ -62,6 +62,8 @@ s('Hello world', 'ISO-8859-1')
  * `toUpperCase`
  * `truncate`
  * `truncateSafely`
+ * `cutStart`
+ * `cutEnd`
  * `replace`
  * `replaceIgnoreCase`
  * `replaceFirst`
@@ -278,6 +280,30 @@ public function truncate($maxLength, $ellipsis = null);
  * @return static a new instance of this class
  */
 public function truncateSafely($maxLength, $ellipsis = null);
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+/**
+ * Removes the specified number of characters from the start of this string
+ *
+ * @param int $length the number of characters to remove
+ * @return static a new instance of this class
+ */
+public function cutStart($length);
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+/**
+ * Removes the specified number of characters from the end of this string
+ *
+ * @param int $length the number of characters to remove
+ * @return static a new instance of this class
+ */
+public function cutEnd($length);
 
 
 ////////////////////////////////////////////////////////////////////////////////
