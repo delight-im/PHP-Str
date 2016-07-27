@@ -62,6 +62,7 @@ s('Hello world', 'ISO-8859-1')
  * `isLowerCase`
  * `toUpperCase`
  * `isUpperCase`
+ * `isCapitalized`
  * `truncate`
  * `truncateSafely`
  * `cutStart`
@@ -276,6 +277,17 @@ public function toUpperCase();
  * @return bool
  */
 public function isUpperCase();
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+/**
+ * Returns whether this string has its first letter written in uppercase
+ *
+ * @return bool
+ */
+public function isCapitalized();
 
 
 ////////////////////////////////////////////////////////////////////////////////

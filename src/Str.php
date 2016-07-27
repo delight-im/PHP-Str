@@ -242,6 +242,15 @@ final class Str implements \Countable {
 	}
 
 	/**
+	 * Returns whether this string has its first letter written in uppercase
+	 *
+	 * @return bool
+	 */
+	public function isCapitalized() {
+		return $this->start()->isUpperCase();
+	}
+
+	/**
 	 * Truncates this string so that it has at most the specified length
 	 *
 	 * @param int $maxLength the maximum length that this string may have (including any ellipsis)
