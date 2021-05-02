@@ -716,7 +716,7 @@ final class Str implements \Countable {
 		return $this->rawString;
 	}
 
-	private function trimInternal(callable $func, $charactersToRemove = null, $alwaysRemoveWhitespace) {
+	private function trimInternal(callable $func, $charactersToRemove = null, $alwaysRemoveWhitespace = null) {
 		if ($alwaysRemoveWhitespace === null) {
 			$alwaysRemoveWhitespace = false;
 		}
