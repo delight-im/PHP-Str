@@ -190,6 +190,8 @@ assert((string) $testStrObj->replaceLast('w') === 'Hello Hello w☺rld ☺rld');
 assert((string) $testStrObj->replaceLast('w', 'www') === 'Hello Hello w☺rld www☺rld');
 assert((string) $testStrObj->replaceLast('Hello', 'Bonjour') === 'Hello Bonjour w☺rld w☺rld');
 assert((string) $testStrObj->replaceLast('hello', 'Bonjour') === $testStr);
+assert((string) $testStrObj->replaceLast('', 'x') === $testStr);
+assert((string) $testStrObj->replaceLast('', '') === $testStr);
 assert((string) $testStrObj->replaceLastIgnoreCase('Hello', 'Bonjour') === 'Hello Bonjour w☺rld w☺rld');
 assert((string) $testStrObj->replaceLastIgnoreCase('hello', 'Bonjour') === 'Hello Bonjour w☺rld w☺rld');
 
