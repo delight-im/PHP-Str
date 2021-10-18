@@ -232,6 +232,7 @@ assert((string) $testStrObj->beforeLast('d w☺rl') === 'Hello Hello w☺rl');
 assert((string) $testStrObj->beforeLast('w☺rld') === 'Hello Hello w☺rld ');
 assert((string) $testStrObj->beforeLast('hello') === '');
 assert((string) $testStrObj->beforeLast('x') === '');
+assert((string) $testStrObj->beforeLast('') === '');
 
 assert((string) $testStrObj->between('Hello', 'w☺rld') === ' Hello w☺rld ');
 assert((string) $testStrObj->between('w☺rld', 'w☺rld') === ' ');
