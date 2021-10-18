@@ -477,6 +477,8 @@ final class Str implements \Countable {
 	/**
 	 * Replaces the specified part in this string only if it ends with that part
 	 *
+	 * This operation is case-sensitive
+	 *
 	 * @param string $searchFor the string to search for
 	 * @param string $replaceWith the string to use as the replacement (optional)
 	 * @return static a new instance of this class

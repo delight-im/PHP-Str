@@ -200,6 +200,7 @@ assert((string) $testStrObj->replaceLastIgnoreCase('', '') === $testStr);
 assert((string) $testStrObj->replaceSuffix('w☺rld ') === $testStr);
 assert((string) $testStrObj->replaceSuffix(' w☺rld') === 'Hello Hello w☺rld');
 assert((string) $testStrObj->replaceSuffix(' w☺rld', ' earth') === 'Hello Hello w☺rld earth');
+assert((string) $testStrObj->replaceSuffix(' W☺rld', ' earth') === $testStr);
 
 assert(count($testStrObj->split(' ')) === 4);
 assert(count($testStrObj->split(' ', 3)) === 3);
