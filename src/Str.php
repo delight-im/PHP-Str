@@ -636,6 +636,8 @@ final class Str implements \Countable {
 	 *
 	 * This operation is case-sensitive
 	 *
+	 * The empty string (as a search string) is not considered to be a part of any other string
+	 *
 	 * If the given search string is not found anywhere, an empty string is returned
 	 *
 	 * @param string $search the search string that should delimit the start

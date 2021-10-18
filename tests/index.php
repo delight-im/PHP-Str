@@ -251,6 +251,7 @@ assert((string) $testStrObj->afterFirst('d w☺rl') === 'd');
 assert((string) $testStrObj->afterFirst('w☺rld') === ' w☺rld');
 assert((string) $testStrObj->afterFirst('hello') === '');
 assert((string) $testStrObj->afterFirst('x') === '');
+assert((string) $testStrObj->afterFirst('') === '');
 assert((string) $testStrObj->afterLast('Hello') === ' w☺rld w☺rld');
 assert((string) $testStrObj->afterLast('o H') === 'ello w☺rld w☺rld');
 assert((string) $testStrObj->afterLast('d w☺rl') === 'd');
