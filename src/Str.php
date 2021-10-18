@@ -582,6 +582,10 @@ final class Str implements \Countable {
 	/**
 	 * Returns the part of this string *before* the *last* occurrence of the search string
 	 *
+	 * This operation is case-sensitive
+	 *
+	 * If the given search string is not found anywhere, an empty string is returned
+	 *
 	 * @param string $search the search string that should delimit the end
 	 * @return static a new instance of this class
 	 */
