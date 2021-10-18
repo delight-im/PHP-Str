@@ -58,6 +58,7 @@ assert($testStrObj->endsWith('ld') === true);
 assert($testStrObj->endsWith('lD') === false);
 assert($testStrObj->endsWith('rl') === false);
 assert($testStrObj->endsWith('rL') === false);
+assert($testStrObj->endsWith('') === false);
 assert($testStrObj->endsWithIgnoreCase('ld') === true);
 assert($testStrObj->endsWithIgnoreCase('lD') === true);
 assert($testStrObj->endsWithIgnoreCase('rl') === false);
