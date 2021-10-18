@@ -208,6 +208,7 @@ assert(count($testStrObj->split(' ')) === 4);
 assert(count($testStrObj->split(' ', 3)) === 3);
 assert(count($testStrObj->split(' ', 5)) === 4);
 assert(count($testStrObj->split(' Hello w☺rld ')) === 2);
+assert(count($testStrObj->split(' hello w☺rld ')) === 1);
 
 assert(count($testStrObj->splitByRegex('/ (?=[A-Z])|(?<=[a-z]) (?!.*? )/')) === 3);
 assert(count($testStrObj->splitByRegex('/ (?=[A-Z])|(?<=[a-z]) (?!.*? )/', 2)) === 2);

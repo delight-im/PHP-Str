@@ -497,6 +497,8 @@ final class Str implements \Countable {
 	/**
 	 * Splits this string into an array of substrings at the specified delimiter
 	 *
+	 * This operation is case-sensitive
+	 *
 	 * @param string $delimiter the delimiter to split the string at
 	 * @param int|null $limit the maximum number of substrings to return (optional)
 	 * @return static[] the new instances of this class
