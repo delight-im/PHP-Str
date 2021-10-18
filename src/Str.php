@@ -602,6 +602,8 @@ final class Str implements \Countable {
 	 *
 	 * If there are multiple occurrences, the part with the maximum length will be returned
 	 *
+	 * The empty string (as a search string) is not considered to be a part of any other string
+	 *
 	 * If one of the given search strings is not found anywhere, an empty string is returned
 	 *
 	 * @param string $start the substring whose first occurrence should delimit the start
@@ -609,6 +611,10 @@ final class Str implements \Countable {
 	 * @return static a new instance of this class
 	 */
 	public function between($start, $end) {
+		if ($start === '' || $end === '') {
+			return new static('', $this->charset);
+		}
+
 		$beforeStart = mb_strpos($this->rawString, $start, 0, $this->charset);
 
 		$rawString = '';
