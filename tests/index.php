@@ -52,6 +52,7 @@ assert($testStrObj->containsIgnoreCase('He') === true);
 assert($testStrObj->containsIgnoreCase('he') === true);
 assert($testStrObj->containsIgnoreCase('ld') === true);
 assert($testStrObj->containsIgnoreCase('lD') === true);
+assert($testStrObj->containsIgnoreCase('') === false);
 
 assert($testStrObj->endsWith('ld') === true);
 assert($testStrObj->endsWith('lD') === false);

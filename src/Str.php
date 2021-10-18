@@ -105,11 +105,13 @@ final class Str implements \Countable {
 	 *
 	 * This operation is case-insensitive
 	 *
+	 * The empty string is not considered to be a part of any other string
+	 *
 	 * @param string $infix the other string to search for
 	 * @return bool whether the supplied other string is contained in this string
 	 */
 	public function containsIgnoreCase($infix) {
-		return mb_stripos($this->rawString, $infix, 0, $this->charset) !== false;
+		return $infix !== '' && mb_stripos($this->rawString, $infix, 0, $this->charset) !== false;
 	}
 
 	/**
