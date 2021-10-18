@@ -872,6 +872,10 @@ final class Str implements \Countable {
 	}
 
 	private function replaceOneInternal(callable $func, $searchFor, $replaceWith) {
+		if ($searchFor === '') {
+			return $this;
+		}
+
 		$pos = $func($this->rawString, $searchFor, 0, $this->charset);
 
 		if ($pos === false) {
