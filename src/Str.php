@@ -313,6 +313,8 @@ final class Str implements \Countable {
 	 *
 	 * This operation is case-sensitive
 	 *
+	 * The empty string is not considered to be a part of any other string
+	 *
 	 * @param string $substring the substring whose occurrences to count
 	 * @return int the number of occurrences
 	 */
@@ -321,6 +323,10 @@ final class Str implements \Countable {
 			return mb_strlen($this->rawString, $this->charset);
 		}
 		else {
+			if ($substring === '') {
+				return 0;
+			}
+
 			return mb_substr_count($this->rawString, $substring, $this->charset);
 		}
 	}
