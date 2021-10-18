@@ -33,6 +33,7 @@ assert($testStrObj->startsWithIgnoreCase('He') === true);
 assert($testStrObj->startsWithIgnoreCase('he') === true);
 assert($testStrObj->startsWithIgnoreCase('el') === false);
 assert($testStrObj->startsWithIgnoreCase('El') === false);
+assert($testStrObj->startsWithIgnoreCase('') === false);
 
 assert($testStrObj->contains('o w') === true);
 assert($testStrObj->contains('o W') === false);
