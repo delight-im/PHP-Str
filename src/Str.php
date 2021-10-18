@@ -135,6 +135,8 @@ final class Str implements \Countable {
 	 *
 	 * This operation is case-insensitive
 	 *
+	 * The empty string is not considered to be a part of any other string
+	 *
 	 * @param string $suffix the other string to search for
 	 * @return bool whether the supplied other string can be found at the end of this string
 	 */

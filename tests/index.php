@@ -63,6 +63,7 @@ assert($testStrObj->endsWithIgnoreCase('ld') === true);
 assert($testStrObj->endsWithIgnoreCase('lD') === true);
 assert($testStrObj->endsWithIgnoreCase('rl') === false);
 assert($testStrObj->endsWithIgnoreCase('rL') === false);
+assert($testStrObj->endsWithIgnoreCase('') === false);
 
 assert((string) Str::from(" \r\n".$testStr." \n")->trim() === $testStr);
 assert((string) Str::from(" \r\n".$testStr." \n")->trim('ab') === " \r\n".$testStr." \n");
