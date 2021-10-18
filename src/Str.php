@@ -726,7 +726,7 @@ final class Str implements \Countable {
 	/**
 	 * Compares this string to another string lexicographically
 	 *
-	 * This operation is case-sensitive
+	 * This operation is case-insensitive
 	 *
 	 * @param string $other the other string to compare to
 	 * @param bool|null $human whether to use human sorting for numbers (e.g. `2` before `10`) (optional)
