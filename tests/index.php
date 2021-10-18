@@ -237,6 +237,10 @@ assert((string) $testStrObj->beforeLast('') === '');
 assert((string) $testStrObj->between('Hello', 'w☺rld') === ' Hello w☺rld ');
 assert((string) $testStrObj->between('w☺rld', 'w☺rld') === ' ');
 assert((string) $testStrObj->between('w☺rld', 'Hello') === '');
+assert((string) $testStrObj->between('hello', 'w☺rld') === '');
+assert((string) $testStrObj->between('Hello', 'W☺rld') === '');
+assert((string) $testStrObj->between('hello', 'W☺rld') === '');
+assert((string) $testStrObj->between('x', 'y') === '');
 
 assert((string) $testStrObj->afterFirst('Hello') === ' Hello w☺rld w☺rld');
 assert((string) $testStrObj->afterFirst('o H') === 'ello w☺rld w☺rld');

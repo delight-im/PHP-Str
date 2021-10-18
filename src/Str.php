@@ -598,7 +598,11 @@ final class Str implements \Countable {
 	/**
 	 * Returns the part of this string between the two specified substrings
 	 *
+	 * This operation is case-sensitive
+	 *
 	 * If there are multiple occurrences, the part with the maximum length will be returned
+	 *
+	 * If one of the given search strings is not found anywhere, an empty string is returned
 	 *
 	 * @param string $start the substring whose first occurrence should delimit the start
 	 * @param string $end the substring whose last occurrence should delimit the end
