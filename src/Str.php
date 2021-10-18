@@ -695,7 +695,7 @@ final class Str implements \Countable {
 	/**
 	 * Returns whether this string matches the other string
 	 *
-	 * This operation is case-sensitive
+	 * This operation is case-insensitive
 	 *
 	 * @param string $other the other string to compare with
 	 * @return bool whether the two strings are equal
