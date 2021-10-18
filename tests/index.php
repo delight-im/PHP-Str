@@ -258,6 +258,7 @@ assert((string) $testStrObj->afterLast('d w☺rl') === 'd');
 assert((string) $testStrObj->afterLast('w☺rld') === '');
 assert((string) $testStrObj->afterLast('hello') === '');
 assert((string) $testStrObj->afterLast('x') === '');
+assert((string) $testStrObj->afterLast('') === '');
 
 assert($testStrObj->matches('/(?:[a-z]+) ([a-z]+) (\S+) \S+/i') === true);
 assert($testStrObj->matches('/[a-z]+ [a-z]+ \S+ \S+/') === false);
