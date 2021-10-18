@@ -183,6 +183,8 @@ assert((string) $testStrObj->replacePrefix(' Hello') === $testStr);
 assert((string) $testStrObj->replacePrefix('Hello ') === 'Hello w☺rld w☺rld');
 assert((string) $testStrObj->replacePrefix('Hello ', 'Bonjour ') === 'Bonjour Hello w☺rld w☺rld');
 assert((string) $testStrObj->replacePrefix('hello ', 'Bonjour ') === $testStr);
+assert((string) $testStrObj->replacePrefix('', 'x') === $testStr);
+assert((string) $testStrObj->replacePrefix('', '') === $testStr);
 
 assert((string) $testStrObj->replaceLast('w') === 'Hello Hello w☺rld ☺rld');
 assert((string) $testStrObj->replaceLast('w', 'www') === 'Hello Hello w☺rld www☺rld');
