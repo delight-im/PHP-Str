@@ -893,6 +893,10 @@ final class Str implements \Countable {
 	}
 
 	private function sideInternal(callable $func, $substr, $direction) {
+		if ($substr === '') {
+			return new static('', $this->charset);
+		}
+
 		$startPos = $func($this->rawString, $substr, 0, $this->charset);
 
 		if ($startPos !== false) {
