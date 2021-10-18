@@ -464,6 +464,8 @@ final class Str implements \Countable {
 	 *
 	 * This operation is case-insensitive
 	 *
+	 * The empty string is not considered to be a part of any other string
+	 *
 	 * @param string $searchFor the string to search for
 	 * @param string $replaceWith the string to use as the replacement (optional)
 	 * @return static a new instance of this class
