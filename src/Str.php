@@ -499,11 +499,17 @@ final class Str implements \Countable {
 	 *
 	 * This operation is case-sensitive
 	 *
+	 * The empty string is not considered to be a part of any other string
+	 *
 	 * @param string $delimiter the delimiter to split the string at
 	 * @param int|null $limit the maximum number of substrings to return (optional)
 	 * @return static[] the new instances of this class
 	 */
 	public function split($delimiter, $limit = null) {
+		if ($delimiter === '') {
+			return [ $this ];
+		}
+
 		if ($limit === null) {
 			$limit = PHP_INT_MAX;
 		}
