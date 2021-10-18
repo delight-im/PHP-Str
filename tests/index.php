@@ -43,6 +43,7 @@ assert($testStrObj->contains('He') === true);
 assert($testStrObj->contains('he') === false);
 assert($testStrObj->contains('ld') === true);
 assert($testStrObj->contains('lD') === false);
+assert($testStrObj->contains('') === false);
 assert($testStrObj->containsIgnoreCase('o w') === true);
 assert($testStrObj->containsIgnoreCase('o W') === true);
 assert($testStrObj->containsIgnoreCase('m') === false);
