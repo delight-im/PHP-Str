@@ -176,6 +176,8 @@ assert((string) $testStrObj->replaceFirst('', 'x') === $testStr);
 assert((string) $testStrObj->replaceFirst('', '') === $testStr);
 assert((string) $testStrObj->replaceFirstIgnoreCase('Hello', 'Bonjour') === 'Bonjour Hello w☺rld w☺rld');
 assert((string) $testStrObj->replaceFirstIgnoreCase('hello', 'Bonjour') === 'Bonjour Hello w☺rld w☺rld');
+assert((string) $testStrObj->replaceFirstIgnoreCase('', 'x') === $testStr);
+assert((string) $testStrObj->replaceFirstIgnoreCase('', '') === $testStr);
 
 assert((string) $testStrObj->replacePrefix(' Hello') === $testStr);
 assert((string) $testStrObj->replacePrefix('Hello ') === 'Hello w☺rld w☺rld');
