@@ -311,6 +311,8 @@ final class Str implements \Countable {
 	/**
 	 * Counts the occurrences of the specified substring in this string
 	 *
+	 * This operation is case-sensitive
+	 *
 	 * @param string $substring the substring whose occurrences to count
 	 * @return int the number of occurrences
 	 */

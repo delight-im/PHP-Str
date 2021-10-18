@@ -137,6 +137,8 @@ assert($testStrObj->count('l') === 6);
 assert($testStrObj->count('lo') === 2);
 assert($testStrObj->count('☺') === 2);
 assert($testStrObj->count(' ') === 3);
+assert($testStrObj->count('L') === 0);
+assert($testStrObj->count('x') === 0);
 
 assert((string) $testStrObj->cutStart(0) === $testStr);
 assert((string) $testStrObj->cutStart(2) === 'llo Hello w☺rld w☺rld');
