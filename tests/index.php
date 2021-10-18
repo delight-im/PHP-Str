@@ -28,6 +28,7 @@ assert($testStrObj->startsWith('He') === true);
 assert($testStrObj->startsWith('he') === false);
 assert($testStrObj->startsWith('el') === false);
 assert($testStrObj->startsWith('El') === false);
+assert($testStrObj->startsWith('') === false);
 assert($testStrObj->startsWithIgnoreCase('He') === true);
 assert($testStrObj->startsWithIgnoreCase('he') === true);
 assert($testStrObj->startsWithIgnoreCase('el') === false);

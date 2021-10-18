@@ -63,11 +63,13 @@ final class Str implements \Countable {
 	 *
 	 * This operation is case-sensitive
 	 *
+	 * The empty string is not considered to be a part of any other string
+	 *
 	 * @param string $prefix the other string to search for
 	 * @return bool whether the supplied other string can be found at the beginning of this string
 	 */
 	public function startsWith($prefix) {
-		return mb_strpos($this->rawString, $prefix, 0, $this->charset) === 0;
+		return $prefix !== '' && mb_strpos($this->rawString, $prefix, 0, $this->charset) === 0;
 	}
 
 	/**
