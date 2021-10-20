@@ -69,6 +69,10 @@ final class Str implements \Countable {
 	 * @return bool whether the supplied other string can be found at the beginning of this string
 	 */
 	public function startsWith($prefix) {
+		if (\PHP_VERSION_ID >= 80000) {
+			return $prefix !== '' && \str_starts_with($this->rawString, $prefix);
+		}
+
 		return $prefix !== '' && \strncmp($this->rawString, $prefix, \strlen($prefix)) === 0;
 	}
 
