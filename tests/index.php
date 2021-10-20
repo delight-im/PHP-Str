@@ -23,6 +23,10 @@ use Delight\Str\Str;
 
 $testStr = 'Hello Hello w☺rld w☺rld';
 $testStrObj = Str::from($testStr);
+$japaneseUtf8Str = \base64_decode('44GT44KT44Gr44Gh44Gv44CB5LiW55WM77yB');
+$japaneseUtf8StartStr = \base64_decode('44GT44KT44Gr44Gh44Gv');
+$japaneseUtf8EndStr = \base64_decode('5LiW55WM77yB');
+$japaneseEucJpStr = \mb_convert_encoding($japaneseUtf8Str, 'EUC-JP', 'UTF-8');
 
 assert($testStrObj->startsWith('He') === true);
 assert($testStrObj->startsWith('he') === false);
