@@ -101,6 +101,10 @@ final class Str implements \Countable {
 	 * @return bool whether the supplied other string is contained in this string
 	 */
 	public function contains($infix) {
+		if (\PHP_VERSION_ID >= 80000) {
+			return $infix !== '' && \str_contains($this->rawString, $infix);
+		}
+
 		return $infix !== '' && \mb_strpos($this->rawString, $infix, 0, $this->charset) !== false;
 	}
 
