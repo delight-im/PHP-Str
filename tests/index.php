@@ -7,7 +7,7 @@
  */
 
 // enable error reporting
-\error_reporting(E_ALL);
+\error_reporting(\E_ALL);
 \ini_set('display_errors', 'stdout');
 
 // enable assertions
@@ -17,7 +17,7 @@
 
 \header('Content-Type: text/plain; charset=utf-8');
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 use Delight\Str\Str;
 
@@ -65,20 +65,20 @@ assert($testStrObj->endsWithIgnoreCase('rl') === false);
 assert($testStrObj->endsWithIgnoreCase('rL') === false);
 assert($testStrObj->endsWithIgnoreCase('') === false);
 
-assert((string) Str::from(" \r\n".$testStr." \n")->trim() === $testStr);
-assert((string) Str::from(" \r\n".$testStr." \n")->trim('ab') === " \r\n".$testStr." \n");
-assert((string) Str::from("ab cd".$testStr." d c b a")->trim('ab') === " cd".$testStr." d c b ");
-assert((string) Str::from("ab cd".$testStr." d c b a")->trim('ab', true) === "cd".$testStr." d c");
+assert((string) Str::from(" \r\n" . $testStr . " \n")->trim() === $testStr);
+assert((string) Str::from(" \r\n" . $testStr . " \n")->trim('ab') === " \r\n" . $testStr . " \n");
+assert((string) Str::from("ab cd" . $testStr . " d c b a")->trim('ab') === " cd" . $testStr . " d c b ");
+assert((string) Str::from("ab cd" . $testStr . " d c b a")->trim('ab', true) === "cd" . $testStr . " d c");
 
-assert((string) Str::from(" \r\n".$testStr." \n")->trimStart() === $testStr." \n");
-assert((string) Str::from(" \r\n".$testStr." \n")->trimStart('ab') === " \r\n".$testStr." \n");
-assert((string) Str::from("ab cd".$testStr." d c b a")->trimStart('ab') === " cd".$testStr." d c b a");
-assert((string) Str::from("ab cd".$testStr." d c b a")->trimStart('ab', true) === "cd".$testStr." d c b a");
+assert((string) Str::from(" \r\n" . $testStr . " \n")->trimStart() === $testStr . " \n");
+assert((string) Str::from(" \r\n" . $testStr . " \n")->trimStart('ab') === " \r\n" . $testStr . " \n");
+assert((string) Str::from("ab cd" . $testStr . " d c b a")->trimStart('ab') === " cd" . $testStr . " d c b a");
+assert((string) Str::from("ab cd" . $testStr . " d c b a")->trimStart('ab', true) === "cd" . $testStr . " d c b a");
 
-assert((string) Str::from(" \r\n".$testStr." \n")->trimEnd() === " \r\n".$testStr);
-assert((string) Str::from(" \r\n".$testStr." \n")->trimEnd('ab') === " \r\n".$testStr." \n");
-assert((string) Str::from("ab cd".$testStr." d c b a")->trimEnd('ab') === "ab cd".$testStr." d c b ");
-assert((string) Str::from("ab cd".$testStr." d c b a")->trimEnd('ab', true) === "ab cd".$testStr." d c");
+assert((string) Str::from(" \r\n" . $testStr . " \n")->trimEnd() === " \r\n" . $testStr);
+assert((string) Str::from(" \r\n" . $testStr . " \n")->trimEnd('ab') === " \r\n" . $testStr . " \n");
+assert((string) Str::from("ab cd" . $testStr . " d c b a")->trimEnd('ab') === "ab cd" . $testStr . " d c b ");
+assert((string) Str::from("ab cd" . $testStr . " d c b a")->trimEnd('ab', true) === "ab cd" . $testStr . " d c");
 
 assert((string) $testStrObj->first() === 'H');
 assert((string) $testStrObj->first(0) === '');
@@ -131,7 +131,7 @@ assert((string) $testStrObj->truncateSafely(24) === $testStr);
 
 assert($testStrObj->count() === 23);
 assert($testStrObj->length() === 23);
-assert(count($testStrObj) === 23);
+assert(\count($testStrObj) === 23);
 
 assert($testStrObj->count('l') === 6);
 assert($testStrObj->count('lo') === 2);
@@ -204,20 +204,20 @@ assert((string) $testStrObj->replaceSuffix(' W☺rld', ' earth') === $testStr);
 assert((string) $testStrObj->replaceSuffix('', 'x') === $testStr);
 assert((string) $testStrObj->replaceSuffix('', '') === $testStr);
 
-assert(count($testStrObj->split(' ')) === 4);
-assert(count($testStrObj->split(' ', 3)) === 3);
-assert(count($testStrObj->split(' ', 5)) === 4);
-assert(count($testStrObj->split(' Hello w☺rld ')) === 2);
-assert(count($testStrObj->split(' hello w☺rld ')) === 1);
-assert(count($testStrObj->split('')) === 1);
+assert(\count($testStrObj->split(' ')) === 4);
+assert(\count($testStrObj->split(' ', 3)) === 3);
+assert(\count($testStrObj->split(' ', 5)) === 4);
+assert(\count($testStrObj->split(' Hello w☺rld ')) === 2);
+assert(\count($testStrObj->split(' hello w☺rld ')) === 1);
+assert(\count($testStrObj->split('')) === 1);
 
-assert(count($testStrObj->splitByRegex('/ (?=[A-Z])|(?<=[a-z]) (?!.*? )/')) === 3);
-assert(count($testStrObj->splitByRegex('/ (?=[A-Z])|(?<=[a-z]) (?!.*? )/', 2)) === 2);
-assert(count($testStrObj->splitByRegex('/ (?=[A-Z])|(?<=[a-z]) (?!.*? )/', 4)) === 3);
+assert(\count($testStrObj->splitByRegex('/ (?=[A-Z])|(?<=[a-z]) (?!.*? )/')) === 3);
+assert(\count($testStrObj->splitByRegex('/ (?=[A-Z])|(?<=[a-z]) (?!.*? )/', 2)) === 2);
+assert(\count($testStrObj->splitByRegex('/ (?=[A-Z])|(?<=[a-z]) (?!.*? )/', 4)) === 3);
 
-assert(count(Str::from('One, two; three and four! Five? It\'s six.')->words()) === 8);
-assert(count(Str::from('One, two; three and four! Five? It\'s six.')->words(4)) === 4);
-assert(implode(' + ', Str::from('One, two; three and four! Five? It\'s six.')->words(3)) === 'One + two + three');
+assert(\count(Str::from('One, two; three and four! Five? It\'s six.')->words()) === 8);
+assert(\count(Str::from('One, two; three and four! Five? It\'s six.')->words(4)) === 4);
+assert(\implode(' + ', Str::from('One, two; three and four! Five? It\'s six.')->words(3)) === 'One + two + three');
 
 assert((string) $testStrObj->beforeFirst('Hello') === '');
 assert((string) $testStrObj->beforeFirst('o H') === 'Hell');
@@ -264,7 +264,7 @@ assert($testStrObj->matches('/(?:[a-z]+) ([a-z]+) (\S+) \S+/i') === true);
 assert($testStrObj->matches('/[a-z]+ [a-z]+ \S+ \S+/') === false);
 assert($testStrObj->matches('/[a-zA-Z]+ [a-zA-Z]+ \S+ \S+/') === true);
 assert($testStrObj->matches('/[a-z]/', $matches, true) === true);
-assert(count($matches[0]) === 16);
+assert(\count($matches[0]) === 16);
 
 assert(Str::from('bb')->equals('aa') === false);
 assert(Str::from('bb')->equals('b') === false);
@@ -327,13 +327,13 @@ assert(Str::from('Chapter 2')->compareToIgnoreCase('chapter 10', true) < 0);
 assert(Str::from('Chapter 2')->compareToIgnoreCase('Chapter 10', true) < 0);
 
 assert((string) $testStrObj->escapeForHtml() === $testStr);
-assert((string) Str::from('<b>'.$testStr.'</b>')->escapeForHtml() === '&lt;b&gt;'.$testStr.'&lt;/b&gt;');
+assert((string) Str::from('<b>' . $testStr . '</b>')->escapeForHtml() === '&lt;b&gt;' . $testStr . '&lt;/b&gt;');
 
 assert((string) $testStrObj->normalizeLineEndings() === $testStr);
-assert((string) Str::from("a\r\nb\nc\rd".$testStr."a\r\nb\nc\rd")->normalizeLineEndings() === "a\nb\nc\nd".$testStr."a\nb\nc\nd");
-assert((string) Str::from("a\r\nb\nc\rd".$testStr."a\r\nb\nc\rd")->normalizeLineEndings("\r\n") === "a\r\nb\r\nc\r\nd".$testStr."a\r\nb\r\nc\r\nd");
-assert((string) Str::from("a\r\nb\nc\rd".$testStr."a\r\nb\nc\rd")->normalizeLineEndings("\r") === "a\rb\rc\rd".$testStr."a\rb\rc\rd");
-assert((string) Str::from("a\r\nb\nc\rd".$testStr."a\r\nb\nc\rd")->normalizeLineEndings("\n") === "a\nb\nc\nd".$testStr."a\nb\nc\nd");
+assert((string) Str::from("a\r\nb\nc\rd" . $testStr . "a\r\nb\nc\rd")->normalizeLineEndings() === "a\nb\nc\nd" . $testStr . "a\nb\nc\nd");
+assert((string) Str::from("a\r\nb\nc\rd" . $testStr . "a\r\nb\nc\rd")->normalizeLineEndings("\r\n") === "a\r\nb\r\nc\r\nd" . $testStr . "a\r\nb\r\nc\r\nd");
+assert((string) Str::from("a\r\nb\nc\rd" . $testStr . "a\r\nb\nc\rd")->normalizeLineEndings("\r") === "a\rb\rc\rd" . $testStr . "a\rb\rc\rd");
+assert((string) Str::from("a\r\nb\nc\rd" . $testStr . "a\r\nb\nc\rd")->normalizeLineEndings("\n") === "a\nb\nc\nd" . $testStr . "a\nb\nc\nd");
 
 assert((string) $testStrObj->reverse() === 'dlr☺w dlr☺w olleH olleH');
 

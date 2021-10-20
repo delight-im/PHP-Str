@@ -49,7 +49,7 @@ final class Str implements \Countable {
 	 * @return static[] the new instances of this class
 	 */
 	public static function fromArray($rawArray, $charset = null) {
-		$output = array();
+		$output = [];
 
 		foreach ($rawArray as $rawEntry) {
 			$output[] = new static($rawEntry, $charset);
@@ -69,7 +69,7 @@ final class Str implements \Countable {
 	 * @return bool whether the supplied other string can be found at the beginning of this string
 	 */
 	public function startsWith($prefix) {
-		return $prefix !== '' && mb_strpos($this->rawString, $prefix, 0, $this->charset) === 0;
+		return $prefix !== '' && \mb_strpos($this->rawString, $prefix, 0, $this->charset) === 0;
 	}
 
 	/**
@@ -83,7 +83,7 @@ final class Str implements \Countable {
 	 * @return bool whether the supplied other string can be found at the beginning of this string
 	 */
 	public function startsWithIgnoreCase($prefix) {
-		return $prefix !== '' && mb_stripos($this->rawString, $prefix, 0, $this->charset) === 0;
+		return $prefix !== '' && \mb_stripos($this->rawString, $prefix, 0, $this->charset) === 0;
 	}
 
 	/**
@@ -97,7 +97,7 @@ final class Str implements \Countable {
 	 * @return bool whether the supplied other string is contained in this string
 	 */
 	public function contains($infix) {
-		return $infix !== '' && mb_strpos($this->rawString, $infix, 0, $this->charset) !== false;
+		return $infix !== '' && \mb_strpos($this->rawString, $infix, 0, $this->charset) !== false;
 	}
 
 	/**
@@ -111,7 +111,7 @@ final class Str implements \Countable {
 	 * @return bool whether the supplied other string is contained in this string
 	 */
 	public function containsIgnoreCase($infix) {
-		return $infix !== '' && mb_stripos($this->rawString, $infix, 0, $this->charset) !== false;
+		return $infix !== '' && \mb_stripos($this->rawString, $infix, 0, $this->charset) !== false;
 	}
 
 	/**
@@ -127,7 +127,7 @@ final class Str implements \Countable {
 	public function endsWith($suffix) {
 		$other = new Str($suffix, $this->charset);
 
-		return mb_strrpos($this->rawString, $suffix, 0, $this->charset) === ($this->length() - $other->length());
+		return \mb_strrpos($this->rawString, $suffix, 0, $this->charset) === ($this->length() - $other->length());
 	}
 
 	/**
@@ -143,7 +143,7 @@ final class Str implements \Countable {
 	public function endsWithIgnoreCase($suffix) {
 		$other = new Str($suffix, $this->charset);
 
-		return mb_strripos($this->rawString, $suffix, 0, $this->charset) === ($this->length() - $other->length());
+		return \mb_strripos($this->rawString, $suffix, 0, $this->charset) === ($this->length() - $other->length());
 	}
 
 	/**
@@ -201,7 +201,7 @@ final class Str implements \Countable {
 			$length = 1;
 		}
 
-		$rawString = mb_substr($this->rawString, 0, $length, $this->charset);
+		$rawString = \mb_substr($this->rawString, 0, $length, $this->charset);
 
 		return new static($rawString, $this->charset);
 	}
@@ -230,7 +230,7 @@ final class Str implements \Countable {
 
 		$offset = $this->length() - $length;
 
-		$rawString = mb_substr($this->rawString, $offset, null, $this->charset);
+		$rawString = \mb_substr($this->rawString, $offset, null, $this->charset);
 
 		return new static($rawString, $this->charset);
 	}
@@ -241,7 +241,7 @@ final class Str implements \Countable {
 	 * @return static a new instance of this class
 	 */
 	public function toLowerCase() {
-		$rawString = mb_strtolower($this->rawString, $this->charset);
+		$rawString = \mb_strtolower($this->rawString, $this->charset);
 
 		return new static($rawString, $this->charset);
 	}
@@ -261,7 +261,7 @@ final class Str implements \Countable {
 	 * @return static a new instance of this class
 	 */
 	public function toUpperCase() {
-		$rawString = mb_strtoupper($this->rawString, $this->charset);
+		$rawString = \mb_strtoupper($this->rawString, $this->charset);
 
 		return new static($rawString, $this->charset);
 	}
@@ -320,14 +320,14 @@ final class Str implements \Countable {
 	 */
 	public function count($substring = null) {
 		if ($substring === null) {
-			return mb_strlen($this->rawString, $this->charset);
+			return \mb_strlen($this->rawString, $this->charset);
 		}
 		else {
 			if ($substring === '') {
 				return 0;
 			}
 
-			return mb_substr_count($this->rawString, $substring, $this->charset);
+			return \mb_substr_count($this->rawString, $substring, $this->charset);
 		}
 	}
 
@@ -347,7 +347,7 @@ final class Str implements \Countable {
 	 * @return static a new instance of this class
 	 */
 	public function cutStart($length) {
-		$rawString = mb_substr($this->rawString, $length, null, $this->charset);
+		$rawString = \mb_substr($this->rawString, $length, null, $this->charset);
 
 		return new static($rawString, $this->charset);
 	}
@@ -359,7 +359,7 @@ final class Str implements \Countable {
 	 * @return static a new instance of this class
 	 */
 	public function cutEnd($length) {
-		$rawString = mb_substr($this->rawString, 0, $this->length() - $length, $this->charset);
+		$rawString = \mb_substr($this->rawString, 0, $this->length() - $length, $this->charset);
 
 		return new static($rawString, $this->charset);
 	}
@@ -511,10 +511,10 @@ final class Str implements \Countable {
 		}
 
 		if ($limit === null) {
-			$limit = PHP_INT_MAX;
+			$limit = \PHP_INT_MAX;
 		}
 
-		return self::fromArray(explode($delimiter, $this->rawString, $limit));
+		return self::fromArray(\explode($delimiter, $this->rawString, $limit));
 	}
 
 	/**
@@ -534,7 +534,7 @@ final class Str implements \Countable {
 			$flags = 0;
 		}
 
-		return self::fromArray(preg_split($delimiterPattern, $this->rawString, $limit, $flags));
+		return self::fromArray(\preg_split($delimiterPattern, $this->rawString, $limit, $flags));
 	}
 
 	/**
@@ -551,12 +551,12 @@ final class Str implements \Countable {
 		}
 
 		// split the string into words
-		$words = $this->splitByRegex('/[^\\w\']+/u', $limit, PREG_SPLIT_NO_EMPTY);
+		$words = $this->splitByRegex('/[^\\w\']+/u', $limit, \PREG_SPLIT_NO_EMPTY);
 
 		// if a limit has been specified
 		if ($limit !== null) {
 			// discard the last entry (which contains the remainder of the string)
-			array_pop($words);
+			\array_pop($words);
 		}
 
 		// return the words
@@ -615,16 +615,16 @@ final class Str implements \Countable {
 			return new static('', $this->charset);
 		}
 
-		$beforeStart = mb_strpos($this->rawString, $start, 0, $this->charset);
+		$beforeStart = \mb_strpos($this->rawString, $start, 0, $this->charset);
 
 		$rawString = '';
 
 		if ($beforeStart !== false) {
-			$afterStart = $beforeStart + mb_strlen($start, $this->charset);
-			$beforeEnd = mb_strrpos($this->rawString, $end, $afterStart, $this->charset);
+			$afterStart = $beforeStart + \mb_strlen($start, $this->charset);
+			$beforeEnd = \mb_strrpos($this->rawString, $end, $afterStart, $this->charset);
 
 			if ($beforeEnd !== false) {
-				$rawString = mb_substr($this->rawString, $afterStart, $beforeEnd - $afterStart, $this->charset);
+				$rawString = \mb_substr($this->rawString, $afterStart, $beforeEnd - $afterStart, $this->charset);
 			}
 		}
 
@@ -673,10 +673,10 @@ final class Str implements \Countable {
 	 */
 	public function matches($regex, &$matches = null, $returnAll = null) {
 		if ($returnAll) {
-			return preg_match_all($regex, $this->rawString, $matches) > 0;
+			return \preg_match_all($regex, $this->rawString, $matches) > 0;
 		}
 		else {
-			return preg_match($regex, $this->rawString, $matches) === 1;
+			return \preg_match($regex, $this->rawString, $matches) === 1;
 		}
 	}
 
@@ -715,10 +715,10 @@ final class Str implements \Countable {
 	 */
 	public function compareTo($other, $human = null) {
 		if ($human) {
-			return strnatcmp($this->rawString, $other);
+			return \strnatcmp($this->rawString, $other);
 		}
 		else {
-			return strcmp($this->rawString, $other);
+			return \strcmp($this->rawString, $other);
 		}
 	}
 
@@ -734,10 +734,10 @@ final class Str implements \Countable {
 	 */
 	public function compareToIgnoreCase($other, $human = null) {
 		if ($human) {
-			return strnatcasecmp($this->rawString, $other);
+			return \strnatcasecmp($this->rawString, $other);
 		}
 		else {
-			return strcasecmp($this->rawString, $other);
+			return \strcasecmp($this->rawString, $other);
 		}
 	}
 
@@ -747,7 +747,7 @@ final class Str implements \Countable {
 	 * @return static a new instance of this class
 	 */
 	public function escapeForHtml() {
-		$rawString = htmlspecialchars($this->rawString, ENT_QUOTES, $this->charset);
+		$rawString = \htmlspecialchars($this->rawString, \ENT_QUOTES, $this->charset);
 
 		return new static($rawString, $this->charset);
 	}
@@ -763,7 +763,7 @@ final class Str implements \Countable {
 			$newlineSequence = "\n";
 		}
 
-		$rawString = preg_replace('/\R/u', $newlineSequence, $this->rawString);
+		$rawString = \preg_replace('/\R/u', $newlineSequence, $this->rawString);
 
 		return new static($rawString, $this->charset);
 	}
@@ -774,8 +774,8 @@ final class Str implements \Countable {
 	 * @return static a new instance of this class
 	 */
 	public function reverse() {
-		if (preg_match_all('/./us', $this->rawString, $matches)) {
-			$rawString = join('', array_reverse($matches[0]));
+		if (\preg_match_all('/./us', $this->rawString, $matches)) {
+			$rawString = \join('', \array_reverse($matches[0]));
 
 			return new static($rawString, $this->charset);
 		}
@@ -839,17 +839,17 @@ final class Str implements \Countable {
 			}
 
 			// calculate the actual maximum length without the ellipsis
-			$maxLength -= mb_strlen($ellipsis, $this->charset);
+			$maxLength -= \mb_strlen($ellipsis, $this->charset);
 
 			// truncate the string to the desired length
-			$rawString = mb_substr($this->rawString, 0, $maxLength, $this->charset);
+			$rawString = \mb_substr($this->rawString, 0, $maxLength, $this->charset);
 
 			// if we don't want to break words
 			if ($safe) {
 				// if the truncated string *does* end *within* a word
-				if (!preg_match('/\\W/u', mb_substr($this->rawString, $maxLength - 1, 2, $this->charset))) {
+				if (!\preg_match('/\\W/u', \mb_substr($this->rawString, $maxLength - 1, 2, $this->charset))) {
 					// if there's some word boundary before
-					if (preg_match('/.*\\W/u', $rawString, $matches)) {
+					if (\preg_match('/.*\\W/u', $rawString, $matches)) {
 						// truncate there instead
 						$rawString = $matches[0];
 					}
@@ -886,7 +886,7 @@ final class Str implements \Countable {
 				$replaceWith = '';
 			}
 
-			$rawString = mb_substr($this->rawString, 0, $pos, $this->charset) . $replaceWith . mb_substr($this->rawString, $pos + mb_strlen($searchFor, $this->charset), null, $this->charset);
+			$rawString = \mb_substr($this->rawString, 0, $pos, $this->charset) . $replaceWith . \mb_substr($this->rawString, $pos + \mb_strlen($searchFor, $this->charset), null, $this->charset);
 
 			return new static($rawString, $this->charset);
 		}
@@ -905,11 +905,11 @@ final class Str implements \Countable {
 				$length = $startPos;
 			}
 			else {
-				$offset = $startPos + mb_strlen($substr, $this->charset);
+				$offset = $startPos + \mb_strlen($substr, $this->charset);
 				$length = null;
 			}
 
-			$rawString = mb_substr($this->rawString, $offset, $length, $this->charset);
+			$rawString = \mb_substr($this->rawString, $offset, $length, $this->charset);
 		}
 		else {
 			$rawString = '';
