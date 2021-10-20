@@ -133,6 +133,10 @@ final class Str implements \Countable {
 	 * @return bool whether the supplied other string can be found at the end of this string
 	 */
 	public function endsWith($suffix) {
+		if (\PHP_VERSION_ID >= 80000) {
+			return $suffix !== '' && \str_ends_with($this->rawString, $suffix);
+		}
+
 		$suffixLength = \strlen($suffix);
 
 		return $suffix !== '' && \substr_compare($this->rawString, $suffix, -$suffixLength, $suffixLength, false) === 0;
