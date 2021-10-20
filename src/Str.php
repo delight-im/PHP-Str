@@ -125,9 +125,9 @@ final class Str implements \Countable {
 	 * @return bool whether the supplied other string can be found at the end of this string
 	 */
 	public function endsWith($suffix) {
-		$other = new Str($suffix, $this->charset);
+		$suffixLength = \strlen($suffix);
 
-		return \mb_strrpos($this->rawString, $suffix, 0, $this->charset) === ($this->length() - $other->length());
+		return $suffix !== '' && \substr_compare($this->rawString, $suffix, -$suffixLength, $suffixLength, false) === 0;
 	}
 
 	/**
