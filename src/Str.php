@@ -69,7 +69,7 @@ final class Str implements \Countable {
 	 * @return bool whether the supplied other string can be found at the beginning of this string
 	 */
 	public function startsWith($prefix) {
-		return $prefix !== '' && \mb_strpos($this->rawString, $prefix, 0, $this->charset) === 0;
+		return $prefix !== '' && \strncmp($this->rawString, $prefix, \strlen($prefix)) === 0;
 	}
 
 	/**
