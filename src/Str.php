@@ -83,7 +83,7 @@ final class Str implements \Countable {
 	 * @return bool whether the supplied other string can be found at the beginning of this string
 	 */
 	public function startsWithIgnoreCase($prefix) {
-		return $prefix !== '' && \mb_stripos($this->rawString, $prefix, 0, $this->charset) === 0;
+		return $prefix !== '' && \strncasecmp($this->rawString, $prefix, \strlen($prefix)) === 0;
 	}
 
 	/**
