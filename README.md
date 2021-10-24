@@ -111,7 +111,7 @@ $str = \Delight\Str\Str::from('Hello w☺rld', 'UTF-8');
  * @param string $prefix the other string to search for
  * @return bool whether the supplied other string can be found at the beginning of this string
  */
-public function startsWith($prefix);
+function startsWith($prefix);
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -125,7 +125,7 @@ public function startsWith($prefix);
  * @param string $prefix the other string to search for
  * @return bool whether the supplied other string can be found at the beginning of this string
  */
-public function startsWithIgnoreCase($prefix);
+function startsWithIgnoreCase($prefix);
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -139,7 +139,7 @@ public function startsWithIgnoreCase($prefix);
  * @param string $infix the other string to search for
  * @return bool whether the supplied other string is contained in this string
  */
-public function contains($infix);
+function contains($infix);
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -153,7 +153,7 @@ public function contains($infix);
  * @param string $infix the other string to search for
  * @return bool whether the supplied other string is contained in this string
  */
-public function containsIgnoreCase($infix);
+function containsIgnoreCase($infix);
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -167,7 +167,7 @@ public function containsIgnoreCase($infix);
  * @param string $suffix the other string to search for
  * @return bool whether the supplied other string can be found at the end of this string
  */
-public function endsWith($suffix);
+function endsWith($suffix);
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -181,7 +181,7 @@ public function endsWith($suffix);
  * @param string $suffix the other string to search for
  * @return bool whether the supplied other string can be found at the end of this string
  */
-public function endsWithIgnoreCase($suffix);
+function endsWithIgnoreCase($suffix);
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -194,7 +194,7 @@ public function endsWithIgnoreCase($suffix);
  * @param bool $alwaysRemoveWhitespace whether to remove whitespace even if a custom list of characters is provided (optional)
  * @return static this instance for chaining
  */
-public function trim($charactersToRemove = null, $alwaysRemoveWhitespace = null);
+function trim($charactersToRemove = null, $alwaysRemoveWhitespace = null);
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -207,7 +207,7 @@ public function trim($charactersToRemove = null, $alwaysRemoveWhitespace = null)
  * @param bool $alwaysRemoveWhitespace whether to remove whitespace even if a custom list of characters is provided (optional)
  * @return static this instance for chaining
  */
-public function trimStart($charactersToRemove = null, $alwaysRemoveWhitespace = null);
+function trimStart($charactersToRemove = null, $alwaysRemoveWhitespace = null);
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -220,7 +220,7 @@ public function trimStart($charactersToRemove = null, $alwaysRemoveWhitespace = 
  * @param bool $alwaysRemoveWhitespace whether to remove whitespace even if a custom list of characters is provided (optional)
  * @return static this instance for chaining
  */
-public function trimEnd($charactersToRemove = null, $alwaysRemoveWhitespace = null);
+function trimEnd($charactersToRemove = null, $alwaysRemoveWhitespace = null);
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -232,7 +232,7 @@ public function trimEnd($charactersToRemove = null, $alwaysRemoveWhitespace = nu
  * @param int|null $length the number of characters to return from the start (optional)
  * @return static a new instance of this class
  */
-public function first($length = null);
+function first($length = null);
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -244,7 +244,7 @@ public function first($length = null);
  * @param int|null $length the number of characters to return from the end (optional)
  * @return static a new instance of this class
  */
-public function last($length = null);
+function last($length = null);
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -256,7 +256,7 @@ public function last($length = null);
  * @param int $index the zero-based position of the byte to return
  * @return string the byte at the specified position
  */
-public function byteAt($index);
+function byteAt($index);
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -268,7 +268,7 @@ public function byteAt($index);
  * @param int $index the zero-based position of the code point to return
  * @return string the code point at the specified position
  */
-public function codePointAt($index);
+function codePointAt($index);
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -279,7 +279,7 @@ public function codePointAt($index);
  *
  * @return static this instance for chaining
  */
-public function toLowerCase();
+function toLowerCase();
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -290,7 +290,7 @@ public function toLowerCase();
  *
  * @return bool
  */
-public function isLowerCase();
+function isLowerCase();
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -301,7 +301,7 @@ public function isLowerCase();
  *
  * @return static this instance for chaining
  */
-public function toUpperCase();
+function toUpperCase();
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -312,7 +312,7 @@ public function toUpperCase();
  *
  * @return bool
  */
-public function isUpperCase();
+function isUpperCase();
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -323,7 +323,7 @@ public function isUpperCase();
  *
  * @return bool
  */
-public function isCapitalized();
+function isCapitalized();
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -336,7 +336,7 @@ public function isCapitalized();
  * @param string|null $ellipsis the string to use as the ellipsis (optional)
  * @return static a new instance of this class
  */
-public function truncate($maxLength, $ellipsis = null);
+function truncate($maxLength, $ellipsis = null);
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -351,7 +351,7 @@ public function truncate($maxLength, $ellipsis = null);
  * @param string|null $ellipsis the string to use as the ellipsis (optional)
  * @return static a new instance of this class
  */
-public function truncateSafely($maxLength, $ellipsis = null);
+function truncateSafely($maxLength, $ellipsis = null);
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -363,7 +363,7 @@ public function truncateSafely($maxLength, $ellipsis = null);
  * @param string $substring the substring whose occurrences to count
  * @return int the number of occurrences
  */
-public function count($substring = null);
+function count($substring = null);
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -374,7 +374,7 @@ public function count($substring = null);
  *
  * @return int the number of characters
  */
-public function length();
+function length();
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -385,7 +385,7 @@ public function length();
  *
  * @return int the number of bytes
  */
-public function lengthInBytes();
+function lengthInBytes();
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -396,7 +396,7 @@ public function lengthInBytes();
  *
  * @return int the number of code points
  */
-public function lengthInCodePoints();
+function lengthInCodePoints();
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -408,7 +408,7 @@ public function lengthInCodePoints();
  * @param int $length the number of characters to remove
  * @return static a new instance of this class
  */
-public function cutStart($length);
+function cutStart($length);
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -420,7 +420,7 @@ public function cutStart($length);
  * @param int $length the number of characters to remove
  * @return static a new instance of this class
  */
-public function cutEnd($length);
+function cutEnd($length);
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -433,7 +433,7 @@ public function cutEnd($length);
  * @param string $replaceWith the string to use as the replacement (optional)
  * @return static this instance for chaining
  */
-public function replace($searchFor, $replaceWith = null);
+function replace($searchFor, $replaceWith = null);
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -448,7 +448,7 @@ public function replace($searchFor, $replaceWith = null);
  * @param string $replaceWith the string to use as the replacement (optional)
  * @return static a new instance of this class
  */
-public function replaceIgnoreCase($searchFor, $replaceWith = null);
+function replaceIgnoreCase($searchFor, $replaceWith = null);
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -461,7 +461,7 @@ public function replaceIgnoreCase($searchFor, $replaceWith = null);
  * @param string $replaceWith the string to use as the replacement (optional)
  * @return static a new instance of this class
  */
-public function replaceFirst($searchFor, $replaceWith = null);
+function replaceFirst($searchFor, $replaceWith = null);
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -476,7 +476,7 @@ public function replaceFirst($searchFor, $replaceWith = null);
  * @param string $replaceWith the string to use as the replacement (optional)
  * @return static a new instance of this class
  */
-public function replaceFirstIgnoreCase($searchFor, $replaceWith = null);
+function replaceFirstIgnoreCase($searchFor, $replaceWith = null);
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -489,7 +489,7 @@ public function replaceFirstIgnoreCase($searchFor, $replaceWith = null);
  * @param string $replaceWith the string to use as the replacement (optional)
  * @return static a new instance of this class
  */
-public function replacePrefix($searchFor, $replaceWith = null);
+function replacePrefix($searchFor, $replaceWith = null);
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -502,7 +502,7 @@ public function replacePrefix($searchFor, $replaceWith = null);
  * @param string $replaceWith the string to use as the replacement (optional)
  * @return static a new instance of this class
  */
-public function replaceLast($searchFor, $replaceWith = null);
+function replaceLast($searchFor, $replaceWith = null);
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -517,7 +517,7 @@ public function replaceLast($searchFor, $replaceWith = null);
  * @param string $replaceWith the string to use as the replacement (optional)
  * @return static a new instance of this class
  */
-public function replaceLastIgnoreCase($searchFor, $replaceWith = null);
+function replaceLastIgnoreCase($searchFor, $replaceWith = null);
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -530,7 +530,7 @@ public function replaceLastIgnoreCase($searchFor, $replaceWith = null);
  * @param string $replaceWith the string to use as the replacement (optional)
  * @return static a new instance of this class
  */
-public function replaceSuffix($searchFor, $replaceWith = null);
+function replaceSuffix($searchFor, $replaceWith = null);
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -543,7 +543,7 @@ public function replaceSuffix($searchFor, $replaceWith = null);
  * @param int|null $limit the maximum number of substrings to return (optional)
  * @return static[] an array containing the substrings (which are instances of this class as well)
  */
-public function split($delimiter, $limit = null);
+function split($delimiter, $limit = null);
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -557,7 +557,7 @@ public function split($delimiter, $limit = null);
  * @param int|null $flags any combination (bit-wise ORed) of PHP's `PREG_SPLIT_*` flags
  * @return static[] an array containing the substrings (which are instances of this class as well)
  */
-public function splitByRegex($delimiterPattern, $limit = null, $flags = null);
+function splitByRegex($delimiterPattern, $limit = null, $flags = null);
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -569,7 +569,7 @@ public function splitByRegex($delimiterPattern, $limit = null, $flags = null);
  * @param int|null the maximum number of words to return from the start (optional)
  * @return static[] the new instances of this class
  */
-public function words($limit = null);
+function words($limit = null);
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -581,7 +581,7 @@ public function words($limit = null);
  * @param string $search the search string that should delimit the end
  * @return static a new instance of this class
  */
-public function beforeFirst($search);
+function beforeFirst($search);
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -593,7 +593,7 @@ public function beforeFirst($search);
  * @param string $search the search string that should delimit the end
  * @return static a new instance of this class
  */
-public function beforeLast($search);
+function beforeLast($search);
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -608,7 +608,7 @@ public function beforeLast($search);
  * @param string $end the substring whose last occurrence should delimit the end
  * @return static a new instance of this class
  */
-public function between($start, $end);
+function between($start, $end);
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -620,7 +620,7 @@ public function between($start, $end);
  * @param string $search the search string that should delimit the start
  * @return static a new instance of this class
  */
-public function afterFirst($search);
+function afterFirst($search);
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -632,7 +632,7 @@ public function afterFirst($search);
  * @param string $search the search string that should delimit the start
  * @return static a new instance of this class
  */
-public function afterLast($search);
+function afterLast($search);
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -646,7 +646,7 @@ public function afterLast($search);
  * @param bool|null $returnAll whether to return all matches and not only the first one (optional)
  * @return bool whether this string matches the regular expression
  */
-public function matches($regex, &$matches = null, $returnAll = null);
+function matches($regex, &$matches = null, $returnAll = null);
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -658,7 +658,7 @@ public function matches($regex, &$matches = null, $returnAll = null);
  * @param string $other the other string to compare with
  * @return bool whether the two strings are equal
  */
-public function equals($other);
+function equals($other);
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -672,7 +672,7 @@ public function equals($other);
  * @param string $other the other string to compare with
  * @return bool whether the two strings are equal
  */
-public function equalsIgnoreCase($other);
+function equalsIgnoreCase($other);
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -685,7 +685,7 @@ public function equalsIgnoreCase($other);
  * @param bool|null $human whether to use human sorting for numbers (e.g. `2` before `10`) (optional)
  * @return int an indication whether this string is less than (< 0), equal (= 0) or greater (> 0)
  */
-public function compareTo($other, $human = null);
+function compareTo($other, $human = null);
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -700,7 +700,7 @@ public function compareTo($other, $human = null);
  * @param bool|null $human whether to use human sorting for numbers (e.g. `2` before `10`) (optional)
  * @return int an indication whether this string is less than (< 0), equal (= 0) or greater (> 0)
  */
-public function compareToIgnoreCase($other, $human = null);
+function compareToIgnoreCase($other, $human = null);
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -711,7 +711,7 @@ public function compareToIgnoreCase($other, $human = null);
  *
  * @return static this instance for chaining
  */
-public function escapeForHtml();
+function escapeForHtml();
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -723,7 +723,7 @@ public function escapeForHtml();
  * @param string|null $newlineSequence the target newline sequence to use (optional)
  * @return static this instance for chaining
  */
-public function normalizeLineEndings($newlineSequence = null);
+function normalizeLineEndings($newlineSequence = null);
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -734,7 +734,7 @@ public function normalizeLineEndings($newlineSequence = null);
  *
  * @return static a new instance of this class
  */
-public function reverse();
+function reverse();
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -746,7 +746,7 @@ public function reverse();
  * @param bool|null $excludeLowerCase whether to exclude lowercase letters from the result (optional)
  * @return static a new instance of this class
  */
-public function acronym($excludeLowerCase = null);
+function acronym($excludeLowerCase = null);
 ```
 
 ### Checking the length of a string
