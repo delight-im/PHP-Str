@@ -253,6 +253,18 @@ public function byteAt($index);
 
 
 /**
+ * Returns the code point at the specified position of this string
+ *
+ * @param int $index the zero-based position of the code point to return
+ * @return string the code point at the specified position
+ */
+public function codePointAt($index);
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+/**
  * Converts this string to lowercase
  *
  * @return static this instance for chaining
