@@ -19,6 +19,10 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
+function fail($lineNumber) {
+	exit('Error on line ' . $lineNumber);
+}
+
 use Delight\Str\Str;
 
 $testStr = 'Hello Hello w☺rld w☺rld';
