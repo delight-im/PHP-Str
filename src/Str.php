@@ -382,6 +382,15 @@ final class Str implements \Countable {
 	}
 
 	/**
+	 * Returns the length of this string in code points
+	 *
+	 * @return int the number of code points
+	 */
+	public function lengthInCodePoints() {
+		return $this->count();
+	}
+
+	/**
 	 * Removes the specified number of characters from the start of this string
 	 *
 	 * @param int $length the number of characters to remove
