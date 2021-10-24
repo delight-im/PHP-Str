@@ -258,6 +258,16 @@ final class Str implements \Countable {
 	}
 
 	/**
+	 * Returns the code point at the specified position of this string
+	 *
+	 * @param int $index the zero-based position of the code point to return
+	 * @return string the code point at the specified position
+	 */
+	public function codePointAt($index) {
+		return \mb_substr($this->rawString, $index, 1, $this->charset);
+	}
+
+	/**
 	 * Converts this string to lowercase
 	 *
 	 * @return static a new instance of this class
