@@ -15,7 +15,7 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 function fail($lineNumber) {
-	exit('Error on line ' . $lineNumber);
+	exit('Error on line ' . $lineNumber . "\n");
 }
 
 use Delight\Str\Str;
@@ -345,4 +345,4 @@ $japaneseEucJpStr = \mb_convert_encoding($japaneseUtf8Str, 'EUC-JP', 'UTF-8');
 ((string) Str::from('PHP: Hypertext Preprocessor')->acronym() === 'PHP') or \fail(__LINE__);
 ((string) Str::from('Light Amplification by Stimulated Emission of Radiation')->acronym(true) === 'LASER') or \fail(__LINE__);
 
-echo 'ALL TESTS PASSED';
+echo 'ALL TESTS PASSED' . "\n";
