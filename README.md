@@ -40,6 +40,14 @@ $str = s('Hello w☺rld');
 $str = s('Hello w☺rld', 'UTF-8');
 ```
 
+If you don’t want to set up that shorthand, however, you can still create instances easily:
+
+```php
+$str = \Delight\Str\Str::from('Hello w☺rld');
+// or
+$str = \Delight\Str\Str::from('Hello w☺rld', 'UTF-8');
+```
+
 ### Available methods
 
  * `startsWith`
