@@ -103,6 +103,23 @@ $japaneseEucJpStr = \mb_convert_encoding($japaneseUtf8Str, 'EUC-JP', 'UTF-8');
 ((string) $testStrObj->last(14) === 'lo w☺rld w☺rld') or \fail(__LINE__);
 ((string) $testStrObj->last(15) === 'llo w☺rld w☺rld') or \fail(__LINE__);
 
+(\bin2hex(Str::from($unicodeOnePlusTwoStr)->byteAt(1)) === 'f0') or \fail(__LINE__);
+(\bin2hex(Str::from($unicodeOnePlusTwoStr)->byteAt(2)) === '9f') or \fail(__LINE__);
+(\bin2hex(Str::from($unicodeOnePlusTwoStr)->byteAt(4)) === 'a9') or \fail(__LINE__);
+(\bin2hex(Str::from($unicodeOnePlusTwoStr)->byteAt(5)) === '62') or \fail(__LINE__);
+(\bin2hex(Str::from($unicodeTwoPlusTwoStr)->byteAt(1)) === 'f0') or \fail(__LINE__);
+(\bin2hex(Str::from($unicodeTwoPlusTwoStr)->byteAt(2)) === '9f') or \fail(__LINE__);
+(\bin2hex(Str::from($unicodeTwoPlusTwoStr)->byteAt(4)) === 'b1') or \fail(__LINE__);
+(\bin2hex(Str::from($unicodeTwoPlusTwoStr)->byteAt(5)) === 'f0') or \fail(__LINE__);
+(\bin2hex(Str::from($unicodeThreePlusTwoStr)->byteAt(1)) === 'f0') or \fail(__LINE__);
+(\bin2hex(Str::from($unicodeThreePlusTwoStr)->byteAt(2)) === '9f') or \fail(__LINE__);
+(\bin2hex(Str::from($unicodeThreePlusTwoStr)->byteAt(4)) === 'a8') or \fail(__LINE__);
+(\bin2hex(Str::from($unicodeThreePlusTwoStr)->byteAt(5)) === 'e2') or \fail(__LINE__);
+(\bin2hex(Str::from($unicodeFourPlusTwoStr)->byteAt(1)) === 'f0') or \fail(__LINE__);
+(\bin2hex(Str::from($unicodeFourPlusTwoStr)->byteAt(2)) === '9f') or \fail(__LINE__);
+(\bin2hex(Str::from($unicodeFourPlusTwoStr)->byteAt(4)) === 'a9') or \fail(__LINE__);
+(\bin2hex(Str::from($unicodeFourPlusTwoStr)->byteAt(5)) === 'f0') or \fail(__LINE__);
+
 ((string) $testStrObj->toLowerCase() === 'hello hello w☺rld w☺rld') or \fail(__LINE__);
 ($testStrObj->isLowerCase() === false) or \fail(__LINE__);
 ($testStrObj->toLowerCase()->isLowerCase() === true) or \fail(__LINE__);
