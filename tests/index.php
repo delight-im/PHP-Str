@@ -169,6 +169,13 @@ $japaneseEucJpStr = \mb_convert_encoding($japaneseUtf8Str, 'EUC-JP', 'UTF-8');
 ($testStrObj->count('x') === 0) or \fail(__LINE__);
 ($testStrObj->count('') === 0) or \fail(__LINE__);
 
+(Str::from('abc')->lengthInBytes() === 3) or \fail(__LINE__);
+(Str::from('aöz')->lengthInBytes() === 4) or \fail(__LINE__);
+(Str::from($unicodeOnePlusTwoStr)->lengthInBytes() === 6) or \fail(__LINE__);
+(Str::from($unicodeTwoPlusTwoStr)->lengthInBytes() === 10) or \fail(__LINE__);
+(Str::from($unicodeThreePlusTwoStr)->lengthInBytes() === 13) or \fail(__LINE__);
+(Str::from($unicodeFourPlusTwoStr)->lengthInBytes() === 17) or \fail(__LINE__);
+
 ((string) $testStrObj->cutStart(0) === $testStr) or \fail(__LINE__);
 ((string) $testStrObj->cutStart(2) === 'llo Hello w☺rld w☺rld') or \fail(__LINE__);
 ((string) $testStrObj->cutStart(9) === 'lo w☺rld w☺rld') or \fail(__LINE__);
