@@ -22,6 +22,10 @@ use Delight\Str\Str;
 
 $testStr = 'Hello Hello w☺rld w☺rld';
 $testStrObj = Str::from($testStr);
+$unicodeOnePlusTwoStr = \base64_decode('YfCfkqli', true); // U+1F4A9
+$unicodeTwoPlusTwoStr = \base64_decode('YfCfh7Hwn4e6Yg==', true); // U+1F1F1 + U+1F1FA
+$unicodeThreePlusTwoStr = \base64_decode('YfCfkajigI3wn6axYg==', true); // U+1F468 + U+200D + U+1F9B1
+$unicodeFourPlusTwoStr = \base64_decode('YfCfkanwn4++4oCN8J+msWI=', true); // U+1F469 + U+1F3FE + U+200D + U+1F9B1
 $japaneseUtf8Str = \base64_decode('44GT44KT44Gr44Gh44Gv44CB5LiW55WM77yB', true);
 $japaneseUtf8StartStr = \base64_decode('44GT44KT44Gr44Gh44Gv', true);
 $japaneseUtf8EndStr = \base64_decode('5LiW55WM77yB', true);
