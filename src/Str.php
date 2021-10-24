@@ -248,6 +248,16 @@ final class Str implements \Countable {
 	}
 
 	/**
+	 * Returns the byte at the specified position of this string
+	 *
+	 * @param int $index the zero-based position of the byte to return
+	 * @return string the byte at the specified position
+	 */
+	public function byteAt($index) {
+		return isset($this->rawString[$index]) ? $this->rawString[$index] : '';
+	}
+
+	/**
 	 * Converts this string to lowercase
 	 *
 	 * @return static a new instance of this class
