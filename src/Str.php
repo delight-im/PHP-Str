@@ -373,6 +373,15 @@ final class Str implements \Countable {
 	}
 
 	/**
+	 * Returns the length of this string in bytes
+	 *
+	 * @return int the number of bytes
+	 */
+	public function lengthInBytes() {
+		return \strlen($this->rawString);
+	}
+
+	/**
 	 * Removes the specified number of characters from the start of this string
 	 *
 	 * @param int $length the number of characters to remove
