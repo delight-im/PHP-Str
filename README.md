@@ -5,6 +5,7 @@ Convenient object-oriented operations on strings
 ## Requirements
 
  * PHP 5.3.0+
+   * Multibyte String extension (`mbstring`)
 
 ## Installation
 
