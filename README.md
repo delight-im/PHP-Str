@@ -61,6 +61,8 @@ $str = \Delight\Str\Str::from('Hello w☺rld', 'UTF-8');
  * `trimEnd`
  * `first`
  * `last`
+ * `byteAt`
+ * `codePointAt`
  * `toLowerCase`
  * `isLowerCase`
  * `toUpperCase`
@@ -70,6 +72,8 @@ $str = \Delight\Str\Str::from('Hello w☺rld', 'UTF-8');
  * `truncateSafely`
  * `count`
  * `length`
+ * `lengthInBytes`
+ * `lengthInCodePoints`
  * `cutStart`
  * `cutEnd`
  * `replace`
