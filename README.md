@@ -38,8 +38,6 @@ With that shorthand in place, creating instances from any string is as simple as
 $str = s('Hello w☺rld');
 // or
 $str = s('Hello w☺rld', 'UTF-8');
-// or
-$str = s('Hello world', 'ISO-8859-1');
 ```
 
 ### Available methods
