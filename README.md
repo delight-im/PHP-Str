@@ -35,11 +35,11 @@ This lets you create string objects by simply wrapping strings in `s(...)`.
 With that shorthand in place, creating instances from any string is as simple as this:
 
 ```php
-s('Hello w☺rld')
+$str = s('Hello w☺rld');
 // or
-s('Hello w☺rld', 'UTF-8')
+$str = s('Hello w☺rld', 'UTF-8');
 // or
-s('Hello world', 'ISO-8859-1')
+$str = s('Hello world', 'ISO-8859-1');
 ```
 
 ### Available methods
