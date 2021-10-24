@@ -170,11 +170,17 @@ $japaneseEucJpStr = \mb_convert_encoding($japaneseUtf8Str, 'EUC-JP', 'UTF-8');
 ($testStrObj->count('') === 0) or \fail(__LINE__);
 
 (Str::from('abc')->lengthInBytes() === 3) or \fail(__LINE__);
+(Str::from('abc')->lengthInCodePoints() === 3) or \fail(__LINE__);
 (Str::from('aöz')->lengthInBytes() === 4) or \fail(__LINE__);
+(Str::from('aöz')->lengthInCodePoints() === 3) or \fail(__LINE__);
 (Str::from($unicodeOnePlusTwoStr)->lengthInBytes() === 6) or \fail(__LINE__);
+(Str::from($unicodeOnePlusTwoStr)->lengthInCodePoints() === 3) or \fail(__LINE__);
 (Str::from($unicodeTwoPlusTwoStr)->lengthInBytes() === 10) or \fail(__LINE__);
+(Str::from($unicodeTwoPlusTwoStr)->lengthInCodePoints() === 4) or \fail(__LINE__);
 (Str::from($unicodeThreePlusTwoStr)->lengthInBytes() === 13) or \fail(__LINE__);
+(Str::from($unicodeThreePlusTwoStr)->lengthInCodePoints() === 5) or \fail(__LINE__);
 (Str::from($unicodeFourPlusTwoStr)->lengthInBytes() === 17) or \fail(__LINE__);
+(Str::from($unicodeFourPlusTwoStr)->lengthInCodePoints() === 6) or \fail(__LINE__);
 
 ((string) $testStrObj->cutStart(0) === $testStr) or \fail(__LINE__);
 ((string) $testStrObj->cutStart(2) === 'llo Hello w☺rld w☺rld') or \fail(__LINE__);
