@@ -371,6 +371,17 @@ public function length();
 
 
 /**
+ * Returns the length of this string in bytes
+ *
+ * @return int the number of bytes
+ */
+public function lengthInBytes();
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+/**
  * Removes the specified number of characters from the start of this string
  *
  * @param int $length the number of characters to remove
