@@ -871,7 +871,9 @@ final class Str implements \Countable {
 			$charactersToRemove .= " \t\n\r\0\x0B";
 		}
 
-		return $func($this->rawString, $charactersToRemove);
+		$newRawString = $func($this->rawString, $charactersToRemove);
+
+		return new static($newRawString, $this->charset);
 	}
 
 	private function truncateInternal($maxLength, $ellipsis, $safe) {
