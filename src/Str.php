@@ -139,7 +139,7 @@ final class Str implements \Countable {
 	}
 
 	/**
-	 * Returns whether this string contains the supplied other string
+	 * Returns whether this string contains the supplied other string based on bytes
 	 *
 	 * This operation is case-sensitive
 	 *
@@ -148,12 +148,36 @@ final class Str implements \Countable {
 	 * @param string $infix the other string to search for
 	 * @return bool whether the supplied other string is contained in this string
 	 */
-	public function contains($infix) {
+	public function containsBytes($infix) {
 		if (\PHP_VERSION_ID >= 80000) {
 			return $infix !== '' && \str_contains($this->rawString, $infix);
 		}
 
 		return $infix !== '' && \mb_strpos($this->rawString, $infix, 0, $this->charset) !== false;
+	}
+
+	/**
+	 * Returns whether this string contains the supplied other string based on code points
+	 *
+	 * This operation is case-sensitive
+	 *
+	 * The empty string is not considered to be a part of any other string
+	 *
+	 * @param string $infix the other string to search for
+	 * @return bool whether the supplied other string is contained in this string
+	 */
+	public function containsCodePoints($infix) {
+		return $this->containsBytes($infix);
+	}
+
+	/**
+	 * Alias of `containsCodePoints`
+	 *
+	 * @param string $infix
+	 * @return bool
+	 */
+	public function contains($infix) {
+		return $this->containsCodePoints($infix);
 	}
 
 	/**
