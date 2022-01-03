@@ -64,6 +64,8 @@ $str = \Delight\Str\Str::from('Hello w☺rld', 'UTF-8');
    * `containsBytesIgnoreCase`
    * `containsCodePointsIgnoreCase`
  * `endsWith`
+   * `endsWithBytes`
+   * `endsWithCodePoints`
  * `endsWithIgnoreCase`
  * `trim`
  * `trimStart`
@@ -185,6 +187,8 @@ function containsCodePointsIgnoreCase($infix);
  * @return bool whether the supplied other string can be found at the end of this string
  */
 function endsWith($suffix);
+function endsWithBytes($suffix);
+function endsWithCodePoints($suffix);
 
 
 ////////////////////////////////////////////////////////////////////////////////
