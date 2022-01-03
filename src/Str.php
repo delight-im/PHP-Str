@@ -192,10 +192,10 @@ final class Str implements \Countable {
 	}
 
 	/**
-	 * Returns the first character or the specified number of characters from the start of this string
+	 * Alias of `first`
 	 *
-	 * @param int|null $length the number of characters to return from the start (optional)
-	 * @return static a new instance of this class
+	 * @param int|null $length
+	 * @return static
 	 * @deprecated use `first` instead
 	 */
 	public function start($length = null) {
@@ -219,10 +219,10 @@ final class Str implements \Countable {
 	}
 
 	/**
-	 * Returns the last character or the specified number of characters from the end of this string
+	 * Alias of `last`
 	 *
-	 * @param int|null $length the number of characters to return from the end (optional)
-	 * @return static a new instance of this class
+	 * @param int|null $length
+	 * @return static
 	 * @deprecated use `last` instead
 	 */
 	public function end($length = null) {
