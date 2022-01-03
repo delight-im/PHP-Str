@@ -219,7 +219,7 @@ final class Str implements \Countable {
 	}
 
 	/**
-	 * Returns whether this string ends with the supplied other string
+	 * Returns whether this string ends with the supplied other string based on bytes
 	 *
 	 * This operation is case-sensitive
 	 *
@@ -228,7 +228,7 @@ final class Str implements \Countable {
 	 * @param string $suffix the other string to search for
 	 * @return bool whether the supplied other string can be found at the end of this string
 	 */
-	public function endsWith($suffix) {
+	public function endsWithBytes($suffix) {
 		if (\PHP_VERSION_ID >= 80000) {
 			return $suffix !== '' && \str_ends_with($this->rawString, $suffix);
 		}
@@ -236,6 +236,30 @@ final class Str implements \Countable {
 		$suffixLength = \strlen($suffix);
 
 		return $suffix !== '' && \substr_compare($this->rawString, $suffix, -$suffixLength, $suffixLength, false) === 0;
+	}
+
+	/**
+	 * Returns whether this string ends with the supplied other string based on code points
+	 *
+	 * This operation is case-sensitive
+	 *
+	 * The empty string is not considered to be a part of any other string
+	 *
+	 * @param string $suffix the other string to search for
+	 * @return bool whether the supplied other string can be found at the end of this string
+	 */
+	public function endsWithCodePoints($suffix) {
+		return $this->endsWithBytes($suffix);
+	}
+
+	/**
+	 * Alias of `endsWithCodePoints`
+	 *
+	 * @param string $suffix
+	 * @return bool
+	 */
+	public function endsWith($suffix) {
+		return $this->endsWithCodePoints($suffix);
 	}
 
 	/**
