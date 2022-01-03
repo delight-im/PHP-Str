@@ -67,6 +67,8 @@ $str = \Delight\Str\Str::from('Hello w☺rld', 'UTF-8');
    * `endsWithBytes`
    * `endsWithCodePoints`
  * `endsWithIgnoreCase`
+   * `endsWithBytesIgnoreCase`
+   * `endsWithCodePointsIgnoreCase`
  * `trim`
  * `trimStart`
  * `trimEnd`
@@ -203,6 +205,8 @@ function endsWithCodePoints($suffix);
  * @return bool whether the supplied other string can be found at the end of this string
  */
 function endsWithIgnoreCase($suffix);
+function endsWithBytesIgnoreCase($suffix);
+function endsWithCodePointsIgnoreCase($suffix);
 
 
 ////////////////////////////////////////////////////////////////////////////////
