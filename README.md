@@ -52,6 +52,8 @@ $str = \Delight\Str\Str::from('Hello w☺rld', 'UTF-8');
 ### Available methods
 
  * `startsWith`
+   * `startsWithBytes`
+   * `startsWithCodePoints`
  * `startsWithIgnoreCase`
  * `contains`
  * `containsIgnoreCase`
@@ -113,6 +115,8 @@ $str = \Delight\Str\Str::from('Hello w☺rld', 'UTF-8');
  * @return bool whether the supplied other string can be found at the beginning of this string
  */
 function startsWith($prefix);
+function startsWithBytes($prefix);
+function startsWithCodePoints($prefix);
 
 
 ////////////////////////////////////////////////////////////////////////////////
