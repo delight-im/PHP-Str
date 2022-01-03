@@ -36,6 +36,17 @@ $japaneseEucJpStr = \mb_convert_encoding($japaneseUtf8Str, 'EUC-JP', 'UTF-8');
 ($testStrObj->startsWith('el') === false) or \fail(__LINE__);
 ($testStrObj->startsWith('El') === false) or \fail(__LINE__);
 ($testStrObj->startsWith('') === false) or \fail(__LINE__);
+($testStrObj->startsWithBytes('He') === true) or \fail(__LINE__);
+($testStrObj->startsWithBytes('he') === false) or \fail(__LINE__);
+($testStrObj->startsWithBytes('el') === false) or \fail(__LINE__);
+($testStrObj->startsWithBytes('El') === false) or \fail(__LINE__);
+($testStrObj->startsWithBytes('') === false) or \fail(__LINE__);
+($testStrObj->startsWithCodePoints('He') === true) or \fail(__LINE__);
+($testStrObj->startsWithCodePoints('he') === false) or \fail(__LINE__);
+($testStrObj->startsWithCodePoints('el') === false) or \fail(__LINE__);
+($testStrObj->startsWithCodePoints('El') === false) or \fail(__LINE__);
+($testStrObj->startsWithCodePoints('') === false) or \fail(__LINE__);
+
 ($testStrObj->startsWithIgnoreCase('He') === true) or \fail(__LINE__);
 ($testStrObj->startsWithIgnoreCase('he') === true) or \fail(__LINE__);
 ($testStrObj->startsWithIgnoreCase('el') === false) or \fail(__LINE__);
@@ -389,6 +400,16 @@ $a = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' worl
 
 $b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
 $c = $b->startsWith(' § Wor');
+((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
+(\gettype($b) !== \gettype($c)) or \fail(__LINE__);
+
+$b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
+$c = $b->startsWithBytes(' § Wor');
+((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
+(\gettype($b) !== \gettype($c)) or \fail(__LINE__);
+
+$b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
+$c = $b->startsWithCodePoints(' § Wor');
 ((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
 (\gettype($b) !== \gettype($c)) or \fail(__LINE__);
 
@@ -793,6 +814,31 @@ $c = $b->acronym(true);
 //     U+00C5 = U+212B
 $testStr = " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ";
 $testStrObj = Str::from($testStr);
+
+($testStrObj->startsWith(" abc a") === true) or \fail(__LINE__);
+($testStrObj->startsWith(" abc b") === false) or \fail(__LINE__);
+($testStrObj->startsWith(" abc a\u{00F1}") === true) or \fail(__LINE__);
+($testStrObj->startsWith(" abc a\u{00F2}") === false) or \fail(__LINE__);
+($testStrObj->startsWith(" abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a") === true) or \fail(__LINE__);
+($testStrObj->startsWith(" abc a\u{00F1}\u{00E4}\u{006E}\u{0303}b") === false) or \fail(__LINE__);
+($testStrObj->startsWith(" abc a\u{00F1}\u{00E4}\u{00F1}a") === false) or \fail(__LINE__);
+($testStrObj->startsWith(" abc a\u{00F1}\u{00E4}\u{00F1}b") === false) or \fail(__LINE__);
+($testStrObj->startsWithBytes(" abc a") === true) or \fail(__LINE__);
+($testStrObj->startsWithBytes(" abc b") === false) or \fail(__LINE__);
+($testStrObj->startsWithBytes(" abc a\u{00F1}") === true) or \fail(__LINE__);
+($testStrObj->startsWithBytes(" abc a\u{00F2}") === false) or \fail(__LINE__);
+($testStrObj->startsWithBytes(" abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a") === true) or \fail(__LINE__);
+($testStrObj->startsWithBytes(" abc a\u{00F1}\u{00E4}\u{006E}\u{0303}b") === false) or \fail(__LINE__);
+($testStrObj->startsWithBytes(" abc a\u{00F1}\u{00E4}\u{00F1}a") === false) or \fail(__LINE__);
+($testStrObj->startsWithBytes(" abc a\u{00F1}\u{00E4}\u{00F1}b") === false) or \fail(__LINE__);
+($testStrObj->startsWithCodePoints(" abc a") === true) or \fail(__LINE__);
+($testStrObj->startsWithCodePoints(" abc b") === false) or \fail(__LINE__);
+($testStrObj->startsWithCodePoints(" abc a\u{00F1}") === true) or \fail(__LINE__);
+($testStrObj->startsWithCodePoints(" abc a\u{00F2}") === false) or \fail(__LINE__);
+($testStrObj->startsWithCodePoints(" abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a") === true) or \fail(__LINE__);
+($testStrObj->startsWithCodePoints(" abc a\u{00F1}\u{00E4}\u{006E}\u{0303}b") === false) or \fail(__LINE__);
+($testStrObj->startsWithCodePoints(" abc a\u{00F1}\u{00E4}\u{00F1}a") === false) or \fail(__LINE__);
+($testStrObj->startsWithCodePoints(" abc a\u{00F1}\u{00E4}\u{00F1}b") === false) or \fail(__LINE__);
 
 // END BYTES VS CODE POINTS VS GRAPHEME CLUSTERS
 
