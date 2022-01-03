@@ -59,7 +59,7 @@ final class Str implements \Countable {
 	}
 
 	/**
-	 * Returns whether this string starts with the supplied other string
+	 * Returns whether this string starts with the supplied other string based on bytes
 	 *
 	 * This operation is case-sensitive
 	 *
@@ -68,12 +68,36 @@ final class Str implements \Countable {
 	 * @param string $prefix the other string to search for
 	 * @return bool whether the supplied other string can be found at the beginning of this string
 	 */
-	public function startsWith($prefix) {
+	public function startsWithBytes($prefix) {
 		if (\PHP_VERSION_ID >= 80000) {
 			return $prefix !== '' && \str_starts_with($this->rawString, $prefix);
 		}
 
 		return $prefix !== '' && \strncmp($this->rawString, $prefix, \strlen($prefix)) === 0;
+	}
+
+	/**
+	 * Returns whether this string starts with the supplied other string based on code points
+	 *
+	 * This operation is case-sensitive
+	 *
+	 * The empty string is not considered to be a part of any other string
+	 *
+	 * @param string $prefix the other string to search for
+	 * @return bool whether the supplied other string can be found at the beginning of this string
+	 */
+	public function startsWithCodePoints($prefix) {
+		return $this->startsWithBytes($prefix);
+	}
+
+	/**
+	 * Alias of `startsWithCodePoints`
+	 *
+	 * @param string $prefix
+	 * @return bool
+	 */
+	public function startsWith($prefix) {
+		return $this->startsWithCodePoints($prefix);
 	}
 
 	/**
