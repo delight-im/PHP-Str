@@ -153,7 +153,7 @@ final class Str implements \Countable {
 			return $infix !== '' && \str_contains($this->rawString, $infix);
 		}
 
-		return $infix !== '' && \mb_strpos($this->rawString, $infix, 0, $this->charset) !== false;
+		return $infix !== '' && \strpos($this->rawString, $infix, 0) !== false;
 	}
 
 	/**
