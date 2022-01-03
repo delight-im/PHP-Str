@@ -72,6 +72,25 @@ $japaneseEucJpStr = \mb_convert_encoding($japaneseUtf8Str, 'EUC-JP', 'UTF-8');
 ($testStrObj->contains('ld') === true) or \fail(__LINE__);
 ($testStrObj->contains('lD') === false) or \fail(__LINE__);
 ($testStrObj->contains('') === false) or \fail(__LINE__);
+($testStrObj->containsBytes('o w') === true) or \fail(__LINE__);
+($testStrObj->containsBytes('o W') === false) or \fail(__LINE__);
+($testStrObj->containsBytes('m') === false) or \fail(__LINE__);
+($testStrObj->containsBytes('M') === false) or \fail(__LINE__);
+($testStrObj->containsBytes('He') === true) or \fail(__LINE__);
+($testStrObj->containsBytes('he') === false) or \fail(__LINE__);
+($testStrObj->containsBytes('ld') === true) or \fail(__LINE__);
+($testStrObj->containsBytes('lD') === false) or \fail(__LINE__);
+($testStrObj->containsBytes('') === false) or \fail(__LINE__);
+($testStrObj->containsCodePoints('o w') === true) or \fail(__LINE__);
+($testStrObj->containsCodePoints('o W') === false) or \fail(__LINE__);
+($testStrObj->containsCodePoints('m') === false) or \fail(__LINE__);
+($testStrObj->containsCodePoints('M') === false) or \fail(__LINE__);
+($testStrObj->containsCodePoints('He') === true) or \fail(__LINE__);
+($testStrObj->containsCodePoints('he') === false) or \fail(__LINE__);
+($testStrObj->containsCodePoints('ld') === true) or \fail(__LINE__);
+($testStrObj->containsCodePoints('lD') === false) or \fail(__LINE__);
+($testStrObj->containsCodePoints('') === false) or \fail(__LINE__);
+
 ($testStrObj->containsIgnoreCase('o w') === true) or \fail(__LINE__);
 ($testStrObj->containsIgnoreCase('o W') === true) or \fail(__LINE__);
 ($testStrObj->containsIgnoreCase('m') === false) or \fail(__LINE__);
@@ -440,6 +459,16 @@ $c = $b->startsWithCodePointsIgnoreCase(' § wOR');
 
 $b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
 $c = $b->contains('orl');
+((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
+(\gettype($b) !== \gettype($c)) or \fail(__LINE__);
+
+$b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
+$c = $b->containsBytes('orl');
+((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
+(\gettype($b) !== \gettype($c)) or \fail(__LINE__);
+
+$b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
+$c = $b->containsCodePoints('orl');
 ((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
 (\gettype($b) !== \gettype($c)) or \fail(__LINE__);
 
@@ -884,6 +913,31 @@ $testStrObj = Str::from($testStr);
 ($testStrObj->startsWithCodePointsIgnoreCase(" aBc a\u{00D1}\u{00C4}\u{004E}\u{0303}b") === false) or \fail(__LINE__);
 ($testStrObj->startsWithCodePointsIgnoreCase(" aBc a\u{00D1}\u{00C4}\u{00D1}a") === false) or \fail(__LINE__);
 ($testStrObj->startsWithCodePointsIgnoreCase(" aBc a\u{00D1}\u{00C4}\u{00D1}b") === false) or \fail(__LINE__);
+
+($testStrObj->contains("c a") === true) or \fail(__LINE__);
+($testStrObj->contains("c b") === false) or \fail(__LINE__);
+($testStrObj->contains("c a\u{00F1}") === true) or \fail(__LINE__);
+($testStrObj->contains("c a\u{00F2}") === false) or \fail(__LINE__);
+($testStrObj->contains("c a\u{00F1}\u{00E4}\u{006E}\u{0303}a") === true) or \fail(__LINE__);
+($testStrObj->contains("c a\u{00F1}\u{00E4}\u{006E}\u{0303}b") === false) or \fail(__LINE__);
+($testStrObj->contains("c a\u{00F1}\u{00E4}\u{00F1}a") === false) or \fail(__LINE__);
+($testStrObj->contains("c a\u{00F1}\u{00E4}\u{00F1}b") === false) or \fail(__LINE__);
+($testStrObj->containsBytes("c a") === true) or \fail(__LINE__);
+($testStrObj->containsBytes("c b") === false) or \fail(__LINE__);
+($testStrObj->containsBytes("c a\u{00F1}") === true) or \fail(__LINE__);
+($testStrObj->containsBytes("c a\u{00F2}") === false) or \fail(__LINE__);
+($testStrObj->containsBytes("c a\u{00F1}\u{00E4}\u{006E}\u{0303}a") === true) or \fail(__LINE__);
+($testStrObj->containsBytes("c a\u{00F1}\u{00E4}\u{006E}\u{0303}b") === false) or \fail(__LINE__);
+($testStrObj->containsBytes("c a\u{00F1}\u{00E4}\u{00F1}a") === false) or \fail(__LINE__);
+($testStrObj->containsBytes("c a\u{00F1}\u{00E4}\u{00F1}b") === false) or \fail(__LINE__);
+($testStrObj->containsCodePoints("c a") === true) or \fail(__LINE__);
+($testStrObj->containsCodePoints("c b") === false) or \fail(__LINE__);
+($testStrObj->containsCodePoints("c a\u{00F1}") === true) or \fail(__LINE__);
+($testStrObj->containsCodePoints("c a\u{00F2}") === false) or \fail(__LINE__);
+($testStrObj->containsCodePoints("c a\u{00F1}\u{00E4}\u{006E}\u{0303}a") === true) or \fail(__LINE__);
+($testStrObj->containsCodePoints("c a\u{00F1}\u{00E4}\u{006E}\u{0303}b") === false) or \fail(__LINE__);
+($testStrObj->containsCodePoints("c a\u{00F1}\u{00E4}\u{00F1}a") === false) or \fail(__LINE__);
+($testStrObj->containsCodePoints("c a\u{00F1}\u{00E4}\u{00F1}b") === false) or \fail(__LINE__);
 
 // END BYTES VS CODE POINTS VS GRAPHEME CLUSTERS
 
