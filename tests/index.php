@@ -784,4 +784,16 @@ $c = $b->acronym(true);
 
 // END (IM)MUTABILITY
 
+// BEGIN BYTES VS CODE POINTS VS GRAPHEME CLUSTERS
+
+// {6|6|6} + {2|1|1} + {2|1|1} + {3|2|1} + {6|6|6} + {3|1|1} + {5|5|5} + {4|1|1} + {5|5|5} + {8|2|1} + {5|5|5} + {11|3|1} + {5|5|5} + {16|5|1} + {5|5|5} + {2|1|1} + {2|1|1} + {3|1|1} + {6|6|6} + {2|1|1} + {2|1|1} + {3|2|1} + {6|6|6} {bytes|code points|grapheme clusters} = {112|72|63} {bytes|code points|grapheme clusters}
+// ... + U+00F1 + U+00E4 + { U+006E + U+0303 } + ... + U+231A + ... + U+1F602 + ... + { U+1F1E6 + U+1F1F7 } + ... + { U+1F468 + U+200D + U+1F37C } + ... + { U+1F575 U+FE0F U+200D U+2640 U+FE0F } + ... + U+00C5 + U+00C4 + U+212B + ... + U+00F1 + U+00DC + { U+006E + U+0303 } + ...
+//   where
+//     U+00F1 = { U+006E + U+0303 }
+//     U+00C5 = U+212B
+$testStr = " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ";
+$testStrObj = Str::from($testStr);
+
+// END BYTES VS CODE POINTS VS GRAPHEME CLUSTERS
+
 echo 'ALL TESTS PASSED' . "\n";
