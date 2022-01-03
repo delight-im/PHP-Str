@@ -101,7 +101,7 @@ final class Str implements \Countable {
 	}
 
 	/**
-	 * Returns whether this string starts with the supplied other string
+	 * Returns whether this string starts with the supplied other string based on bytes
 	 *
 	 * This operation is case-insensitive
 	 *
@@ -110,8 +110,32 @@ final class Str implements \Countable {
 	 * @param string $prefix the other string to search for
 	 * @return bool whether the supplied other string can be found at the beginning of this string
 	 */
-	public function startsWithIgnoreCase($prefix) {
+	public function startsWithBytesIgnoreCase($prefix) {
 		return $prefix !== '' && \strncasecmp($this->rawString, $prefix, \strlen($prefix)) === 0;
+	}
+
+	/**
+	 * Returns whether this string starts with the supplied other string based on code points
+	 *
+	 * This operation is case-insensitive
+	 *
+	 * The empty string is not considered to be a part of any other string
+	 *
+	 * @param string $prefix the other string to search for
+	 * @return bool whether the supplied other string can be found at the beginning of this string
+	 */
+	public function startsWithCodePointsIgnoreCase($prefix) {
+		return $prefix !== '' && \mb_stripos($this->rawString, $prefix, 0, $this->charset) === 0;
+	}
+
+	/**
+	 * Alias of `startsWithBytesIgnoreCase`
+	 *
+	 * @param string $prefix
+	 * @return bool
+	 */
+	public function startsWithIgnoreCase($prefix) {
+		return $this->startsWithBytesIgnoreCase($prefix);
 	}
 
 	/**
