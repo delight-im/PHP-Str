@@ -263,7 +263,7 @@ final class Str implements \Countable {
 	}
 
 	/**
-	 * Returns whether this string ends with the supplied other string
+	 * Returns whether this string ends with the supplied other string based on bytes
 	 *
 	 * This operation is case-insensitive
 	 *
@@ -272,10 +272,34 @@ final class Str implements \Countable {
 	 * @param string $suffix the other string to search for
 	 * @return bool whether the supplied other string can be found at the end of this string
 	 */
-	public function endsWithIgnoreCase($suffix) {
+	public function endsWithBytesIgnoreCase($suffix) {
 		$suffixLength = \strlen($suffix);
 
 		return $suffix !== '' && \substr_compare($this->rawString, $suffix, -$suffixLength, $suffixLength, true) === 0;
+	}
+
+	/**
+	 * Returns whether this string ends with the supplied other string based on code points
+	 *
+	 * This operation is case-insensitive
+	 *
+	 * The empty string is not considered to be a part of any other string
+	 *
+	 * @param string $suffix the other string to search for
+	 * @return bool whether the supplied other string can be found at the end of this string
+	 */
+	public function endsWithCodePointsIgnoreCase($suffix) {
+		return $suffix !== '' && \mb_strripos($this->rawString, $suffix, \mb_strlen($this->rawString) - \mb_strlen($suffix), $this->charset) !== false;
+	}
+
+	/**
+	 * Alias of `endsWithBytesIgnoreCase`
+	 *
+	 * @param string $suffix
+	 * @return bool
+	 */
+	public function endsWithIgnoreCase($suffix) {
+		return $this->endsWithBytesIgnoreCase($suffix);
 	}
 
 	/**
