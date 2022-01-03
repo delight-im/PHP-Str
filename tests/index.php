@@ -52,6 +52,16 @@ $japaneseEucJpStr = \mb_convert_encoding($japaneseUtf8Str, 'EUC-JP', 'UTF-8');
 ($testStrObj->startsWithIgnoreCase('el') === false) or \fail(__LINE__);
 ($testStrObj->startsWithIgnoreCase('El') === false) or \fail(__LINE__);
 ($testStrObj->startsWithIgnoreCase('') === false) or \fail(__LINE__);
+($testStrObj->startsWithBytesIgnoreCase('He') === true) or \fail(__LINE__);
+($testStrObj->startsWithBytesIgnoreCase('he') === true) or \fail(__LINE__);
+($testStrObj->startsWithBytesIgnoreCase('el') === false) or \fail(__LINE__);
+($testStrObj->startsWithBytesIgnoreCase('El') === false) or \fail(__LINE__);
+($testStrObj->startsWithBytesIgnoreCase('') === false) or \fail(__LINE__);
+($testStrObj->startsWithCodePointsIgnoreCase('He') === true) or \fail(__LINE__);
+($testStrObj->startsWithCodePointsIgnoreCase('he') === true) or \fail(__LINE__);
+($testStrObj->startsWithCodePointsIgnoreCase('el') === false) or \fail(__LINE__);
+($testStrObj->startsWithCodePointsIgnoreCase('El') === false) or \fail(__LINE__);
+($testStrObj->startsWithCodePointsIgnoreCase('') === false) or \fail(__LINE__);
 
 ($testStrObj->contains('o w') === true) or \fail(__LINE__);
 ($testStrObj->contains('o W') === false) or \fail(__LINE__);
@@ -415,6 +425,16 @@ $c = $b->startsWithCodePoints(' § Wor');
 
 $b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
 $c = $b->startsWithIgnoreCase(' § wOR');
+((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
+(\gettype($b) !== \gettype($c)) or \fail(__LINE__);
+
+$b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
+$c = $b->startsWithBytesIgnoreCase(' § wOR');
+((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
+(\gettype($b) !== \gettype($c)) or \fail(__LINE__);
+
+$b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
+$c = $b->startsWithCodePointsIgnoreCase(' § wOR');
 ((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
 (\gettype($b) !== \gettype($c)) or \fail(__LINE__);
 
@@ -839,6 +859,31 @@ $testStrObj = Str::from($testStr);
 ($testStrObj->startsWithCodePoints(" abc a\u{00F1}\u{00E4}\u{006E}\u{0303}b") === false) or \fail(__LINE__);
 ($testStrObj->startsWithCodePoints(" abc a\u{00F1}\u{00E4}\u{00F1}a") === false) or \fail(__LINE__);
 ($testStrObj->startsWithCodePoints(" abc a\u{00F1}\u{00E4}\u{00F1}b") === false) or \fail(__LINE__);
+
+($testStrObj->startsWithIgnoreCase(" aBc a") === true) or \fail(__LINE__);
+($testStrObj->startsWithIgnoreCase(" aBc b") === false) or \fail(__LINE__);
+($testStrObj->startsWithIgnoreCase(" aBc a\u{00F1}") === true) or \fail(__LINE__);
+($testStrObj->startsWithIgnoreCase(" aBc a\u{00F2}") === false) or \fail(__LINE__);
+($testStrObj->startsWithIgnoreCase(" aBc a\u{00D1}\u{00C4}\u{004E}\u{0303}a") === false) or \fail(__LINE__);
+($testStrObj->startsWithIgnoreCase(" aBc a\u{00D1}\u{00C4}\u{004E}\u{0303}b") === false) or \fail(__LINE__);
+($testStrObj->startsWithIgnoreCase(" aBc a\u{00D1}\u{00C4}\u{00D1}a") === false) or \fail(__LINE__);
+($testStrObj->startsWithIgnoreCase(" aBc a\u{00D1}\u{00C4}\u{00D1}b") === false) or \fail(__LINE__);
+($testStrObj->startsWithBytesIgnoreCase(" aBc a") === true) or \fail(__LINE__);
+($testStrObj->startsWithBytesIgnoreCase(" aBc b") === false) or \fail(__LINE__);
+($testStrObj->startsWithBytesIgnoreCase(" aBc a\u{00F1}") === true) or \fail(__LINE__);
+($testStrObj->startsWithBytesIgnoreCase(" aBc a\u{00F2}") === false) or \fail(__LINE__);
+($testStrObj->startsWithBytesIgnoreCase(" aBc a\u{00D1}\u{00C4}\u{004E}\u{0303}a") === false) or \fail(__LINE__);
+($testStrObj->startsWithBytesIgnoreCase(" aBc a\u{00D1}\u{00C4}\u{004E}\u{0303}b") === false) or \fail(__LINE__);
+($testStrObj->startsWithBytesIgnoreCase(" aBc a\u{00D1}\u{00C4}\u{00D1}a") === false) or \fail(__LINE__);
+($testStrObj->startsWithBytesIgnoreCase(" aBc a\u{00D1}\u{00C4}\u{00D1}b") === false) or \fail(__LINE__);
+($testStrObj->startsWithCodePointsIgnoreCase(" aBc a") === true) or \fail(__LINE__);
+($testStrObj->startsWithCodePointsIgnoreCase(" aBc b") === false) or \fail(__LINE__);
+($testStrObj->startsWithCodePointsIgnoreCase(" aBc a\u{00F1}") === true) or \fail(__LINE__);
+($testStrObj->startsWithCodePointsIgnoreCase(" aBc a\u{00F2}") === false) or \fail(__LINE__);
+($testStrObj->startsWithCodePointsIgnoreCase(" aBc a\u{00D1}\u{00C4}\u{004E}\u{0303}a") === true) or \fail(__LINE__);
+($testStrObj->startsWithCodePointsIgnoreCase(" aBc a\u{00D1}\u{00C4}\u{004E}\u{0303}b") === false) or \fail(__LINE__);
+($testStrObj->startsWithCodePointsIgnoreCase(" aBc a\u{00D1}\u{00C4}\u{00D1}a") === false) or \fail(__LINE__);
+($testStrObj->startsWithCodePointsIgnoreCase(" aBc a\u{00D1}\u{00C4}\u{00D1}b") === false) or \fail(__LINE__);
 
 // END BYTES VS CODE POINTS VS GRAPHEME CLUSTERS
 
