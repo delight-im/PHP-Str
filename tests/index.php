@@ -140,6 +140,16 @@ $japaneseEucJpStr = \mb_convert_encoding($japaneseUtf8Str, 'EUC-JP', 'UTF-8');
 ($testStrObj->endsWithIgnoreCase('rl') === false) or \fail(__LINE__);
 ($testStrObj->endsWithIgnoreCase('rL') === false) or \fail(__LINE__);
 ($testStrObj->endsWithIgnoreCase('') === false) or \fail(__LINE__);
+($testStrObj->endsWithBytesIgnoreCase('ld') === true) or \fail(__LINE__);
+($testStrObj->endsWithBytesIgnoreCase('lD') === true) or \fail(__LINE__);
+($testStrObj->endsWithBytesIgnoreCase('rl') === false) or \fail(__LINE__);
+($testStrObj->endsWithBytesIgnoreCase('rL') === false) or \fail(__LINE__);
+($testStrObj->endsWithBytesIgnoreCase('') === false) or \fail(__LINE__);
+($testStrObj->endsWithCodePointsIgnoreCase('ld') === true) or \fail(__LINE__);
+($testStrObj->endsWithCodePointsIgnoreCase('lD') === true) or \fail(__LINE__);
+($testStrObj->endsWithCodePointsIgnoreCase('rl') === false) or \fail(__LINE__);
+($testStrObj->endsWithCodePointsIgnoreCase('rL') === false) or \fail(__LINE__);
+($testStrObj->endsWithCodePointsIgnoreCase('') === false) or \fail(__LINE__);
 
 ((string) Str::from(" \r\n" . $testStr . " \n")->trim() === $testStr) or \fail(__LINE__);
 ((string) Str::from(" \r\n" . $testStr . " \n")->trim('ab') === " \r\n" . $testStr . " \n") or \fail(__LINE__);
@@ -533,6 +543,16 @@ $c = $b->endsWithCodePoints('C! § ');
 
 $b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
 $c = $b->endsWithIgnoreCase('c! § ');
+((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
+(\gettype($b) !== \gettype($c)) or \fail(__LINE__);
+
+$b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
+$c = $b->endsWithBytesIgnoreCase('c! § ');
+((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
+(\gettype($b) !== \gettype($c)) or \fail(__LINE__);
+
+$b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
+$c = $b->endsWithCodePointsIgnoreCase('c! § ');
 ((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
 (\gettype($b) !== \gettype($c)) or \fail(__LINE__);
 
@@ -1037,6 +1057,31 @@ $testStrObj = Str::from($testStr);
 ($testStrObj->endsWithCodePoints("\u{00DD}\u{006E}\u{0303}u 789 ") === false) or \fail(__LINE__);
 ($testStrObj->endsWithCodePoints("u\u{00F1}\u{00DC}\u{00F1}u 789 ") === false) or \fail(__LINE__);
 ($testStrObj->endsWithCodePoints("v\u{00F1}\u{00DC}\u{00F1}u 789 ") === false) or \fail(__LINE__);
+
+($testStrObj->endsWithIgnoreCase("U 789 ") === true) or \fail(__LINE__);
+($testStrObj->endsWithIgnoreCase("V 789 ") === false) or \fail(__LINE__);
+($testStrObj->endsWithIgnoreCase("\u{0303}U 789 ") === true) or \fail(__LINE__);
+($testStrObj->endsWithIgnoreCase("\u{0304}U 789 ") === false) or \fail(__LINE__);
+($testStrObj->endsWithIgnoreCase("\u{00FC}\u{004E}\u{0303}U 789 ") === false) or \fail(__LINE__);
+($testStrObj->endsWithIgnoreCase("\u{00FD}\u{004E}\u{0303}U 789 ") === false) or \fail(__LINE__);
+($testStrObj->endsWithIgnoreCase("u\u{00D1}\u{00FC}\u{00D1}U 789 ") === false) or \fail(__LINE__);
+($testStrObj->endsWithIgnoreCase("v\u{00D1}\u{00FC}\u{00D1}U 789 ") === false) or \fail(__LINE__);
+($testStrObj->endsWithBytesIgnoreCase("U 789 ") === true) or \fail(__LINE__);
+($testStrObj->endsWithBytesIgnoreCase("V 789 ") === false) or \fail(__LINE__);
+($testStrObj->endsWithBytesIgnoreCase("\u{0303}U 789 ") === true) or \fail(__LINE__);
+($testStrObj->endsWithBytesIgnoreCase("\u{0304}U 789 ") === false) or \fail(__LINE__);
+($testStrObj->endsWithBytesIgnoreCase("\u{00FC}\u{004E}\u{0303}U 789 ") === false) or \fail(__LINE__);
+($testStrObj->endsWithBytesIgnoreCase("\u{00FD}\u{004E}\u{0303}U 789 ") === false) or \fail(__LINE__);
+($testStrObj->endsWithBytesIgnoreCase("u\u{00D1}\u{00FC}\u{00D1}U 789 ") === false) or \fail(__LINE__);
+($testStrObj->endsWithBytesIgnoreCase("v\u{00D1}\u{00FC}\u{00D1}U 789 ") === false) or \fail(__LINE__);
+($testStrObj->endsWithCodePointsIgnoreCase("U 789 ") === true) or \fail(__LINE__);
+($testStrObj->endsWithCodePointsIgnoreCase("V 789 ") === false) or \fail(__LINE__);
+($testStrObj->endsWithCodePointsIgnoreCase("\u{0303}U 789 ") === true) or \fail(__LINE__);
+($testStrObj->endsWithCodePointsIgnoreCase("\u{0304}U 789 ") === false) or \fail(__LINE__);
+($testStrObj->endsWithCodePointsIgnoreCase("\u{00FC}\u{004E}\u{0303}U 789 ") === true) or \fail(__LINE__);
+($testStrObj->endsWithCodePointsIgnoreCase("\u{00FD}\u{004E}\u{0303}U 789 ") === false) or \fail(__LINE__);
+($testStrObj->endsWithCodePointsIgnoreCase("u\u{00D1}\u{00FC}\u{00D1}U 789 ") === false) or \fail(__LINE__);
+($testStrObj->endsWithCodePointsIgnoreCase("v\u{00D1}\u{00FC}\u{00D1}U 789 ") === false) or \fail(__LINE__);
 
 // END BYTES VS CODE POINTS VS GRAPHEME CLUSTERS
 
