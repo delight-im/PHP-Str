@@ -58,6 +58,8 @@ $str = \Delight\Str\Str::from('Hello w☺rld', 'UTF-8');
    * `startsWithBytesIgnoreCase`
    * `startsWithCodePointsIgnoreCase`
  * `contains`
+   * `containsBytes`
+   * `containsCodePoints`
  * `containsIgnoreCase`
  * `endsWith`
  * `endsWithIgnoreCase`
@@ -149,6 +151,8 @@ function startsWithCodePointsIgnoreCase($prefix);
  * @return bool whether the supplied other string is contained in this string
  */
 function contains($infix);
+function containsBytes($infix);
+function containsCodePoints($infix);
 
 
 ////////////////////////////////////////////////////////////////////////////////
