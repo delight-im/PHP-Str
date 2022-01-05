@@ -77,6 +77,7 @@ $str = \Delight\Str\Str::from('Hello w☺rld', 'UTF-8');
  * `byteAt`
  * `codePointAt`
  * `isEmpty`
+ * `isAscii`
  * `toLowerCase`
  * `isLowerCase`
  * `toUpperCase`
@@ -306,6 +307,17 @@ function codePointAt($index);
  * @return bool
  */
 public function isEmpty();
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+/**
+ * Returns whether this string consists entirely of ASCII characters
+ *
+ * @return bool
+ */
+public function isAscii();
 
 
 ////////////////////////////////////////////////////////////////////////////////
