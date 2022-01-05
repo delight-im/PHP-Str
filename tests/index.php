@@ -203,6 +203,16 @@ $japaneseEucJpStr = \mb_convert_encoding($japaneseUtf8Str, 'EUC-JP', 'UTF-8');
 (\bin2hex(Str::from($unicodeFourPlusTwoStr)->byteAt(5)) === 'f0') or \fail(__LINE__);
 (\bin2hex(Str::from($unicodeFourPlusTwoStr)->codePointAt(1)) === 'f09f91a9') or \fail(__LINE__);
 
+(Str::from(null)->isEmpty() === true) or \fail(__LINE__);
+(Str::from('')->isEmpty() === true) or \fail(__LINE__);
+(Str::from(0)->isEmpty() === false) or \fail(__LINE__);
+(Str::from(1)->isEmpty() === false) or \fail(__LINE__);
+(Str::from('0')->isEmpty() === false) or \fail(__LINE__);
+(Str::from('1')->isEmpty() === false) or \fail(__LINE__);
+(Str::from('a')->isEmpty() === false) or \fail(__LINE__);
+(Str::from('abc')->isEmpty() === false) or \fail(__LINE__);
+($testStrObj->isEmpty() === false) or \fail(__LINE__);
+
 ((string) $testStrObj->toLowerCase() === 'hello hello w☺rld w☺rld') or \fail(__LINE__);
 ($testStrObj->isLowerCase() === false) or \fail(__LINE__);
 ($testStrObj->toLowerCase()->isLowerCase() === true) or \fail(__LINE__);
@@ -630,6 +640,11 @@ $b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' worl
 $c = $b->codePointAt(6);
 ((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
 ((string) $b !== (string) $c && \gettype($b) !== \gettype($c)) or \fail(__LINE__);
+
+$b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
+$c = $b->isEmpty();
+((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
+(\gettype($b) !== \gettype($c)) or \fail(__LINE__);
 
 $b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
 $c = $b->toLowerCase();
