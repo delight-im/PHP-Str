@@ -421,6 +421,15 @@ final class Str implements \Countable {
 	}
 
 	/**
+	 * Returns whether this string consists entirely of ASCII characters
+	 *
+	 * @return bool
+	 */
+	public function isAscii() {
+		return \preg_match('/[^\x00-\x7F]/', $this->rawString) === 0;
+	}
+
+	/**
 	 * Converts this string to lowercase
 	 *
 	 * @return static a new instance of this class
