@@ -412,6 +412,15 @@ final class Str implements \Countable {
 	}
 
 	/**
+	 * Returns whether this string is empty
+	 *
+	 * @return bool
+	 */
+	public function isEmpty() {
+		return $this->rawString === '';
+	}
+
+	/**
 	 * Converts this string to lowercase
 	 *
 	 * @return static a new instance of this class
