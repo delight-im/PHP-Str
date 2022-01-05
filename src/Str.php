@@ -430,6 +430,15 @@ final class Str implements \Countable {
 	}
 
 	/**
+	 * Returns whether this string consists entirely of printable ASCII characters
+	 *
+	 * @return bool
+	 */
+	public function isPrintableAscii() {
+		return \preg_match('/[^\x20-\x7E]/', $this->rawString) === 0;
+	}
+
+	/**
 	 * Converts this string to lowercase
 	 *
 	 * @return static a new instance of this class
