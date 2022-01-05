@@ -76,6 +76,7 @@ $str = \Delight\Str\Str::from('Hello w☺rld', 'UTF-8');
  * `last`
  * `byteAt`
  * `codePointAt`
+ * `isEmpty`
  * `toLowerCase`
  * `isLowerCase`
  * `toUpperCase`
@@ -295,6 +296,15 @@ function byteAt($index);
  */
 function codePointAt($index);
 
+
+////////////////////////////////////////////////////////////////////////////////
+
+/**
+ * Returns whether this string is empty
+ *
+ * @return bool
+ */
+public function isEmpty();
 
 ////////////////////////////////////////////////////////////////////////////////
 
