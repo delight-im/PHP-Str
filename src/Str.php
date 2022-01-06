@@ -531,14 +531,34 @@ final class Str implements \Countable {
 	}
 
 	/**
-	 * Converts this string to uppercase
+	 * Converts this string to uppercase based on bytes
 	 *
 	 * @return static a new instance of this class
 	 */
-	public function toUpperCase() {
+	public function toUpperCaseBytes() {
+		$rawString = \strtoupper($this->rawString);
+
+		return new static($rawString, $this->charset);
+	}
+
+	/**
+	 * Converts this string to uppercase based on code points
+	 *
+	 * @return static a new instance of this class
+	 */
+	public function toUpperCaseCodePoints() {
 		$rawString = \mb_strtoupper($this->rawString, $this->charset);
 
 		return new static($rawString, $this->charset);
+	}
+
+	/**
+	 * Alias of `toUpperCaseCodePoints`
+	 *
+	 * @return static
+	 */
+	public function toUpperCase() {
+		return $this->toUpperCaseCodePoints();
 	}
 
 	/**
