@@ -1232,6 +1232,17 @@ $testStrObj = Str::from($testStr);
 ((string) $testStrObj->lastCodePoints(7) === "\u{0303}u 789 ") or \fail(__LINE__);
 ((string) $testStrObj->lastCodePoints(8) === "\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
 
+((string) $testStrObj->byteAt(0) === " ") or \fail(__LINE__);
+((string) $testStrObj->byteAt(3) === "c") or \fail(__LINE__);
+((string) $testStrObj->byteAt(6) === "\xC3") or \fail(__LINE__);
+((string) $testStrObj->byteAt(8) === "\xC3") or \fail(__LINE__);
+((string) $testStrObj->byteAt(9) === "\xA4") or \fail(__LINE__);
+((string) $testStrObj->codePointAt(0) === " ") or \fail(__LINE__);
+((string) $testStrObj->codePointAt(3) === "c") or \fail(__LINE__);
+((string) $testStrObj->codePointAt(6) === "\u{00F1}") or \fail(__LINE__);
+((string) $testStrObj->codePointAt(8) === "\u{006E}") or \fail(__LINE__);
+((string) $testStrObj->codePointAt(9) === "\u{0303}") or \fail(__LINE__);
+
 // END BYTES VS CODE POINTS VS GRAPHEME CLUSTERS
 
 echo 'ALL TESTS PASSED' . "\n";
