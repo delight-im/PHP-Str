@@ -73,6 +73,8 @@ $str = \Delight\Str\Str::from('Hello w☺rld', 'UTF-8');
  * `trimStart`
  * `trimEnd`
  * `first`
+   * `firstBytes`
+   * `firstCodePoints`
  * `last`
  * `byteAt`
  * `codePointAt`
@@ -261,6 +263,8 @@ function trimEnd($charactersToRemove = null, $alwaysRemoveWhitespace = null);
  * @return static a new instance of this class
  */
 function first($length = null);
+function firstBytes($length = null);
+function firstCodePoints($length = null);
 
 
 ////////////////////////////////////////////////////////////////////////////////
