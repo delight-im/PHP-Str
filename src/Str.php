@@ -491,14 +491,34 @@ final class Str implements \Countable {
 	}
 
 	/**
-	 * Converts this string to lowercase
+	 * Converts this string to lowercase based on bytes
 	 *
 	 * @return static a new instance of this class
 	 */
-	public function toLowerCase() {
+	public function toLowerCaseBytes() {
+		$rawString = \strtolower($this->rawString);
+
+		return new static($rawString, $this->charset);
+	}
+
+	/**
+	 * Converts this string to lowercase based on code points
+	 *
+	 * @return static a new instance of this class
+	 */
+	public function toLowerCaseCodePoints() {
 		$rawString = \mb_strtolower($this->rawString, $this->charset);
 
 		return new static($rawString, $this->charset);
+	}
+
+	/**
+	 * Alias of `toLowerCaseCodePoints`
+	 *
+	 * @return static
+	 */
+	public function toLowerCase() {
+		return $this->toLowerCaseCodePoints();
 	}
 
 	/**
