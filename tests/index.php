@@ -245,6 +245,8 @@ $japaneseEucJpStr = \mb_convert_encoding($japaneseUtf8Str, 'EUC-JP', 'UTF-8');
 ($testStrObj->toLowerCase()->isLowerCase() === true) or \fail(__LINE__);
 
 ((string) $testStrObj->toUpperCase() === 'HELLO HELLO W☺RLD W☺RLD') or \fail(__LINE__);
+((string) $testStrObj->toUpperCaseBytes() === 'HELLO HELLO W☺RLD W☺RLD') or \fail(__LINE__);
+((string) $testStrObj->toUpperCaseCodePoints() === 'HELLO HELLO W☺RLD W☺RLD') or \fail(__LINE__);
 ($testStrObj->isUpperCase() === false) or \fail(__LINE__);
 ($testStrObj->toUpperCase()->isUpperCase() === true) or \fail(__LINE__);
 
@@ -745,6 +747,16 @@ $c = $b->isLowerCase();
 
 $b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
 $c = $b->toUpperCase();
+((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
+((string) $b !== (string) $c && \gettype($b) === \gettype($c)) or \fail(__LINE__);
+
+$b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
+$c = $b->toUpperCaseBytes();
+((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
+((string) $b !== (string) $c && \gettype($b) === \gettype($c)) or \fail(__LINE__);
+
+$b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
+$c = $b->toUpperCaseCodePoints();
 ((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
 ((string) $b !== (string) $c && \gettype($b) === \gettype($c)) or \fail(__LINE__);
 
@@ -1258,6 +1270,13 @@ $testStrObj = Str::from($testStr);
 ((string) $testStrObj->toLowerCase() === " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00E5}\u{00E4}\u{00E5} 456 u\u{00F1}\u{00FC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
 ((string) $testStrObj->toLowerCaseBytes() === " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
 ((string) $testStrObj->toLowerCaseCodePoints() === " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00E5}\u{00E4}\u{00E5} 456 u\u{00F1}\u{00FC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+
+((string) $testStrObj->toUpperCase() === " ABC A\u{00D1}\u{00C4}\u{004E}\u{0303}A DEF \u{231A} GHI \u{1F602} JKL \u{1F1E6}\u{1F1F7} MNO \u{1F468}\u{200D}\u{1F37C} PQR \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 U\u{00D1}\u{00DC}\u{004E}\u{0303}U 789 ") or \fail(__LINE__);
+((string) $testStrObj->toUpperCaseBytes() === " ABC A\u{00F1}\u{00E4}\u{004E}\u{0303}A DEF \u{231A} GHI \u{1F602} JKL \u{1F1E6}\u{1F1F7} MNO \u{1F468}\u{200D}\u{1F37C} PQR \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 U\u{00F1}\u{00DC}\u{004E}\u{0303}U 789 ") or \fail(__LINE__);
+((string) $testStrObj->toUpperCaseCodePoints() === " ABC A\u{00D1}\u{00C4}\u{004E}\u{0303}A DEF \u{231A} GHI \u{1F602} JKL \u{1F1E6}\u{1F1F7} MNO \u{1F468}\u{200D}\u{1F37C} PQR \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 U\u{00D1}\u{00DC}\u{004E}\u{0303}U 789 ") or \fail(__LINE__);
+((string) Str::from("Stra\u{00DF}e")->toUpperCase() === 'STRASSE') or \fail(__LINE__);
+((string) Str::from("Stra\u{00DF}e")->toUpperCaseBytes() === "STRA\u{00DF}E") or \fail(__LINE__);
+((string) Str::from("Stra\u{00DF}e")->toUpperCaseCodePoints() === 'STRASSE') or \fail(__LINE__);
 
 // END BYTES VS CODE POINTS VS GRAPHEME CLUSTERS
 
