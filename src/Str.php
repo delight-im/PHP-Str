@@ -400,21 +400,47 @@ final class Str implements \Countable {
 	}
 
 	/**
-	 * Returns the last character or the specified number of characters from the end of this string
+	 * Returns the last byte or the specified number of bytes from the end of this string
 	 *
-	 * @param int|null $length the number of characters to return from the end (optional)
+	 * @param int|null $length the number of bytes to return from the end (optional)
 	 * @return static a new instance of this class
 	 */
-	public function last($length = null) {
+	public function lastBytes($length = null) {
 		if ($length === null) {
 			$length = 1;
 		}
 
-		$offset = $this->length() - $length;
+		$offset = $this->lengthInBytes() - $length;
+		$rawString = \substr($this->rawString, $offset);
 
+		return new static($rawString, $this->charset);
+	}
+
+	/**
+	 * Returns the last code point or the specified number of code points from the end of this string
+	 *
+	 * @param int|null $length the number of code points to return from the end (optional)
+	 * @return static a new instance of this class
+	 */
+	public function lastCodePoints($length = null) {
+		if ($length === null) {
+			$length = 1;
+		}
+
+		$offset = $this->lengthInCodePoints() - $length;
 		$rawString = \mb_substr($this->rawString, $offset, null, $this->charset);
 
 		return new static($rawString, $this->charset);
+	}
+
+	/**
+	 * Alias of `lastCodePoints`
+	 *
+	 * @param int|null $length
+	 * @return static
+	 */
+	public function last($length = null) {
+		return $this->lastCodePoints($length);
 	}
 
 	/**
