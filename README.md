@@ -84,6 +84,8 @@ $str = \Delight\Str\Str::from('Hello w☺rld', 'UTF-8');
  * `isAscii`
  * `isPrintableAscii`
  * `toLowerCase`
+   * `toLowerCaseBytes`
+   * `toLowerCaseCodePoints`
  * `isLowerCase`
  * `toUpperCase`
  * `isUpperCase`
@@ -349,6 +351,8 @@ public function isPrintableAscii();
  * @return static this instance for chaining
  */
 function toLowerCase();
+function toLowerCaseBytes();
+function toLowerCaseCodePoints();
 
 
 ////////////////////////////////////////////////////////////////////////////////
