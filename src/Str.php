@@ -347,12 +347,28 @@ final class Str implements \Countable {
 	}
 
 	/**
-	 * Returns the first character or the specified number of characters from the start of this string
+	 * Returns the first byte or the specified number of bytes from the start of this string
 	 *
-	 * @param int|null $length the number of characters to return from the start (optional)
+	 * @param int|null $length the number of bytes to return from the start (optional)
 	 * @return static a new instance of this class
 	 */
-	public function first($length = null) {
+	public function firstBytes($length = null) {
+		if ($length === null) {
+			$length = 1;
+		}
+
+		$rawString = \substr($this->rawString, 0, $length);
+
+		return new static($rawString, $this->charset);
+	}
+
+	/**
+	 * Returns the first code point or the specified number of code points from the start of this string
+	 *
+	 * @param int|null $length the number of code points to return from the start (optional)
+	 * @return static a new instance of this class
+	 */
+	public function firstCodePoints($length = null) {
 		if ($length === null) {
 			$length = 1;
 		}
@@ -360,6 +376,16 @@ final class Str implements \Countable {
 		$rawString = \mb_substr($this->rawString, 0, $length, $this->charset);
 
 		return new static($rawString, $this->charset);
+	}
+
+	/**
+	 * Alias of `firstCodePoints`
+	 *
+	 * @param int|null $length
+	 * @return static
+	 */
+	public function first($length = null) {
+		return $this->firstCodePoints($length);
 	}
 
 	/**
