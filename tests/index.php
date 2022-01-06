@@ -239,6 +239,8 @@ $japaneseEucJpStr = \mb_convert_encoding($japaneseUtf8Str, 'EUC-JP', 'UTF-8');
 ($testStrObj->isPrintableAscii() === false) or \fail(__LINE__);
 
 ((string) $testStrObj->toLowerCase() === 'hello hello w☺rld w☺rld') or \fail(__LINE__);
+((string) $testStrObj->toLowerCaseBytes() === 'hello hello w☺rld w☺rld') or \fail(__LINE__);
+((string) $testStrObj->toLowerCaseCodePoints() === 'hello hello w☺rld w☺rld') or \fail(__LINE__);
 ($testStrObj->isLowerCase() === false) or \fail(__LINE__);
 ($testStrObj->toLowerCase()->isLowerCase() === true) or \fail(__LINE__);
 
@@ -723,6 +725,16 @@ $c = $b->isPrintableAscii();
 
 $b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
 $c = $b->toLowerCase();
+((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
+((string) $b !== (string) $c && \gettype($b) === \gettype($c)) or \fail(__LINE__);
+
+$b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
+$c = $b->toLowerCaseBytes();
+((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
+((string) $b !== (string) $c && \gettype($b) === \gettype($c)) or \fail(__LINE__);
+
+$b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
+$c = $b->toLowerCaseCodePoints();
 ((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
 ((string) $b !== (string) $c && \gettype($b) === \gettype($c)) or \fail(__LINE__);
 
@@ -1242,6 +1254,10 @@ $testStrObj = Str::from($testStr);
 ((string) $testStrObj->codePointAt(6) === "\u{00F1}") or \fail(__LINE__);
 ((string) $testStrObj->codePointAt(8) === "\u{006E}") or \fail(__LINE__);
 ((string) $testStrObj->codePointAt(9) === "\u{0303}") or \fail(__LINE__);
+
+((string) $testStrObj->toLowerCase() === " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00E5}\u{00E4}\u{00E5} 456 u\u{00F1}\u{00FC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+((string) $testStrObj->toLowerCaseBytes() === " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+((string) $testStrObj->toLowerCaseCodePoints() === " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00E5}\u{00E4}\u{00E5} 456 u\u{00F1}\u{00FC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
 
 // END BYTES VS CODE POINTS VS GRAPHEME CLUSTERS
 
