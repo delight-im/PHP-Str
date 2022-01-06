@@ -76,6 +76,8 @@ $str = \Delight\Str\Str::from('Hello w☺rld', 'UTF-8');
    * `firstBytes`
    * `firstCodePoints`
  * `last`
+   * `lastBytes`
+   * `lastCodePoints`
  * `byteAt`
  * `codePointAt`
  * `isEmpty`
@@ -277,6 +279,8 @@ function firstCodePoints($length = null);
  * @return static a new instance of this class
  */
 function last($length = null);
+function lastBytes($length = null);
+function lastCodePoints($length = null);
 
 
 ////////////////////////////////////////////////////////////////////////////////
