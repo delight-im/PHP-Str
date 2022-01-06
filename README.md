@@ -88,6 +88,8 @@ $str = \Delight\Str\Str::from('Hello w☺rld', 'UTF-8');
    * `toLowerCaseCodePoints`
  * `isLowerCase`
  * `toUpperCase`
+   * `toUpperCaseBytes`
+   * `toUpperCaseCodePoints`
  * `isUpperCase`
  * `isCapitalized`
  * `truncate`
@@ -375,6 +377,8 @@ function isLowerCase();
  * @return static this instance for chaining
  */
 function toUpperCase();
+function toUpperCaseBytes();
+function toUpperCaseCodePoints();
 
 
 ////////////////////////////////////////////////////////////////////////////////
