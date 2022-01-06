@@ -310,7 +310,7 @@ final class Str implements \Countable {
 	 * @return static a new instance of this class
 	 */
 	public function trim($charactersToRemove = null, $alwaysRemoveWhitespace = null) {
-		return $this->trimInternal('trim', $charactersToRemove, $alwaysRemoveWhitespace);
+		return $this->trimInternal(true, true, $charactersToRemove, $alwaysRemoveWhitespace);
 	}
 
 	/**
@@ -321,7 +321,7 @@ final class Str implements \Countable {
 	 * @return static a new instance of this class
 	 */
 	public function trimStart($charactersToRemove = null, $alwaysRemoveWhitespace = null) {
-		return $this->trimInternal('ltrim', $charactersToRemove, $alwaysRemoveWhitespace);
+		return $this->trimInternal(true, false, $charactersToRemove, $alwaysRemoveWhitespace);
 	}
 
 	/**
@@ -332,7 +332,7 @@ final class Str implements \Countable {
 	 * @return static a new instance of this class
 	 */
 	public function trimEnd($charactersToRemove = null, $alwaysRemoveWhitespace = null) {
-		return $this->trimInternal('rtrim', $charactersToRemove, $alwaysRemoveWhitespace);
+		return $this->trimInternal(false, true, $charactersToRemove, $alwaysRemoveWhitespace);
 	}
 
 	/**
@@ -1029,20 +1029,61 @@ final class Str implements \Countable {
 		return $this->rawString;
 	}
 
-	private function trimInternal(callable $func, $charactersToRemove = null, $alwaysRemoveWhitespace = null) {
+	private function trimInternal($trimAtStart, $trimAtEnd, $charactersToRemove = null, $alwaysRemoveWhitespace = null) {
+		$defaultCharactersToRemove = " \t\n\r\0\x0B";
+
+		if ($charactersToRemove === null) {
+			$charactersToRemove = $defaultCharactersToRemove;
+		}
+
 		if ($alwaysRemoveWhitespace === null) {
 			$alwaysRemoveWhitespace = false;
 		}
 
-		if ($charactersToRemove === null || $alwaysRemoveWhitespace) {
-			if ($charactersToRemove === null) {
-				$charactersToRemove = '';
-			}
-
-			$charactersToRemove .= " \t\n\r\0\x0B";
+		if ($alwaysRemoveWhitespace) {
+			$charactersToRemove .= $defaultCharactersToRemove;
 		}
 
-		$newRawString = $func($this->rawString, $charactersToRemove);
+		// if non-ASCII (or multi-byte UTF-8) characters are to be removed
+		if (\preg_match('/[^\x00-\x7F]/', $charactersToRemove) === 1) {
+			$charactersToRemoveRegexClass = '[' . \preg_quote($charactersToRemove, '/') . ']';
+
+			if ($trimAtStart) {
+				if ($trimAtEnd) {
+					$charactersToRemoveRegexPattern = '/^' . $charactersToRemoveRegexClass . '+|' . $charactersToRemoveRegexClass . '+$/uD';
+				}
+				else {
+					$charactersToRemoveRegexPattern = '/^' . $charactersToRemoveRegexClass . '+/uD';
+				}
+			}
+			elseif ($trimAtEnd) {
+				$charactersToRemoveRegexPattern = '/' . $charactersToRemoveRegexClass . '+$/uD';
+			}
+			else {
+				throw new \Exception("Either 'trimAtStart' or 'trimAtEnd' must be 'true'");
+			}
+
+			$newRawString = \preg_replace($charactersToRemoveRegexPattern, '', $this->rawString, -1);
+		}
+		// if only ASCII (or single-byte UTF-8) characters are to be removed
+		else {
+			if ($trimAtStart) {
+				if ($trimAtEnd) {
+					$trimFunc = 'trim';
+				}
+				else {
+					$trimFunc = 'ltrim';
+				}
+			}
+			elseif ($trimAtEnd) {
+				$trimFunc = 'rtrim';
+			}
+			else {
+				throw new \Exception("Either 'trimAtStart' or 'trimAtEnd' must be 'true'");
+			}
+
+			$newRawString = $trimFunc($this->rawString, $charactersToRemove);
+		}
 
 		return new static($newRawString, $this->charset);
 	}
