@@ -255,15 +255,26 @@ $japaneseEucJpStr = \mb_convert_encoding($japaneseUtf8Str, 'EUC-JP', 'UTF-8');
 ($testStrObj->toUpperCase()->isCapitalized() === true) or \fail(__LINE__);
 
 ((string) $testStrObj->truncate(5) === 'He...') or \fail(__LINE__);
-((string) $testStrObj->truncate(5, '…') === 'Hell…') or \fail(__LINE__);
+((string) $testStrObj->truncate(5, '+') === 'Hell+') or \fail(__LINE__);
 ((string) $testStrObj->truncate(5, '') === 'Hello') or \fail(__LINE__);
 ((string) $testStrObj->truncate(11) === 'Hello He...') or \fail(__LINE__);
 ((string) $testStrObj->truncate(13) === 'Hello Hell...') or \fail(__LINE__);
 ((string) $testStrObj->truncate(14) === 'Hello Hello...') or \fail(__LINE__);
 ((string) $testStrObj->truncate(15) === 'Hello Hello ...') or \fail(__LINE__);
-((string) $testStrObj->truncate(22) === 'Hello Hello w☺rld w...') or \fail(__LINE__);
-((string) $testStrObj->truncate(23) === $testStr) or \fail(__LINE__);
-((string) $testStrObj->truncate(24) === $testStr) or \fail(__LINE__);
+((string) $testStrObj->truncateBytes(5) === 'He...') or \fail(__LINE__);
+((string) $testStrObj->truncateBytes(5, '+') === 'Hell+') or \fail(__LINE__);
+((string) $testStrObj->truncateBytes(5, '') === 'Hello') or \fail(__LINE__);
+((string) $testStrObj->truncateBytes(11) === 'Hello He...') or \fail(__LINE__);
+((string) $testStrObj->truncateBytes(13) === 'Hello Hell...') or \fail(__LINE__);
+((string) $testStrObj->truncateBytes(14) === 'Hello Hello...') or \fail(__LINE__);
+((string) $testStrObj->truncateBytes(15) === 'Hello Hello ...') or \fail(__LINE__);
+((string) $testStrObj->truncateCodePoints(5) === 'He...') or \fail(__LINE__);
+((string) $testStrObj->truncateCodePoints(5, '+') === 'Hell+') or \fail(__LINE__);
+((string) $testStrObj->truncateCodePoints(5, '') === 'Hello') or \fail(__LINE__);
+((string) $testStrObj->truncateCodePoints(11) === 'Hello He...') or \fail(__LINE__);
+((string) $testStrObj->truncateCodePoints(13) === 'Hello Hell...') or \fail(__LINE__);
+((string) $testStrObj->truncateCodePoints(14) === 'Hello Hello...') or \fail(__LINE__);
+((string) $testStrObj->truncateCodePoints(15) === 'Hello Hello ...') or \fail(__LINE__);
 
 ((string) $testStrObj->truncateSafely(5) === 'He...') or \fail(__LINE__);
 ((string) $testStrObj->truncateSafely(5, '…') === 'Hell…') or \fail(__LINE__);
@@ -777,6 +788,26 @@ $c = $b->truncate(5);
 
 $b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
 $c = $b->truncate(5, 'ooo');
+((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
+((string) $b !== (string) $c && \gettype($b) === \gettype($c)) or \fail(__LINE__);
+
+$b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
+$c = $b->truncateBytes(5);
+((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
+((string) $b !== (string) $c && \gettype($b) === \gettype($c)) or \fail(__LINE__);
+
+$b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
+$c = $b->truncateBytes(5, 'ooo');
+((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
+((string) $b !== (string) $c && \gettype($b) === \gettype($c)) or \fail(__LINE__);
+
+$b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
+$c = $b->truncateCodePoints(5);
+((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
+((string) $b !== (string) $c && \gettype($b) === \gettype($c)) or \fail(__LINE__);
+
+$b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
+$c = $b->truncateCodePoints(5, 'ooo');
 ((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
 ((string) $b !== (string) $c && \gettype($b) === \gettype($c)) or \fail(__LINE__);
 
