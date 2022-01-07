@@ -616,7 +616,7 @@ final class Str implements \Countable {
 	}
 
 	/**
-	 * Truncates this string so that it has at most the specified length
+	 * Truncates this string so that it has at most the specified length in bytes
 	 *
 	 * This method tries *not* to break any words whenever possible
 	 *
@@ -624,8 +624,32 @@ final class Str implements \Countable {
 	 * @param string|null $ellipsis the string to use as the ellipsis (optional)
 	 * @return static a new instance of this class
 	 */
-	public function truncateSafely($maxLength, $ellipsis = null) {
+	public function truncateBytesSafely($maxLength, $ellipsis = null) {
+		return $this->truncateInternal(true, false, $maxLength, $ellipsis, true);
+	}
+
+	/**
+	 * Truncates this string so that it has at most the specified length in code points
+	 *
+	 * This method tries *not* to break any words whenever possible
+	 *
+	 * @param int $maxLength the maximum length that this string may have (including any ellipsis)
+	 * @param string|null $ellipsis the string to use as the ellipsis (optional)
+	 * @return static a new instance of this class
+	 */
+	public function truncateCodePointsSafely($maxLength, $ellipsis = null) {
 		return $this->truncateInternal(false, true, $maxLength, $ellipsis, true);
+	}
+
+	/**
+	 * Alias of `truncateCodePointsSafely`
+	 *
+	 * @param int $maxLength
+	 * @param string|null $ellipsis
+	 * @return static
+	 */
+	public function truncateSafely($maxLength, $ellipsis = null) {
+		return $this->truncateCodePointsSafely($maxLength, $ellipsis);
 	}
 
 	/**
