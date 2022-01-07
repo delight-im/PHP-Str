@@ -1278,6 +1278,43 @@ $testStrObj = Str::from($testStr);
 ((string) Str::from("Stra\u{00DF}e")->toUpperCaseBytes() === "STRA\u{00DF}E") or \fail(__LINE__);
 ((string) Str::from("Stra\u{00DF}e")->toUpperCaseCodePoints() === 'STRASSE') or \fail(__LINE__);
 
+((string) $testStrObj->truncate(6) === " ab...") or \fail(__LINE__);
+((string) $testStrObj->truncate(9) === " abc a...") or \fail(__LINE__);
+((string) $testStrObj->truncate(10) === " abc a\u{00F1}...") or \fail(__LINE__);
+((string) $testStrObj->truncate(12) === " abc a\u{00F1}\u{00E4}\u{006E}...") or \fail(__LINE__);
+((string) $testStrObj->truncate(4, '~') === " ab~") or \fail(__LINE__);
+((string) $testStrObj->truncate(7, '~') === " abc a~") or \fail(__LINE__);
+((string) $testStrObj->truncate(8, '~') === " abc a\u{00F1}~") or \fail(__LINE__);
+((string) $testStrObj->truncate(10, '~') === " abc a\u{00F1}\u{00E4}\u{006E}~") or \fail(__LINE__);
+((string) $testStrObj->truncate(3, '') === " ab") or \fail(__LINE__);
+((string) $testStrObj->truncate(6, '') === " abc a") or \fail(__LINE__);
+((string) $testStrObj->truncate(7, '') === " abc a\u{00F1}") or \fail(__LINE__);
+((string) $testStrObj->truncate(9, '') === " abc a\u{00F1}\u{00E4}\u{006E}") or \fail(__LINE__);
+((string) $testStrObj->truncateBytes(6) === " ab...") or \fail(__LINE__);
+((string) $testStrObj->truncateBytes(9) === " abc a...") or \fail(__LINE__);
+((string) $testStrObj->truncateBytes(11) === " abc a\u{00F1}...") or \fail(__LINE__);
+((string) $testStrObj->truncateBytes(14) === " abc a\u{00F1}\u{00E4}\u{006E}...") or \fail(__LINE__);
+((string) $testStrObj->truncateBytes(4, '~') === " ab~") or \fail(__LINE__);
+((string) $testStrObj->truncateBytes(7, '~') === " abc a~") or \fail(__LINE__);
+((string) $testStrObj->truncateBytes(9, '~') === " abc a\u{00F1}~") or \fail(__LINE__);
+((string) $testStrObj->truncateBytes(12, '~') === " abc a\u{00F1}\u{00E4}\u{006E}~") or \fail(__LINE__);
+((string) $testStrObj->truncateBytes(3, '') === " ab") or \fail(__LINE__);
+((string) $testStrObj->truncateBytes(6, '') === " abc a") or \fail(__LINE__);
+((string) $testStrObj->truncateBytes(8, '') === " abc a\u{00F1}") or \fail(__LINE__);
+((string) $testStrObj->truncateBytes(11, '') === " abc a\u{00F1}\u{00E4}\u{006E}") or \fail(__LINE__);
+((string) $testStrObj->truncateCodePoints(6) === " ab...") or \fail(__LINE__);
+((string) $testStrObj->truncateCodePoints(9) === " abc a...") or \fail(__LINE__);
+((string) $testStrObj->truncateCodePoints(10) === " abc a\u{00F1}...") or \fail(__LINE__);
+((string) $testStrObj->truncateCodePoints(12) === " abc a\u{00F1}\u{00E4}\u{006E}...") or \fail(__LINE__);
+((string) $testStrObj->truncateCodePoints(4, '~') === " ab~") or \fail(__LINE__);
+((string) $testStrObj->truncateCodePoints(7, '~') === " abc a~") or \fail(__LINE__);
+((string) $testStrObj->truncateCodePoints(8, '~') === " abc a\u{00F1}~") or \fail(__LINE__);
+((string) $testStrObj->truncateCodePoints(10, '~') === " abc a\u{00F1}\u{00E4}\u{006E}~") or \fail(__LINE__);
+((string) $testStrObj->truncateCodePoints(3, '') === " ab") or \fail(__LINE__);
+((string) $testStrObj->truncateCodePoints(6, '') === " abc a") or \fail(__LINE__);
+((string) $testStrObj->truncateCodePoints(7, '') === " abc a\u{00F1}") or \fail(__LINE__);
+((string) $testStrObj->truncateCodePoints(9, '') === " abc a\u{00F1}\u{00E4}\u{006E}") or \fail(__LINE__);
+
 // END BYTES VS CODE POINTS VS GRAPHEME CLUSTERS
 
 echo 'ALL TESTS PASSED' . "\n";
