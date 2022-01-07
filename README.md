@@ -96,6 +96,8 @@ $str = \Delight\Str\Str::from('Hello w☺rld', 'UTF-8');
    * `truncateBytes`
    * `truncateCodePoints`
  * `truncateSafely`
+   * `truncateBytesSafely`
+   * `truncateCodePointsSafely`
  * `count`
  * `length`
  * `lengthInBytes`
@@ -433,6 +435,8 @@ function truncateCodePoints($maxLength, $ellipsis = null);
  * @return static a new instance of this class
  */
 function truncateSafely($maxLength, $ellipsis = null);
+function truncateBytesSafely($maxLength, $ellipsis = null);
+function truncateCodePointsSafely($maxLength, $ellipsis = null);
 
 
 ////////////////////////////////////////////////////////////////////////////////
