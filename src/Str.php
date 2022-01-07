@@ -590,7 +590,7 @@ final class Str implements \Countable {
 	 * @return static a new instance of this class
 	 */
 	public function truncate($maxLength, $ellipsis = null) {
-		return $this->truncateInternal($maxLength, $ellipsis, false);
+		return $this->truncateInternal(false, true, $maxLength, $ellipsis, false);
 	}
 
 	/**
@@ -603,7 +603,7 @@ final class Str implements \Countable {
 	 * @return static a new instance of this class
 	 */
 	public function truncateSafely($maxLength, $ellipsis = null) {
-		return $this->truncateInternal($maxLength, $ellipsis, true);
+		return $this->truncateInternal(false, true, $maxLength, $ellipsis, true);
 	}
 
 	/**
@@ -1184,9 +1184,19 @@ final class Str implements \Countable {
 		return new static($newRawString, $this->charset);
 	}
 
-	private function truncateInternal($maxLength, $ellipsis, $safe) {
+	private function truncateInternal($operateOnBytes, $operateOnCodePoints, $maxLength, $ellipsis, $safe) {
+		if ($operateOnBytes) {
+			$previousLength = $this->lengthInBytes();
+		}
+		elseif ($operateOnCodePoints) {
+			$previousLength = $this->lengthInCodePoints();
+		}
+		else {
+			throw new \Exception("Either 'operateOnBytes' or 'operateOnCodePoints' must be 'true'");
+		}
+
 		// if the string doesn't actually need to be truncated for the desired maximum length
-		if ($this->length() <= $maxLength) {
+		if ($previousLength <= $maxLength) {
 			// return it unchanged
 			return $this;
 		}
@@ -1199,15 +1209,41 @@ final class Str implements \Countable {
 			}
 
 			// calculate the actual maximum length without the ellipsis
-			$maxLength -= \mb_strlen($ellipsis, $this->charset);
+			if ($operateOnBytes) {
+				$maxLength -= \strlen($ellipsis);
+			}
+			elseif ($operateOnCodePoints) {
+				$maxLength -= \mb_strlen($ellipsis, $this->charset);
+			}
+			else {
+				throw new \Exception("Either 'operateOnBytes' or 'operateOnCodePoints' must be 'true'");
+			}
 
 			// truncate the string to the desired length
-			$rawString = \mb_substr($this->rawString, 0, $maxLength, $this->charset);
+			if ($operateOnBytes) {
+				$rawString = \substr($this->rawString, 0, $maxLength);
+			}
+			elseif ($operateOnCodePoints) {
+				$rawString = \mb_substr($this->rawString, 0, $maxLength, $this->charset);
+			}
+			else {
+				throw new \Exception("Either 'operateOnBytes' or 'operateOnCodePoints' must be 'true'");
+			}
 
 			// if we don't want to break words
 			if ($safe) {
+				if ($operateOnBytes) {
+					$boundaryChars = \substr($this->rawString, $maxLength - 1, 2);
+				}
+				elseif ($operateOnCodePoints) {
+					$boundaryChars = \mb_substr($this->rawString, $maxLength - 1, 2, $this->charset);
+				}
+				else {
+					throw new \Exception("Either 'operateOnBytes' or 'operateOnCodePoints' must be 'true'");
+				}
+
 				// if the truncated string *does* end *within* a word
-				if (!\preg_match('/\\W/u', \mb_substr($this->rawString, $maxLength - 1, 2, $this->charset))) {
+				if (!\preg_match('/\\W/u', $boundaryChars)) {
 					// if there's some word boundary before
 					if (\preg_match('/.*\\W/u', $rawString, $matches)) {
 						// truncate there instead
