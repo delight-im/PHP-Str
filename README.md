@@ -93,6 +93,8 @@ $str = \Delight\Str\Str::from('Hello w☺rld', 'UTF-8');
  * `isUpperCase`
  * `isCapitalized`
  * `truncate`
+   * `truncateBytes`
+   * `truncateCodePoints`
  * `truncateSafely`
  * `count`
  * `length`
@@ -414,6 +416,8 @@ function isCapitalized();
  * @return static a new instance of this class
  */
 function truncate($maxLength, $ellipsis = null);
+function truncateBytes($maxLength, $ellipsis = null);
+function truncateCodePoints($maxLength, $ellipsis = null);
 
 
 ////////////////////////////////////////////////////////////////////////////////
