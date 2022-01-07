@@ -566,6 +566,7 @@ final class Str implements \Countable {
 	 * Returns whether this string is entirely uppercase
 	 *
 	 * @return bool
+	 * @deprecated use `equals` and `toUpperCase` instead
 	 */
 	public function isUpperCase() {
 		return $this->equals($this->toUpperCase());
