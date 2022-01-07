@@ -525,6 +525,7 @@ final class Str implements \Countable {
 	 * Returns whether this string is entirely lowercase
 	 *
 	 * @return bool
+	 * @deprecated use `equals` and `toLowerCase` instead
 	 */
 	public function isLowerCase() {
 		return $this->equals($this->toLowerCase());
