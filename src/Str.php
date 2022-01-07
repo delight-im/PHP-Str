@@ -583,14 +583,36 @@ final class Str implements \Countable {
 	}
 
 	/**
-	 * Truncates this string so that it has at most the specified length
+	 * Truncates this string so that it has at most the specified length in bytes
 	 *
 	 * @param int $maxLength the maximum length that this string may have (including any ellipsis)
 	 * @param string|null $ellipsis the string to use as the ellipsis (optional)
 	 * @return static a new instance of this class
 	 */
-	public function truncate($maxLength, $ellipsis = null) {
+	public function truncateBytes($maxLength, $ellipsis = null) {
+		return $this->truncateInternal(true, false, $maxLength, $ellipsis, false);
+	}
+
+	/**
+	 * Truncates this string so that it has at most the specified length in code points
+	 *
+	 * @param int $maxLength the maximum length that this string may have (including any ellipsis)
+	 * @param string|null $ellipsis the string to use as the ellipsis (optional)
+	 * @return static a new instance of this class
+	 */
+	public function truncateCodePoints($maxLength, $ellipsis = null) {
 		return $this->truncateInternal(false, true, $maxLength, $ellipsis, false);
+	}
+
+	/**
+	 * Alias of `truncateCodePoints`
+	 *
+	 * @param int $maxLength
+	 * @param string|null $ellipsis
+	 * @return static
+	 */
+	public function truncate($maxLength, $ellipsis = null) {
+		return $this->truncateCodePoints($maxLength, $ellipsis);
 	}
 
 	/**
