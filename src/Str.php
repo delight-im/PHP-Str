@@ -1219,6 +1219,11 @@ final class Str implements \Countable {
 				throw new \Exception("Either 'operateOnBytes' or 'operateOnCodePoints' must be 'true'");
 			}
 
+			// if not even the ellipsis string fits into a string of the specified maximum length
+			if ($maxLength < 0) {
+				return '';
+			}
+
 			// truncate the string to the desired length
 			if ($operateOnBytes) {
 				$rawString = \substr($this->rawString, 0, $maxLength);
