@@ -576,6 +576,7 @@ final class Str implements \Countable {
 	 * Returns whether this string has its first letter written in uppercase
 	 *
 	 * @return bool
+	 * @deprecated use `first` and `equals` and `toUpperCase` instead
 	 */
 	public function isCapitalized() {
 		return $this->first()->isUpperCase();
