@@ -1105,6 +1105,7 @@ final class Str implements \Countable {
 	 *
 	 * @param bool|null $excludeLowerCase whether to exclude lowercase letters from the result (optional)
 	 * @return static a new instance of this class
+	 * @deprecated
 	 */
 	public function acronym($excludeLowerCase = null) {
 		$words = $this->words();
