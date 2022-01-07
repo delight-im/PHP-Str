@@ -1315,6 +1315,43 @@ $testStrObj = Str::from($testStr);
 ((string) $testStrObj->truncateCodePoints(7, '') === " abc a\u{00F1}") or \fail(__LINE__);
 ((string) $testStrObj->truncateCodePoints(9, '') === " abc a\u{00F1}\u{00E4}\u{006E}") or \fail(__LINE__);
 
+((string) $testStrObj->truncateSafely(6) === " ...") or \fail(__LINE__);
+((string) $testStrObj->truncateSafely(9) === " abc ...") or \fail(__LINE__);
+((string) $testStrObj->truncateSafely(10) === " abc ...") or \fail(__LINE__);
+((string) $testStrObj->truncateSafely(12) === " abc a\u{00F1}\u{00E4}\u{006E}...") or \fail(__LINE__);
+((string) $testStrObj->truncateSafely(4, '~') === " ~") or \fail(__LINE__);
+((string) $testStrObj->truncateSafely(7, '~') === " abc ~") or \fail(__LINE__);
+((string) $testStrObj->truncateSafely(8, '~') === " abc ~") or \fail(__LINE__);
+((string) $testStrObj->truncateSafely(10, '~') === " abc a\u{00F1}\u{00E4}\u{006E}~") or \fail(__LINE__);
+((string) $testStrObj->truncateSafely(3, '') === " ") or \fail(__LINE__);
+((string) $testStrObj->truncateSafely(6, '') === " abc ") or \fail(__LINE__);
+((string) $testStrObj->truncateSafely(7, '') === " abc ") or \fail(__LINE__);
+((string) $testStrObj->truncateSafely(9, '') === " abc a\u{00F1}\u{00E4}\u{006E}") or \fail(__LINE__);
+((string) $testStrObj->truncateBytesSafely(6) === " ...") or \fail(__LINE__);
+((string) $testStrObj->truncateBytesSafely(9) === " abc ...") or \fail(__LINE__);
+((string) $testStrObj->truncateBytesSafely(11) === " abc ...") or \fail(__LINE__);
+((string) $testStrObj->truncateBytesSafely(14) === " abc ...") or \fail(__LINE__);
+((string) $testStrObj->truncateBytesSafely(4, '~') === " ~") or \fail(__LINE__);
+((string) $testStrObj->truncateBytesSafely(7, '~') === " abc ~") or \fail(__LINE__);
+((string) $testStrObj->truncateBytesSafely(9, '~') === " abc ~") or \fail(__LINE__);
+((string) $testStrObj->truncateBytesSafely(12, '~') === " abc ~") or \fail(__LINE__);
+((string) $testStrObj->truncateBytesSafely(3, '') === " ") or \fail(__LINE__);
+((string) $testStrObj->truncateBytesSafely(6, '') === " abc ") or \fail(__LINE__);
+((string) $testStrObj->truncateBytesSafely(8, '') === " abc ") or \fail(__LINE__);
+((string) $testStrObj->truncateBytesSafely(11, '') === " abc ") or \fail(__LINE__);
+((string) $testStrObj->truncateCodePointsSafely(6) === " ...") or \fail(__LINE__);
+((string) $testStrObj->truncateCodePointsSafely(9) === " abc ...") or \fail(__LINE__);
+((string) $testStrObj->truncateCodePointsSafely(10) === " abc ...") or \fail(__LINE__);
+((string) $testStrObj->truncateCodePointsSafely(12) === " abc a\u{00F1}\u{00E4}\u{006E}...") or \fail(__LINE__);
+((string) $testStrObj->truncateCodePointsSafely(4, '~') === " ~") or \fail(__LINE__);
+((string) $testStrObj->truncateCodePointsSafely(7, '~') === " abc ~") or \fail(__LINE__);
+((string) $testStrObj->truncateCodePointsSafely(8, '~') === " abc ~") or \fail(__LINE__);
+((string) $testStrObj->truncateCodePointsSafely(10, '~') === " abc a\u{00F1}\u{00E4}\u{006E}~") or \fail(__LINE__);
+((string) $testStrObj->truncateCodePointsSafely(3, '') === " ") or \fail(__LINE__);
+((string) $testStrObj->truncateCodePointsSafely(6, '') === " abc ") or \fail(__LINE__);
+((string) $testStrObj->truncateCodePointsSafely(7, '') === " abc ") or \fail(__LINE__);
+((string) $testStrObj->truncateCodePointsSafely(9, '') === " abc a\u{00F1}\u{00E4}\u{006E}") or \fail(__LINE__);
+
 // END BYTES VS CODE POINTS VS GRAPHEME CLUSTERS
 
 echo 'ALL TESTS PASSED' . "\n";
