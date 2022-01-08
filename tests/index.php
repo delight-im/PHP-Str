@@ -324,16 +324,22 @@ $japaneseEucJpStr = \mb_convert_encoding($japaneseUtf8Str, 'EUC-JP', 'UTF-8');
 ($testStrObj->countCodePoints('x') === 0) or \fail(__LINE__);
 ($testStrObj->countCodePoints('') === 0) or \fail(__LINE__);
 
+(Str::from('abc')->length() === 3) or \fail(__LINE__);
 (Str::from('abc')->lengthInBytes() === 3) or \fail(__LINE__);
 (Str::from('abc')->lengthInCodePoints() === 3) or \fail(__LINE__);
+(Str::from('aöz')->length() === 3) or \fail(__LINE__);
 (Str::from('aöz')->lengthInBytes() === 4) or \fail(__LINE__);
 (Str::from('aöz')->lengthInCodePoints() === 3) or \fail(__LINE__);
+(Str::from($unicodeOnePlusTwoStr)->length() === 3) or \fail(__LINE__);
 (Str::from($unicodeOnePlusTwoStr)->lengthInBytes() === 6) or \fail(__LINE__);
 (Str::from($unicodeOnePlusTwoStr)->lengthInCodePoints() === 3) or \fail(__LINE__);
+(Str::from($unicodeTwoPlusTwoStr)->length() === 4) or \fail(__LINE__);
 (Str::from($unicodeTwoPlusTwoStr)->lengthInBytes() === 10) or \fail(__LINE__);
 (Str::from($unicodeTwoPlusTwoStr)->lengthInCodePoints() === 4) or \fail(__LINE__);
+(Str::from($unicodeThreePlusTwoStr)->length() === 5) or \fail(__LINE__);
 (Str::from($unicodeThreePlusTwoStr)->lengthInBytes() === 13) or \fail(__LINE__);
 (Str::from($unicodeThreePlusTwoStr)->lengthInCodePoints() === 5) or \fail(__LINE__);
+(Str::from($unicodeFourPlusTwoStr)->length() === 6) or \fail(__LINE__);
 (Str::from($unicodeFourPlusTwoStr)->lengthInBytes() === 17) or \fail(__LINE__);
 (Str::from($unicodeFourPlusTwoStr)->lengthInCodePoints() === 6) or \fail(__LINE__);
 
@@ -898,6 +904,11 @@ $c = $b->countCodePoints('or');
 (\gettype($b) !== \gettype($c)) or \fail(__LINE__);
 
 $b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
+$c = $b->length();
+((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
+(\gettype($b) !== \gettype($c)) or \fail(__LINE__);
+
+$b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
 $c = $b->lengthInBytes();
 ((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
 (\gettype($b) !== \gettype($c)) or \fail(__LINE__);
@@ -1455,6 +1466,10 @@ $testStrObj = Str::from($testStr);
 ($testStrObj->countBytes("\u{00F1}") === 2) or \fail(__LINE__);
 ($testStrObj->countCodePoints() === 72) or \fail(__LINE__);
 ($testStrObj->countCodePoints("\u{00F1}") === 2) or \fail(__LINE__);
+
+($testStrObj->length() === 72) or \fail(__LINE__);
+($testStrObj->lengthInBytes() === 112) or \fail(__LINE__);
+($testStrObj->lengthInCodePoints() === 72) or \fail(__LINE__);
 
 // END BYTES VS CODE POINTS VS GRAPHEME CLUSTERS
 
