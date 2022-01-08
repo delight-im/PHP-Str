@@ -357,11 +357,14 @@ $japaneseEucJpStr = \mb_convert_encoding($japaneseUtf8Str, 'EUC-JP', 'UTF-8');
 ((string) $testStrObj->cutCodePointsAtStart(13) === '☺rld w☺rld') or \fail(__LINE__);
 
 ((string) $testStrObj->cutEnd(0) === $testStr) or \fail(__LINE__);
+((string) $testStrObj->cutEnd(1) === 'Hello Hello w☺rld w☺rl') or \fail(__LINE__);
 ((string) $testStrObj->cutEnd(2) === 'Hello Hello w☺rld w☺r') or \fail(__LINE__);
-((string) $testStrObj->cutEnd(9) === 'Hello Hello w☺') or \fail(__LINE__);
-((string) $testStrObj->cutEnd(13) === 'Hello Hell') or \fail(__LINE__);
-((string) $testStrObj->cutEnd(14) === 'Hello Hel') or \fail(__LINE__);
-((string) $testStrObj->cutEnd(15) === 'Hello He') or \fail(__LINE__);
+((string) $testStrObj->cutBytesAtEnd(0) === $testStr) or \fail(__LINE__);
+((string) $testStrObj->cutBytesAtEnd(1) === 'Hello Hello w☺rld w☺rl') or \fail(__LINE__);
+((string) $testStrObj->cutBytesAtEnd(2) === 'Hello Hello w☺rld w☺r') or \fail(__LINE__);
+((string) $testStrObj->cutCodePointsAtEnd(0) === $testStr) or \fail(__LINE__);
+((string) $testStrObj->cutCodePointsAtEnd(1) === 'Hello Hello w☺rld w☺rl') or \fail(__LINE__);
+((string) $testStrObj->cutCodePointsAtEnd(2) === 'Hello Hello w☺rld w☺r') or \fail(__LINE__);
 
 ((string) $testStrObj->replace('Hello') === '  w☺rld w☺rld') or \fail(__LINE__);
 ((string) $testStrObj->replace('hello') === $testStr) or \fail(__LINE__);
@@ -945,6 +948,16 @@ $c = $b->cutEnd(5);
 ((string) $b !== (string) $c && \gettype($b) === \gettype($c)) or \fail(__LINE__);
 
 $b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
+$c = $b->cutBytesAtEnd(5);
+((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
+((string) $b !== (string) $c && \gettype($b) === \gettype($c)) or \fail(__LINE__);
+
+$b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
+$c = $b->cutCodePointsAtEnd(5);
+((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
+((string) $b !== (string) $c && \gettype($b) === \gettype($c)) or \fail(__LINE__);
+
+$b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
 $c = $b->replace('rl');
 ((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
 ((string) $b !== (string) $c && \gettype($b) === \gettype($c)) or \fail(__LINE__);
@@ -1499,6 +1512,19 @@ $testStrObj = Str::from($testStr);
 ((string) $testStrObj->cutCodePointsAtStart(6) === "\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
 ((string) $testStrObj->cutCodePointsAtStart(7) === "\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
 ((string) $testStrObj->cutCodePointsAtStart(11) === " def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+
+((string) $testStrObj->cutEnd(1) === " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789") or \fail(__LINE__);
+((string) $testStrObj->cutEnd(4) === " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u ") or \fail(__LINE__);
+((string) $testStrObj->cutEnd(7) === " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}") or \fail(__LINE__);
+((string) $testStrObj->cutEnd(8) === " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}") or \fail(__LINE__);
+((string) $testStrObj->cutBytesAtEnd(1) === " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789") or \fail(__LINE__);
+((string) $testStrObj->cutBytesAtEnd(4) === " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u ") or \fail(__LINE__);
+((string) $testStrObj->cutBytesAtEnd(8) === " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}") or \fail(__LINE__);
+((string) $testStrObj->cutBytesAtEnd(9) === " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}") or \fail(__LINE__);
+((string) $testStrObj->cutCodePointsAtEnd(1) === " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789") or \fail(__LINE__);
+((string) $testStrObj->cutCodePointsAtEnd(4) === " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u ") or \fail(__LINE__);
+((string) $testStrObj->cutCodePointsAtEnd(7) === " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}") or \fail(__LINE__);
+((string) $testStrObj->cutCodePointsAtEnd(8) === " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}") or \fail(__LINE__);
 
 // END BYTES VS CODE POINTS VS GRAPHEME CLUSTERS
 
