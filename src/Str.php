@@ -653,7 +653,7 @@ final class Str implements \Countable {
 	}
 
 	/**
-	 * Counts the occurrences of the specified substring in this string
+	 * Counts the occurrences of the specified substring in this string based on bytes
 	 *
 	 * This operation is case-sensitive
 	 *
@@ -662,7 +662,30 @@ final class Str implements \Countable {
 	 * @param string $substring the substring whose occurrences to count
 	 * @return int the number of occurrences
 	 */
-	public function count($substring = null) {
+	public function countBytes($substring = null) {
+		if ($substring === null) {
+			return \strlen($this->rawString);
+		}
+		else {
+			if ($substring === '') {
+				return 0;
+			}
+
+			return \substr_count($this->rawString, $substring);
+		}
+	}
+
+	/**
+	 * Counts the occurrences of the specified substring in this string based on code points
+	 *
+	 * This operation is case-sensitive
+	 *
+	 * The empty string is not considered to be a part of any other string
+	 *
+	 * @param string $substring the substring whose occurrences to count
+	 * @return int the number of occurrences
+	 */
+	public function countCodePoints($substring = null) {
 		if ($substring === null) {
 			return \mb_strlen($this->rawString, $this->charset);
 		}
@@ -676,12 +699,22 @@ final class Str implements \Countable {
 	}
 
 	/**
+	 * Alias of `countCodePoints`
+	 *
+	 * @param string $substring
+	 * @return int
+	 */
+	public function count($substring = null) {
+		return $this->countCodePoints($substring);
+	}
+
+	/**
 	 * Returns the length of this string
 	 *
 	 * @return int the number of characters
 	 */
 	public function length() {
-		return $this->count();
+		return $this->countCodePoints();
 	}
 
 	/**
@@ -699,7 +732,7 @@ final class Str implements \Countable {
 	 * @return int the number of code points
 	 */
 	public function lengthInCodePoints() {
-		return $this->count();
+		return $this->countCodePoints();
 	}
 
 	/**
