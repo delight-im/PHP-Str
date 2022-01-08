@@ -105,6 +105,8 @@ $str = \Delight\Str\Str::from('Hello w☺rld', 'UTF-8');
    * `lengthInBytes`
    * `lengthInCodePoints`
  * `cutStart`
+   * `cutBytesAtStart`
+   * `cutCodePointsAtStart`
  * `cutEnd`
  * `replace`
  * `replaceIgnoreCase`
@@ -478,6 +480,8 @@ function lengthInCodePoints();
  * @return static a new instance of this class
  */
 function cutStart($length);
+function cutBytesAtStart($length);
+function cutCodePointsAtStart($length);
 
 
 ////////////////////////////////////////////////////////////////////////////////
