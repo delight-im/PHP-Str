@@ -102,8 +102,8 @@ $str = \Delight\Str\Str::from('Hello w☺rld', 'UTF-8');
    * `countBytes`
    * `countCodePoints`
  * `length`
- * `lengthInBytes`
- * `lengthInCodePoints`
+   * `lengthInBytes`
+   * `lengthInCodePoints`
  * `cutStart`
  * `cutEnd`
  * `replace`
@@ -464,27 +464,7 @@ function countCodePoints($substring = null);
  * @return int the number of characters
  */
 function length();
-
-
-////////////////////////////////////////////////////////////////////////////////
-
-
-/**
- * Returns the length of this string in bytes
- *
- * @return int the number of bytes
- */
 function lengthInBytes();
-
-
-////////////////////////////////////////////////////////////////////////////////
-
-
-/**
- * Returns the length of this string in code points
- *
- * @return int the number of code points
- */
 function lengthInCodePoints();
 
 

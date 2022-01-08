@@ -709,15 +709,6 @@ final class Str implements \Countable {
 	}
 
 	/**
-	 * Returns the length of this string
-	 *
-	 * @return int the number of characters
-	 */
-	public function length() {
-		return $this->countCodePoints();
-	}
-
-	/**
 	 * Returns the length of this string in bytes
 	 *
 	 * @return int the number of bytes
@@ -733,6 +724,15 @@ final class Str implements \Countable {
 	 */
 	public function lengthInCodePoints() {
 		return $this->countCodePoints();
+	}
+
+	/**
+	 * Alias of `lengthInCodePoints`
+	 *
+	 * @return int
+	 */
+	public function length() {
+		return $this->lengthInCodePoints();
 	}
 
 	/**
