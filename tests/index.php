@@ -309,6 +309,20 @@ $japaneseEucJpStr = \mb_convert_encoding($japaneseUtf8Str, 'EUC-JP', 'UTF-8');
 ($testStrObj->count('L') === 0) or \fail(__LINE__);
 ($testStrObj->count('x') === 0) or \fail(__LINE__);
 ($testStrObj->count('') === 0) or \fail(__LINE__);
+($testStrObj->countBytes('l') === 6) or \fail(__LINE__);
+($testStrObj->countBytes('lo') === 2) or \fail(__LINE__);
+($testStrObj->countBytes('☺') === 2) or \fail(__LINE__);
+($testStrObj->countBytes(' ') === 3) or \fail(__LINE__);
+($testStrObj->countBytes('L') === 0) or \fail(__LINE__);
+($testStrObj->countBytes('x') === 0) or \fail(__LINE__);
+($testStrObj->countBytes('') === 0) or \fail(__LINE__);
+($testStrObj->countCodePoints('l') === 6) or \fail(__LINE__);
+($testStrObj->countCodePoints('lo') === 2) or \fail(__LINE__);
+($testStrObj->countCodePoints('☺') === 2) or \fail(__LINE__);
+($testStrObj->countCodePoints(' ') === 3) or \fail(__LINE__);
+($testStrObj->countCodePoints('L') === 0) or \fail(__LINE__);
+($testStrObj->countCodePoints('x') === 0) or \fail(__LINE__);
+($testStrObj->countCodePoints('') === 0) or \fail(__LINE__);
 
 (Str::from('abc')->lengthInBytes() === 3) or \fail(__LINE__);
 (Str::from('abc')->lengthInCodePoints() === 3) or \fail(__LINE__);
@@ -864,6 +878,26 @@ $c = $b->count('or');
 (\gettype($b) !== \gettype($c)) or \fail(__LINE__);
 
 $b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
+$c = $b->countBytes();
+((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
+(\gettype($b) !== \gettype($c)) or \fail(__LINE__);
+
+$b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
+$c = $b->countBytes('or');
+((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
+(\gettype($b) !== \gettype($c)) or \fail(__LINE__);
+
+$b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
+$c = $b->countCodePoints();
+((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
+(\gettype($b) !== \gettype($c)) or \fail(__LINE__);
+
+$b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
+$c = $b->countCodePoints('or');
+((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
+(\gettype($b) !== \gettype($c)) or \fail(__LINE__);
+
+$b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
 $c = $b->lengthInBytes();
 ((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
 (\gettype($b) !== \gettype($c)) or \fail(__LINE__);
@@ -1414,6 +1448,13 @@ $testStrObj = Str::from($testStr);
 ((string) $testStrObj->truncateCodePointsSafely(6, '') === " abc ") or \fail(__LINE__);
 ((string) $testStrObj->truncateCodePointsSafely(7, '') === " abc ") or \fail(__LINE__);
 ((string) $testStrObj->truncateCodePointsSafely(9, '') === " abc a\u{00F1}\u{00E4}\u{006E}") or \fail(__LINE__);
+
+($testStrObj->count() === 72) or \fail(__LINE__);
+($testStrObj->count("\u{00F1}") === 2) or \fail(__LINE__);
+($testStrObj->countBytes() === 112) or \fail(__LINE__);
+($testStrObj->countBytes("\u{00F1}") === 2) or \fail(__LINE__);
+($testStrObj->countCodePoints() === 72) or \fail(__LINE__);
+($testStrObj->countCodePoints("\u{00F1}") === 2) or \fail(__LINE__);
 
 // END BYTES VS CODE POINTS VS GRAPHEME CLUSTERS
 
