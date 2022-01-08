@@ -770,15 +770,37 @@ final class Str implements \Countable {
 	}
 
 	/**
-	 * Removes the specified number of characters from the end of this string
+	 * Removes the specified number of bytes from the end of this string
 	 *
-	 * @param int $length the number of characters to remove
+	 * @param int $length the number of bytes to remove
 	 * @return static a new instance of this class
 	 */
-	public function cutEnd($length) {
-		$rawString = \mb_substr($this->rawString, 0, $this->length() - $length, $this->charset);
+	public function cutBytesAtEnd($length) {
+		$rawString = \substr($this->rawString, 0, $this->lengthInBytes() - $length);
 
 		return new static($rawString, $this->charset);
+	}
+
+	/**
+	 * Removes the specified number of code points from the end of this string
+	 *
+	 * @param int $length the number of code points to remove
+	 * @return static a new instance of this class
+	 */
+	public function cutCodePointsAtEnd($length) {
+		$rawString = \mb_substr($this->rawString, 0, $this->lengthInCodePoints() - $length, $this->charset);
+
+		return new static($rawString, $this->charset);
+	}
+
+	/**
+	 * Alias of `cutCodePointsAtEnd`
+	 *
+	 * @param int $length
+	 * @return static
+	 */
+	public function cutEnd($length) {
+		return $this->cutCodePointsAtEnd($length);
 	}
 
 	/**
