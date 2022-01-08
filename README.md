@@ -99,6 +99,8 @@ $str = \Delight\Str\Str::from('Hello w☺rld', 'UTF-8');
    * `truncateBytesSafely`
    * `truncateCodePointsSafely`
  * `count`
+   * `countBytes`
+   * `countCodePoints`
  * `length`
  * `lengthInBytes`
  * `lengthInCodePoints`
@@ -449,6 +451,8 @@ function truncateCodePointsSafely($maxLength, $ellipsis = null);
  * @return int the number of occurrences
  */
 function count($substring = null);
+function countBytes($substring = null);
+function countCodePoints($substring = null);
 
 
 ////////////////////////////////////////////////////////////////////////////////
