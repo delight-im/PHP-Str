@@ -736,15 +736,37 @@ final class Str implements \Countable {
 	}
 
 	/**
-	 * Removes the specified number of characters from the start of this string
+	 * Removes the specified number of bytes from the start of this string
 	 *
-	 * @param int $length the number of characters to remove
+	 * @param int $length the number of bytes to remove
 	 * @return static a new instance of this class
 	 */
-	public function cutStart($length) {
+	public function cutBytesAtStart($length) {
+		$rawString = \substr($this->rawString, $length);
+
+		return new static($rawString, $this->charset);
+	}
+
+	/**
+	 * Removes the specified number of code points from the start of this string
+	 *
+	 * @param int $length the number of code points to remove
+	 * @return static a new instance of this class
+	 */
+	public function cutCodePointsAtStart($length) {
 		$rawString = \mb_substr($this->rawString, $length, null, $this->charset);
 
 		return new static($rawString, $this->charset);
+	}
+
+	/**
+	 * Alias of `cutCodePointsAtStart`
+	 *
+	 * @param int $length
+	 * @return static
+	 */
+	public function cutStart($length) {
+		return $this->cutCodePointsAtStart($length);
 	}
 
 	/**
