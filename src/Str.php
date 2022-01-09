@@ -804,7 +804,7 @@ final class Str implements \Countable {
 	}
 
 	/**
-	 * Replaces all occurrences of the specified search string with the given replacement
+	 * Replaces all occurrences of the specified search string with the given replacement based on bytes
 	 *
 	 * This operation is case-sensitive
 	 *
@@ -814,8 +814,34 @@ final class Str implements \Countable {
 	 * @param string $replaceWith the string to use as the replacement (optional)
 	 * @return static a new instance of this class
 	 */
-	public function replace($searchFor, $replaceWith = null) {
+	public function replaceBytes($searchFor, $replaceWith = null) {
 		return $this->replaceInternal('str_replace', $searchFor, $replaceWith);
+	}
+
+	/**
+	 * Replaces all occurrences of the specified search string with the given replacement based on code points
+	 *
+	 * This operation is case-sensitive
+	 *
+	 * The empty string is not considered to be a part of any other string
+	 *
+	 * @param string $searchFor the string to search for
+	 * @param string $replaceWith the string to use as the replacement (optional)
+	 * @return static a new instance of this class
+	 */
+	public function replaceCodePoints($searchFor, $replaceWith = null) {
+		return $this->replaceBytes($searchFor, $replaceWith);
+	}
+
+	/**
+	 * Alias of `replaceCodePoints`
+	 *
+	 * @param string $searchFor
+	 * @param string $replaceWith
+	 * @return static
+	 */
+	public function replace($searchFor, $replaceWith = null) {
+		return $this->replaceCodePoints($searchFor, $replaceWith);
 	}
 
 	/**
