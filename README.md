@@ -111,6 +111,8 @@ $str = \Delight\Str\Str::from('Hello w☺rld', 'UTF-8');
    * `cutBytesAtEnd`
    * `cutCodePointsAtEnd`
  * `replace`
+   * `replaceBytes`
+   * `replaceCodePoints`
  * `replaceIgnoreCase`
  * `replaceFirst`
  * `replaceFirstIgnoreCase`
@@ -511,6 +513,8 @@ function cutCodePointsAtEnd($length);
  * @return static this instance for chaining
  */
 function replace($searchFor, $replaceWith = null);
+function replaceBytes($searchFor, $replaceWith = null);
+function replaceCodePoints($searchFor, $replaceWith = null);
 
 
 ////////////////////////////////////////////////////////////////////////////////
