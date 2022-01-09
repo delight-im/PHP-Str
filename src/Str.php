@@ -845,6 +845,47 @@ final class Str implements \Countable {
 	}
 
 	/**
+	 * Replaces all occurrences of the specified search string with the given replacement based on bytes
+	 *
+	 * This operation is case-insensitive
+	 *
+	 * The empty string is not considered to be a part of any other string
+	 *
+	 * @param string $searchFor the string to search for
+	 * @param string $replaceWith the string to use as the replacement (optional)
+	 * @return static a new instance of this class
+	 */
+	public function replaceBytesIgnoreCase($searchFor, $replaceWith = null) {
+		return $this->replaceInternal('str_ireplace', $searchFor, $replaceWith);
+	}
+
+	/**
+	 * Replaces all occurrences of the specified search string with the given replacement based on code points
+	 *
+	 * This operation is case-insensitive
+	 *
+	 * The empty string is not considered to be a part of any other string
+	 *
+	 * @param string $searchFor the string to search for
+	 * @param string $replaceWith the string to use as the replacement (optional)
+	 * @return static a new instance of this class
+	 */
+	public function replaceCodePointsIgnoreCase($searchFor, $replaceWith = null) {
+		$searchFor = (string) $searchFor;
+
+		if ($searchFor === '') {
+			return $this;
+		}
+
+		$replaceWith = ($replaceWith === null) ? '' : (string) $replaceWith;
+		$regexPattern = '/' . \preg_quote($searchFor, '/') . '/ui';
+		$segments = \preg_split($regexPattern, $this->rawString, -1);
+		$newRawString = \implode($replaceWith, $segments);
+
+		return new static($newRawString, $this->charset);
+	}
+
+	/**
 	 * Replaces all occurrences of the specified search string with the given replacement
 	 *
 	 * This operation is case-insensitive
@@ -856,7 +897,7 @@ final class Str implements \Countable {
 	 * @return static a new instance of this class
 	 */
 	public function replaceIgnoreCase($searchFor, $replaceWith = null) {
-		return $this->replaceInternal('str_ireplace', $searchFor, $replaceWith);
+		return $this->replaceBytesIgnoreCase($searchFor, $replaceWith);
 	}
 
 	/**
