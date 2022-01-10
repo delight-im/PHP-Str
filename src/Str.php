@@ -886,15 +886,11 @@ final class Str implements \Countable {
 	}
 
 	/**
-	 * Replaces all occurrences of the specified search string with the given replacement
+	 * Alias of `replaceBytesIgnoreCase`
 	 *
-	 * This operation is case-insensitive
-	 *
-	 * The empty string is not considered to be a part of any other string
-	 *
-	 * @param string $searchFor the string to search for
-	 * @param string $replaceWith the string to use as the replacement (optional)
-	 * @return static a new instance of this class
+	 * @param string $searchFor
+	 * @param string|null $replaceWith
+	 * @return static
 	 */
 	public function replaceIgnoreCase($searchFor, $replaceWith = null) {
 		return $this->replaceBytesIgnoreCase($searchFor, $replaceWith);
