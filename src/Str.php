@@ -942,7 +942,7 @@ final class Str implements \Countable {
 	}
 
 	/**
-	 * Replaces the first occurrence of the specified search string with the given replacement
+	 * Replaces the first occurrence of the specified search string with the given replacement based on bytes
 	 *
 	 * This operation is case-insensitive
 	 *
@@ -952,8 +952,34 @@ final class Str implements \Countable {
 	 * @param string $replaceWith the string to use as the replacement (optional)
 	 * @return static a new instance of this class
 	 */
-	public function replaceFirstIgnoreCase($searchFor, $replaceWith = null) {
+	public function replaceFirstBytesIgnoreCase($searchFor, $replaceWith = null) {
+		return $this->replaceOneInternal(true, false, 'stripos', $searchFor, $replaceWith);
+	}
+
+	/**
+	 * Replaces the first occurrence of the specified search string with the given replacement based on code points
+	 *
+	 * This operation is case-insensitive
+	 *
+	 * The empty string is not considered to be a part of any other string
+	 *
+	 * @param string $searchFor the string to search for
+	 * @param string $replaceWith the string to use as the replacement (optional)
+	 * @return static a new instance of this class
+	 */
+	public function replaceFirstCodePointsIgnoreCase($searchFor, $replaceWith = null) {
 		return $this->replaceOneInternal(false, true, 'mb_stripos', $searchFor, $replaceWith);
+	}
+
+	/**
+	 * Alias of `replaceFirstCodePointsIgnoreCase`
+	 *
+	 * @param string $searchFor
+	 * @param string $replaceWith
+	 * @return static
+	 */
+	public function replaceFirstIgnoreCase($searchFor, $replaceWith = null) {
+		return $this->replaceFirstCodePointsIgnoreCase($searchFor, $replaceWith);
 	}
 
 	/**
