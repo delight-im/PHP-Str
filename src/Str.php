@@ -1034,7 +1034,7 @@ final class Str implements \Countable {
 	}
 
 	/**
-	 * Replaces the last occurrence of the specified search string with the given replacement
+	 * Replaces the last occurrence of the specified search string with the given replacement based on bytes
 	 *
 	 * This operation is case-sensitive
 	 *
@@ -1044,8 +1044,34 @@ final class Str implements \Countable {
 	 * @param string $replaceWith the string to use as the replacement (optional)
 	 * @return static a new instance of this class
 	 */
-	public function replaceLast($searchFor, $replaceWith = null) {
+	public function replaceLastBytes($searchFor, $replaceWith = null) {
+		return $this->replaceOneInternal(true, false, 'strrpos', $searchFor, $replaceWith);
+	}
+
+	/**
+	 * Replaces the last occurrence of the specified search string with the given replacement based on code points
+	 *
+	 * This operation is case-sensitive
+	 *
+	 * The empty string is not considered to be a part of any other string
+	 *
+	 * @param string $searchFor the string to search for
+	 * @param string $replaceWith the string to use as the replacement (optional)
+	 * @return static a new instance of this class
+	 */
+	public function replaceLastCodePoints($searchFor, $replaceWith = null) {
 		return $this->replaceOneInternal(false, true, 'mb_strrpos', $searchFor, $replaceWith);
+	}
+
+	/**
+	 * Alias of `replaceLastCodePoints`
+	 *
+	 * @param string $searchFor
+	 * @param string $replaceWith
+	 * @return static
+	 */
+	public function replaceLast($searchFor, $replaceWith = null) {
+		return $this->replaceLastCodePoints($searchFor, $replaceWith);
 	}
 
 	/**
