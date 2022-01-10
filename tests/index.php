@@ -410,6 +410,19 @@ $japaneseEucJpStr = \mb_convert_encoding($japaneseUtf8Str, 'EUC-JP', 'UTF-8');
 ((string) $testStrObj->replaceFirst('hello', 'Bonjour') === $testStr) or \fail(__LINE__);
 ((string) $testStrObj->replaceFirst('', 'x') === $testStr) or \fail(__LINE__);
 ((string) $testStrObj->replaceFirst('', '') === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceFirstBytes('el') === 'Hlo Hello w☺rld w☺rld') or \fail(__LINE__);
+((string) $testStrObj->replaceFirstBytes('el', 'eeel') === 'Heeello Hello w☺rld w☺rld') or \fail(__LINE__);
+((string) $testStrObj->replaceFirstBytes('Hello', 'Bonjour') === 'Bonjour Hello w☺rld w☺rld') or \fail(__LINE__);
+((string) $testStrObj->replaceFirstBytes('hello', 'Bonjour') === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceFirstBytes('', 'x') === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceFirstBytes('', '') === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceFirstCodePoints('el') === 'Hlo Hello w☺rld w☺rld') or \fail(__LINE__);
+((string) $testStrObj->replaceFirstCodePoints('el', 'eeel') === 'Heeello Hello w☺rld w☺rld') or \fail(__LINE__);
+((string) $testStrObj->replaceFirstCodePoints('Hello', 'Bonjour') === 'Bonjour Hello w☺rld w☺rld') or \fail(__LINE__);
+((string) $testStrObj->replaceFirstCodePoints('hello', 'Bonjour') === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceFirstCodePoints('', 'x') === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceFirstCodePoints('', '') === $testStr) or \fail(__LINE__);
+
 ((string) $testStrObj->replaceFirstIgnoreCase('Hello', 'Bonjour') === 'Bonjour Hello w☺rld w☺rld') or \fail(__LINE__);
 ((string) $testStrObj->replaceFirstIgnoreCase('hello', 'Bonjour') === 'Bonjour Hello w☺rld w☺rld') or \fail(__LINE__);
 ((string) $testStrObj->replaceFirstIgnoreCase('', 'x') === $testStr) or \fail(__LINE__);
@@ -1053,6 +1066,26 @@ $c = $b->replaceFirst('wo', 'wO');
 ((string) $b !== (string) $c && \gettype($b) === \gettype($c)) or \fail(__LINE__);
 
 $b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
+$c = $b->replaceFirstBytes('wo');
+((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
+((string) $b !== (string) $c && \gettype($b) === \gettype($c)) or \fail(__LINE__);
+
+$b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
+$c = $b->replaceFirstBytes('wo', 'wO');
+((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
+((string) $b !== (string) $c && \gettype($b) === \gettype($c)) or \fail(__LINE__);
+
+$b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
+$c = $b->replaceFirstCodePoints('wo');
+((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
+((string) $b !== (string) $c && \gettype($b) === \gettype($c)) or \fail(__LINE__);
+
+$b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
+$c = $b->replaceFirstCodePoints('wo', 'wO');
+((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
+((string) $b !== (string) $c && \gettype($b) === \gettype($c)) or \fail(__LINE__);
+
+$b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
 $c = $b->replaceFirstIgnoreCase('WO');
 ((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
 ((string) $b !== (string) $c && \gettype($b) === \gettype($c)) or \fail(__LINE__);
@@ -1688,6 +1721,55 @@ $testStrObj = Str::from($testStr);
 ((string) $testStrObj->replaceCodePointsIgnoreCase("bC a\u{00D1}\u{00C4}\u{004E}\u{0303}b", 'zzz') === $testStr) or \fail(__LINE__);
 ((string) $testStrObj->replaceCodePointsIgnoreCase("bC a\u{00D1}\u{00C4}\u{00D1}a", 'zzz') === $testStr) or \fail(__LINE__);
 ((string) $testStrObj->replaceCodePointsIgnoreCase("bC a\u{00D1}\u{00C4}\u{00D1}b", 'zzz') === $testStr) or \fail(__LINE__);
+
+((string) $testStrObj->replaceFirst("a") === " bc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+((string) $testStrObj->replaceFirst("z") === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceFirst("\u{00F1}") === " abc a\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+((string) $testStrObj->replaceFirst("\u{00F2}") === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceFirst("\u{006E}\u{0303}") === " abc a\u{00F1}\u{00E4}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+((string) $testStrObj->replaceFirst("\u{006E}\u{0304}") === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceFirst("\u{006E}\u{0303}\u{00E4}\u{00F1}") === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceFirst("\u{006E}\u{0303}\u{00E4}\u{00F2}") === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceFirst("a", 'zzz') === " zzzbc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+((string) $testStrObj->replaceFirst("z", 'zzz') === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceFirst("\u{00F1}", 'zzz') === " abc azzz\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+((string) $testStrObj->replaceFirst("\u{00F2}", 'zzz') === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceFirst("\u{006E}\u{0303}", 'zzz') === " abc a\u{00F1}\u{00E4}zzza def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+((string) $testStrObj->replaceFirst("\u{006E}\u{0304}", 'zzz') === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceFirst("\u{006E}\u{0303}\u{00E4}\u{00F1}", 'zzz') === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceFirst("\u{006E}\u{0303}\u{00E4}\u{00F2}", 'zzz') === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceFirstBytes("a") === " bc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+((string) $testStrObj->replaceFirstBytes("z") === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceFirstBytes("\u{00F1}") === " abc a\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+((string) $testStrObj->replaceFirstBytes("\u{00F2}") === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceFirstBytes("\u{006E}\u{0303}") === " abc a\u{00F1}\u{00E4}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+((string) $testStrObj->replaceFirstBytes("\u{006E}\u{0304}") === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceFirstBytes("\u{006E}\u{0303}\u{00E4}\u{00F1}") === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceFirstBytes("\u{006E}\u{0303}\u{00E4}\u{00F2}") === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceFirstBytes("a", 'zzz') === " zzzbc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+((string) $testStrObj->replaceFirstBytes("z", 'zzz') === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceFirstBytes("\u{00F1}", 'zzz') === " abc azzz\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+((string) $testStrObj->replaceFirstBytes("\u{00F2}", 'zzz') === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceFirstBytes("\u{006E}\u{0303}", 'zzz') === " abc a\u{00F1}\u{00E4}zzza def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+((string) $testStrObj->replaceFirstBytes("\u{006E}\u{0304}", 'zzz') === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceFirstBytes("\u{006E}\u{0303}\u{00E4}\u{00F1}", 'zzz') === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceFirstBytes("\u{006E}\u{0303}\u{00E4}\u{00F2}", 'zzz') === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceFirstCodePoints("a") === " bc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+((string) $testStrObj->replaceFirstCodePoints("z") === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceFirstCodePoints("\u{00F1}") === " abc a\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+((string) $testStrObj->replaceFirstCodePoints("\u{00F2}") === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceFirstCodePoints("\u{006E}\u{0303}") === " abc a\u{00F1}\u{00E4}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+((string) $testStrObj->replaceFirstCodePoints("\u{006E}\u{0304}") === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceFirstCodePoints("\u{006E}\u{0303}\u{00E4}\u{00F1}") === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceFirstCodePoints("\u{006E}\u{0303}\u{00E4}\u{00F2}") === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceFirstCodePoints("a", 'zzz') === " zzzbc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+((string) $testStrObj->replaceFirstCodePoints("z", 'zzz') === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceFirstCodePoints("\u{00F1}", 'zzz') === " abc azzz\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+((string) $testStrObj->replaceFirstCodePoints("\u{00F2}", 'zzz') === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceFirstCodePoints("\u{006E}\u{0303}", 'zzz') === " abc a\u{00F1}\u{00E4}zzza def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+((string) $testStrObj->replaceFirstCodePoints("\u{006E}\u{0304}", 'zzz') === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceFirstCodePoints("\u{006E}\u{0303}\u{00E4}\u{00F1}", 'zzz') === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceFirstCodePoints("\u{006E}\u{0303}\u{00E4}\u{00F2}", 'zzz') === $testStr) or \fail(__LINE__);
 
 // END BYTES VS CODE POINTS VS GRAPHEME CLUSTERS
 
