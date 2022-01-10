@@ -1116,7 +1116,7 @@ final class Str implements \Countable {
 	}
 
 	/**
-	 * Replaces the specified part in this string only if it ends with that part
+	 * Replaces the specified part in this string only if it ends with that part based on bytes
 	 *
 	 * This operation is case-sensitive
 	 *
@@ -1126,13 +1126,44 @@ final class Str implements \Countable {
 	 * @param string $replaceWith the string to use as the replacement (optional)
 	 * @return static a new instance of this class
 	 */
-	public function replaceSuffix($searchFor, $replaceWith = null) {
-		if ($this->endsWith($searchFor)) {
-			return $this->replaceLast($searchFor, $replaceWith);
+	public function replaceSuffixBytes($searchFor, $replaceWith = null) {
+		if ($this->endsWithBytes($searchFor)) {
+			return $this->replaceLastBytes($searchFor, $replaceWith);
 		}
 		else {
 			return $this;
 		}
+	}
+
+	/**
+	 * Replaces the specified part in this string only if it ends with that part based on code points
+	 *
+	 * This operation is case-sensitive
+	 *
+	 * The empty string is not considered to be a part of any other string
+	 *
+	 * @param string $searchFor the string to search for
+	 * @param string $replaceWith the string to use as the replacement (optional)
+	 * @return static a new instance of this class
+	 */
+	public function replaceSuffixCodePoints($searchFor, $replaceWith = null) {
+		if ($this->endsWithCodePoints($searchFor)) {
+			return $this->replaceLastCodePoints($searchFor, $replaceWith);
+		}
+		else {
+			return $this;
+		}
+	}
+
+	/**
+	 * Alias of `replaceSuffixCodePoints`
+	 *
+	 * @param string $searchFor
+	 * @param string $replaceWith
+	 * @return static
+	 */
+	public function replaceSuffix($searchFor, $replaceWith = null) {
+		return $this->replaceSuffixCodePoints($searchFor, $replaceWith);
 	}
 
 	/**
