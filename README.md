@@ -132,6 +132,8 @@ $str = \Delight\Str\Str::from('Hello w☺rld', 'UTF-8');
    * `replaceLastBytesIgnoreCase`
    * `replaceLastCodePointsIgnoreCase`
  * `replaceSuffix`
+   * `replaceSuffixBytes`
+   * `replaceSuffixCodePoints`
  * `split`
  * `splitByRegex`
  * `words`
@@ -636,6 +638,8 @@ function replaceLastCodePointsIgnoreCase($searchFor, $replaceWith = null);
  * @return static a new instance of this class
  */
 function replaceSuffix($searchFor, $replaceWith = null);
+function replaceSuffixBytes($searchFor, $replaceWith = null);
+function replaceSuffixCodePoints($searchFor, $replaceWith = null);
 
 
 ////////////////////////////////////////////////////////////////////////////////
