@@ -23,7 +23,7 @@ final class Str implements \Countable {
 	 * Constructor
 	 *
 	 * @param string $rawString the string to create an instance from
-	 * @param string|null $charset the charset to use (one of the values listed by `mb_list_encodings`) or `null`
+	 * @param string|null $charset (optional) the charset to use (one of the values listed by `mb_list_encodings`)
 	 */
 	public function __construct($rawString, $charset = null) {
 		$this->rawString = (string) $rawString;
@@ -34,7 +34,7 @@ final class Str implements \Countable {
 	 * Static alternative to the constructor for easier chaining
 	 *
 	 * @param string $rawString the string to create an instance from
-	 * @param string|null $charset the charset to use (one of the values listed by `mb_list_encodings`) (optional)
+	 * @param string|null $charset (optional) the charset to use (one of the values listed by `mb_list_encodings`)
 	 * @return static the new instance
 	 */
 	public static function from($rawString, $charset = null) {
@@ -45,7 +45,7 @@ final class Str implements \Countable {
 	 * Variant of the static "constructor" that operates on arrays
 	 *
 	 * @param string[] $rawArray the array of strings to create instances from
-	 * @param string|null $charset the charset to use (one of the values listed by `mb_list_encodings`) (optional)
+	 * @param string|null $charset (optional) the charset to use (one of the values listed by `mb_list_encodings`)
 	 * @return static[] the new instances of this class
 	 */
 	public static function fromArray($rawArray, $charset = null) {
@@ -305,8 +305,8 @@ final class Str implements \Countable {
 	/**
 	 * Removes all whitespace or the specified characters from both sides of this string
 	 *
-	 * @param string $charactersToRemove the characters to remove (optional)
-	 * @param bool $alwaysRemoveWhitespace whether to remove whitespace even if a custom list of characters is provided (optional)
+	 * @param string|null $charactersToRemove (optional) the characters to remove
+	 * @param bool|null $alwaysRemoveWhitespace (optional) whether to remove whitespace even if a custom list of characters is provided
 	 * @return static a new instance of this class
 	 */
 	public function trim($charactersToRemove = null, $alwaysRemoveWhitespace = null) {
@@ -316,8 +316,8 @@ final class Str implements \Countable {
 	/**
 	 * Removes all whitespace or the specified characters from the start of this string
 	 *
-	 * @param string $charactersToRemove the characters to remove (optional)
-	 * @param bool $alwaysRemoveWhitespace whether to remove whitespace even if a custom list of characters is provided (optional)
+	 * @param string|null $charactersToRemove (optional) the characters to remove
+	 * @param bool|null $alwaysRemoveWhitespace (optional) whether to remove whitespace even if a custom list of characters is provided
 	 * @return static a new instance of this class
 	 */
 	public function trimStart($charactersToRemove = null, $alwaysRemoveWhitespace = null) {
@@ -327,8 +327,8 @@ final class Str implements \Countable {
 	/**
 	 * Removes all whitespace or the specified characters from the end of this string
 	 *
-	 * @param string $charactersToRemove the characters to remove (optional)
-	 * @param bool $alwaysRemoveWhitespace whether to remove whitespace even if a custom list of characters is provided (optional)
+	 * @param string|null $charactersToRemove (optional) the characters to remove
+	 * @param bool|null $alwaysRemoveWhitespace (optional) whether to remove whitespace even if a custom list of characters is provided
 	 * @return static a new instance of this class
 	 */
 	public function trimEnd($charactersToRemove = null, $alwaysRemoveWhitespace = null) {
@@ -349,7 +349,7 @@ final class Str implements \Countable {
 	/**
 	 * Returns the first byte or the specified number of bytes from the start of this string
 	 *
-	 * @param int|null $length the number of bytes to return from the start (optional)
+	 * @param int|null $length (optional) the number of bytes to return from the start
 	 * @return static a new instance of this class
 	 */
 	public function firstBytes($length = null) {
@@ -365,7 +365,7 @@ final class Str implements \Countable {
 	/**
 	 * Returns the first code point or the specified number of code points from the start of this string
 	 *
-	 * @param int|null $length the number of code points to return from the start (optional)
+	 * @param int|null $length (optional) the number of code points to return from the start
 	 * @return static a new instance of this class
 	 */
 	public function firstCodePoints($length = null) {
@@ -402,7 +402,7 @@ final class Str implements \Countable {
 	/**
 	 * Returns the last byte or the specified number of bytes from the end of this string
 	 *
-	 * @param int|null $length the number of bytes to return from the end (optional)
+	 * @param int|null $length (optional) the number of bytes to return from the end
 	 * @return static a new instance of this class
 	 */
 	public function lastBytes($length = null) {
@@ -419,7 +419,7 @@ final class Str implements \Countable {
 	/**
 	 * Returns the last code point or the specified number of code points from the end of this string
 	 *
-	 * @param int|null $length the number of code points to return from the end (optional)
+	 * @param int|null $length (optional) the number of code points to return from the end
 	 * @return static a new instance of this class
 	 */
 	public function lastCodePoints($length = null) {
@@ -586,7 +586,7 @@ final class Str implements \Countable {
 	 * Truncates this string so that it has at most the specified length in bytes
 	 *
 	 * @param int $maxLength the maximum length that this string may have (including any ellipsis)
-	 * @param string|null $ellipsis the string to use as the ellipsis (optional)
+	 * @param string|null $ellipsis (optional) the string to use as the ellipsis
 	 * @return static a new instance of this class
 	 */
 	public function truncateBytes($maxLength, $ellipsis = null) {
@@ -597,7 +597,7 @@ final class Str implements \Countable {
 	 * Truncates this string so that it has at most the specified length in code points
 	 *
 	 * @param int $maxLength the maximum length that this string may have (including any ellipsis)
-	 * @param string|null $ellipsis the string to use as the ellipsis (optional)
+	 * @param string|null $ellipsis (optional) the string to use as the ellipsis
 	 * @return static a new instance of this class
 	 */
 	public function truncateCodePoints($maxLength, $ellipsis = null) {
@@ -621,7 +621,7 @@ final class Str implements \Countable {
 	 * This method tries *not* to break any words whenever possible
 	 *
 	 * @param int $maxLength the maximum length that this string may have (including any ellipsis)
-	 * @param string|null $ellipsis the string to use as the ellipsis (optional)
+	 * @param string|null $ellipsis (optional) the string to use as the ellipsis
 	 * @return static a new instance of this class
 	 */
 	public function truncateBytesSafely($maxLength, $ellipsis = null) {
@@ -634,7 +634,7 @@ final class Str implements \Countable {
 	 * This method tries *not* to break any words whenever possible
 	 *
 	 * @param int $maxLength the maximum length that this string may have (including any ellipsis)
-	 * @param string|null $ellipsis the string to use as the ellipsis (optional)
+	 * @param string|null $ellipsis (optional) the string to use as the ellipsis
 	 * @return static a new instance of this class
 	 */
 	public function truncateCodePointsSafely($maxLength, $ellipsis = null) {
@@ -659,7 +659,7 @@ final class Str implements \Countable {
 	 *
 	 * The empty string is not considered to be a part of any other string
 	 *
-	 * @param string $substring the substring whose occurrences to count
+	 * @param string|null $substring (optional) the substring whose occurrences to count
 	 * @return int the number of occurrences
 	 */
 	public function countBytes($substring = null) {
@@ -682,7 +682,7 @@ final class Str implements \Countable {
 	 *
 	 * The empty string is not considered to be a part of any other string
 	 *
-	 * @param string $substring the substring whose occurrences to count
+	 * @param string|null $substring (optional) the substring whose occurrences to count
 	 * @return int the number of occurrences
 	 */
 	public function countCodePoints($substring = null) {
@@ -701,7 +701,7 @@ final class Str implements \Countable {
 	/**
 	 * Alias of `countCodePoints`
 	 *
-	 * @param string $substring
+	 * @param string|null $substring
 	 * @return int
 	 */
 	public function count($substring = null) {
@@ -811,7 +811,7 @@ final class Str implements \Countable {
 	 * The empty string is not considered to be a part of any other string
 	 *
 	 * @param string $searchFor the string to search for
-	 * @param string $replaceWith the string to use as the replacement (optional)
+	 * @param string|null $replaceWith (optional) the string to use as the replacement
 	 * @return static a new instance of this class
 	 */
 	public function replaceBytes($searchFor, $replaceWith = null) {
@@ -826,7 +826,7 @@ final class Str implements \Countable {
 	 * The empty string is not considered to be a part of any other string
 	 *
 	 * @param string $searchFor the string to search for
-	 * @param string $replaceWith the string to use as the replacement (optional)
+	 * @param string|null $replaceWith (optional) the string to use as the replacement
 	 * @return static a new instance of this class
 	 */
 	public function replaceCodePoints($searchFor, $replaceWith = null) {
@@ -837,7 +837,7 @@ final class Str implements \Countable {
 	 * Alias of `replaceCodePoints`
 	 *
 	 * @param string $searchFor
-	 * @param string $replaceWith
+	 * @param string|null $replaceWith
 	 * @return static
 	 */
 	public function replace($searchFor, $replaceWith = null) {
@@ -852,7 +852,7 @@ final class Str implements \Countable {
 	 * The empty string is not considered to be a part of any other string
 	 *
 	 * @param string $searchFor the string to search for
-	 * @param string $replaceWith the string to use as the replacement (optional)
+	 * @param string|null $replaceWith (optional) the string to use as the replacement
 	 * @return static a new instance of this class
 	 */
 	public function replaceBytesIgnoreCase($searchFor, $replaceWith = null) {
@@ -867,7 +867,7 @@ final class Str implements \Countable {
 	 * The empty string is not considered to be a part of any other string
 	 *
 	 * @param string $searchFor the string to search for
-	 * @param string $replaceWith the string to use as the replacement (optional)
+	 * @param string|null $replaceWith (optional) the string to use as the replacement
 	 * @return static a new instance of this class
 	 */
 	public function replaceCodePointsIgnoreCase($searchFor, $replaceWith = null) {
@@ -908,7 +908,7 @@ final class Str implements \Countable {
 	 * The empty string is not considered to be a part of any other string
 	 *
 	 * @param string $searchFor the string to search for
-	 * @param string $replaceWith the string to use as the replacement (optional)
+	 * @param string|null $replaceWith (optional) the string to use as the replacement
 	 * @return static a new instance of this class
 	 */
 	public function replaceFirstBytes($searchFor, $replaceWith = null) {
@@ -923,7 +923,7 @@ final class Str implements \Countable {
 	 * The empty string is not considered to be a part of any other string
 	 *
 	 * @param string $searchFor the string to search for
-	 * @param string $replaceWith the string to use as the replacement (optional)
+	 * @param string|null $replaceWith (optional) the string to use as the replacement
 	 * @return static a new instance of this class
 	 */
 	public function replaceFirstCodePoints($searchFor, $replaceWith = null) {
@@ -934,7 +934,7 @@ final class Str implements \Countable {
 	 * Alias of `replaceFirstCodePoints`
 	 *
 	 * @param string $searchFor
-	 * @param string $replaceWith
+	 * @param string|null $replaceWith
 	 * @return static
 	 */
 	public function replaceFirst($searchFor, $replaceWith = null) {
@@ -949,7 +949,7 @@ final class Str implements \Countable {
 	 * The empty string is not considered to be a part of any other string
 	 *
 	 * @param string $searchFor the string to search for
-	 * @param string $replaceWith the string to use as the replacement (optional)
+	 * @param string|null $replaceWith (optional) the string to use as the replacement
 	 * @return static a new instance of this class
 	 */
 	public function replaceFirstBytesIgnoreCase($searchFor, $replaceWith = null) {
@@ -964,7 +964,7 @@ final class Str implements \Countable {
 	 * The empty string is not considered to be a part of any other string
 	 *
 	 * @param string $searchFor the string to search for
-	 * @param string $replaceWith the string to use as the replacement (optional)
+	 * @param string|null $replaceWith (optional) the string to use as the replacement
 	 * @return static a new instance of this class
 	 */
 	public function replaceFirstCodePointsIgnoreCase($searchFor, $replaceWith = null) {
@@ -975,7 +975,7 @@ final class Str implements \Countable {
 	 * Alias of `replaceFirstCodePointsIgnoreCase`
 	 *
 	 * @param string $searchFor
-	 * @param string $replaceWith
+	 * @param string|null $replaceWith
 	 * @return static
 	 */
 	public function replaceFirstIgnoreCase($searchFor, $replaceWith = null) {
@@ -990,7 +990,7 @@ final class Str implements \Countable {
 	 * The empty string is not considered to be a part of any other string
 	 *
 	 * @param string $searchFor the string to search for
-	 * @param string $replaceWith the string to use as the replacement (optional)
+	 * @param string|null $replaceWith (optional) the string to use as the replacement
 	 * @return static a new instance of this class
 	 */
 	public function replacePrefixBytes($searchFor, $replaceWith = null) {
@@ -1010,7 +1010,7 @@ final class Str implements \Countable {
 	 * The empty string is not considered to be a part of any other string
 	 *
 	 * @param string $searchFor the string to search for
-	 * @param string $replaceWith the string to use as the replacement (optional)
+	 * @param string|null $replaceWith (optional) the string to use as the replacement
 	 * @return static a new instance of this class
 	 */
 	public function replacePrefixCodePoints($searchFor, $replaceWith = null) {
@@ -1026,7 +1026,7 @@ final class Str implements \Countable {
 	 * Alias of `replacePrefixCodePoints`
 	 *
 	 * @param string $searchFor
-	 * @param string $replaceWith
+	 * @param string|null $replaceWith
 	 * @return static
 	 */
 	public function replacePrefix($searchFor, $replaceWith = null) {
@@ -1041,7 +1041,7 @@ final class Str implements \Countable {
 	 * The empty string is not considered to be a part of any other string
 	 *
 	 * @param string $searchFor the string to search for
-	 * @param string $replaceWith the string to use as the replacement (optional)
+	 * @param string|null $replaceWith (optional) the string to use as the replacement
 	 * @return static a new instance of this class
 	 */
 	public function replaceLastBytes($searchFor, $replaceWith = null) {
@@ -1056,7 +1056,7 @@ final class Str implements \Countable {
 	 * The empty string is not considered to be a part of any other string
 	 *
 	 * @param string $searchFor the string to search for
-	 * @param string $replaceWith the string to use as the replacement (optional)
+	 * @param string|null $replaceWith (optional) the string to use as the replacement
 	 * @return static a new instance of this class
 	 */
 	public function replaceLastCodePoints($searchFor, $replaceWith = null) {
@@ -1067,7 +1067,7 @@ final class Str implements \Countable {
 	 * Alias of `replaceLastCodePoints`
 	 *
 	 * @param string $searchFor
-	 * @param string $replaceWith
+	 * @param string|null $replaceWith
 	 * @return static
 	 */
 	public function replaceLast($searchFor, $replaceWith = null) {
@@ -1082,7 +1082,7 @@ final class Str implements \Countable {
 	 * The empty string is not considered to be a part of any other string
 	 *
 	 * @param string $searchFor the string to search for
-	 * @param string $replaceWith the string to use as the replacement (optional)
+	 * @param string|null $replaceWith (optional) the string to use as the replacement
 	 * @return static a new instance of this class
 	 */
 	public function replaceLastBytesIgnoreCase($searchFor, $replaceWith = null) {
@@ -1097,7 +1097,7 @@ final class Str implements \Countable {
 	 * The empty string is not considered to be a part of any other string
 	 *
 	 * @param string $searchFor the string to search for
-	 * @param string $replaceWith the string to use as the replacement (optional)
+	 * @param string|null $replaceWith (optional) the string to use as the replacement
 	 * @return static a new instance of this class
 	 */
 	public function replaceLastCodePointsIgnoreCase($searchFor, $replaceWith = null) {
@@ -1108,7 +1108,7 @@ final class Str implements \Countable {
 	 * Alias of `replaceLastCodePointsIgnoreCase`
 	 *
 	 * @param string $searchFor
-	 * @param string $replaceWith
+	 * @param string|null $replaceWith
 	 * @return static
 	 */
 	public function replaceLastIgnoreCase($searchFor, $replaceWith = null) {
@@ -1123,7 +1123,7 @@ final class Str implements \Countable {
 	 * The empty string is not considered to be a part of any other string
 	 *
 	 * @param string $searchFor the string to search for
-	 * @param string $replaceWith the string to use as the replacement (optional)
+	 * @param string|null $replaceWith (optional) the string to use as the replacement
 	 * @return static a new instance of this class
 	 */
 	public function replaceSuffixBytes($searchFor, $replaceWith = null) {
@@ -1143,7 +1143,7 @@ final class Str implements \Countable {
 	 * The empty string is not considered to be a part of any other string
 	 *
 	 * @param string $searchFor the string to search for
-	 * @param string $replaceWith the string to use as the replacement (optional)
+	 * @param string|null $replaceWith (optional) the string to use as the replacement
 	 * @return static a new instance of this class
 	 */
 	public function replaceSuffixCodePoints($searchFor, $replaceWith = null) {
@@ -1159,7 +1159,7 @@ final class Str implements \Countable {
 	 * Alias of `replaceSuffixCodePoints`
 	 *
 	 * @param string $searchFor
-	 * @param string $replaceWith
+	 * @param string|null $replaceWith
 	 * @return static
 	 */
 	public function replaceSuffix($searchFor, $replaceWith = null) {
@@ -1174,7 +1174,7 @@ final class Str implements \Countable {
 	 * The empty string is not considered to be a part of any other string
 	 *
 	 * @param string $delimiter the delimiter to split the string at
-	 * @param int|null $limit the maximum number of substrings to return (optional)
+	 * @param int|null $limit (optional) the maximum number of substrings to return
 	 * @return static[] the new instances of this class
 	 */
 	public function split($delimiter, $limit = null) {
@@ -1193,8 +1193,8 @@ final class Str implements \Countable {
 	 * Splits this string into an array of substrings at the specified delimiter pattern
 	 *
 	 * @param string $delimiterPattern the regular expression (PCRE) to split the string at
-	 * @param int|null $limit the maximum number of substrings to return (optional)
-	 * @param int|null $flags any combination (bit-wise ORed) of PHP's `PREG_SPLIT_*` flags
+	 * @param int|null $limit (optional) the maximum number of substrings to return
+	 * @param int|null $flags (optional) any combination (bit-wise ORed) of PHP's `PREG_SPLIT_*` flags
 	 * @return static[] the new instances of this class
 	 */
 	public function splitByRegex($delimiterPattern, $limit = null, $flags = null) {
@@ -1212,7 +1212,7 @@ final class Str implements \Countable {
 	/**
 	 * Splits this string into its single words
 	 *
-	 * @param int|null the maximum number of words to return from the start (optional)
+	 * @param int|null $limit (optional) the maximum number of words to return from the start
 	 * @return static[] the new instances of this class
 	 */
 	public function words($limit = null) {
@@ -1339,8 +1339,8 @@ final class Str implements \Countable {
 	 * Matches this string against the specified regular expression (PCRE)
 	 *
 	 * @param string $regex the regular expression (PCRE) to match against
-	 * @param mixed|null $matches the array that should be filled with the matches (optional)
-	 * @param bool|null $returnAll whether to return all matches and not only the first one (optional)
+	 * @param mixed|null $matches (optional) the array that should be filled with the matches
+	 * @param bool|null $returnAll (optional) whether to return all matches and not only the first one
 	 * @return bool whether this string matches the regular expression
 	 */
 	public function matches($regex, &$matches = null, $returnAll = null) {
@@ -1382,7 +1382,7 @@ final class Str implements \Countable {
 	 * This operation is case-sensitive
 	 *
 	 * @param string $other the other string to compare to
-	 * @param bool|null $human whether to use human sorting for numbers (e.g. `2` before `10`) (optional)
+	 * @param bool|null $human (optional) whether to use human sorting for numbers (e.g. `2` before `10`)
 	 * @return int an indication whether this string is less than (< 0), equal (= 0) or greater (> 0)
 	 */
 	public function compareTo($other, $human = null) {
@@ -1401,7 +1401,7 @@ final class Str implements \Countable {
 	 * This operation is case-insensitive
 	 *
 	 * @param string $other the other string to compare to
-	 * @param bool|null $human whether to use human sorting for numbers (e.g. `2` before `10`) (optional)
+	 * @param bool|null $human (optional) whether to use human sorting for numbers (e.g. `2` before `10`)
 	 * @return int an indication whether this string is less than (< 0), equal (= 0) or greater (> 0)
 	 */
 	public function compareToIgnoreCase($other, $human = null) {
@@ -1427,7 +1427,7 @@ final class Str implements \Countable {
 	/**
 	 * Normalizes all line endings in this string by using a single unified newline sequence (which may be specified manually)
 	 *
-	 * @param string|null $newlineSequence the target newline sequence to use (optional)
+	 * @param string|null $newlineSequence (optional) the target newline sequence to use
 	 * @return static a new instance of this class
 	 */
 	public function normalizeLineEndings($newlineSequence = null) {
@@ -1459,7 +1459,7 @@ final class Str implements \Countable {
 	/**
 	 * Turns this string into an acronym (abbreviation)
 	 *
-	 * @param bool|null $excludeLowerCase whether to exclude lowercase letters from the result (optional)
+	 * @param bool|null $excludeLowerCase (optional) whether to exclude lowercase letters from the result
 	 * @return static a new instance of this class
 	 * @deprecated
 	 */
