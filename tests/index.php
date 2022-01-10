@@ -478,6 +478,14 @@ $japaneseEucJpStr = \mb_convert_encoding($japaneseUtf8Str, 'EUC-JP', 'UTF-8');
 ((string) $testStrObj->replaceLastIgnoreCase('hello', 'Bonjour') === 'Hello Bonjour w☺rld w☺rld') or \fail(__LINE__);
 ((string) $testStrObj->replaceLastIgnoreCase('', 'x') === $testStr) or \fail(__LINE__);
 ((string) $testStrObj->replaceLastIgnoreCase('', '') === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceLastBytesIgnoreCase('Hello', 'Bonjour') === 'Hello Bonjour w☺rld w☺rld') or \fail(__LINE__);
+((string) $testStrObj->replaceLastBytesIgnoreCase('hello', 'Bonjour') === 'Hello Bonjour w☺rld w☺rld') or \fail(__LINE__);
+((string) $testStrObj->replaceLastBytesIgnoreCase('', 'x') === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceLastBytesIgnoreCase('', '') === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceLastCodePointsIgnoreCase('Hello', 'Bonjour') === 'Hello Bonjour w☺rld w☺rld') or \fail(__LINE__);
+((string) $testStrObj->replaceLastCodePointsIgnoreCase('hello', 'Bonjour') === 'Hello Bonjour w☺rld w☺rld') or \fail(__LINE__);
+((string) $testStrObj->replaceLastCodePointsIgnoreCase('', 'x') === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceLastCodePointsIgnoreCase('', '') === $testStr) or \fail(__LINE__);
 
 ((string) $testStrObj->replaceSuffix('w☺rld ') === $testStr) or \fail(__LINE__);
 ((string) $testStrObj->replaceSuffix(' w☺rld') === 'Hello Hello w☺rld') or \fail(__LINE__);
@@ -1215,6 +1223,26 @@ $c = $b->replaceLastIgnoreCase('LD');
 
 $b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
 $c = $b->replaceLastIgnoreCase('LD', 'Ld');
+((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
+((string) $b !== (string) $c && \gettype($b) === \gettype($c)) or \fail(__LINE__);
+
+$b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
+$c = $b->replaceLastBytesIgnoreCase('LD');
+((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
+((string) $b !== (string) $c && \gettype($b) === \gettype($c)) or \fail(__LINE__);
+
+$b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
+$c = $b->replaceLastBytesIgnoreCase('LD', 'Ld');
+((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
+((string) $b !== (string) $c && \gettype($b) === \gettype($c)) or \fail(__LINE__);
+
+$b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
+$c = $b->replaceLastCodePointsIgnoreCase('LD');
+((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
+((string) $b !== (string) $c && \gettype($b) === \gettype($c)) or \fail(__LINE__);
+
+$b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
+$c = $b->replaceLastCodePointsIgnoreCase('LD', 'Ld');
 ((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
 ((string) $b !== (string) $c && \gettype($b) === \gettype($c)) or \fail(__LINE__);
 
@@ -2034,6 +2062,55 @@ $testStrObj = Str::from($testStr);
 ((string) $testStrObj->replaceLastCodePoints("\u{00F2}", 'zzz') === $testStr) or \fail(__LINE__);
 ((string) $testStrObj->replaceLastCodePoints("\u{006E}\u{0303}\u{00E4}\u{00F1}", 'zzz') === $testStr) or \fail(__LINE__);
 ((string) $testStrObj->replaceLastCodePoints("\u{006E}\u{0303}\u{00E4}\u{00F2}", 'zzz') === $testStr) or \fail(__LINE__);
+
+((string) $testStrObj->replaceLastIgnoreCase("U") === " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303} 789 ") or \fail(__LINE__);
+((string) $testStrObj->replaceLastIgnoreCase("Z") === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceLastIgnoreCase("\u{004E}\u{0303}") === " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}u 789 ") or \fail(__LINE__);
+((string) $testStrObj->replaceLastIgnoreCase("\u{004E}\u{0304}") === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceLastIgnoreCase("\u{00D1}") === " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+((string) $testStrObj->replaceLastIgnoreCase("\u{00D2}") === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceLastIgnoreCase("\u{004E}\u{0303}\u{00E4}\u{00D1}") === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceLastIgnoreCase("\u{004E}\u{0303}\u{00E4}\u{00D2}") === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceLastIgnoreCase("U", 'zzz') === " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}zzz 789 ") or \fail(__LINE__);
+((string) $testStrObj->replaceLastIgnoreCase("Z", 'zzz') === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceLastIgnoreCase("\u{004E}\u{0303}", 'zzz') === " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}zzzu 789 ") or \fail(__LINE__);
+((string) $testStrObj->replaceLastIgnoreCase("\u{004E}\u{0304}", 'zzz') === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceLastIgnoreCase("\u{00D1}", 'zzz') === " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 uzzz\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+((string) $testStrObj->replaceLastIgnoreCase("\u{00D2}", 'zzz') === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceLastIgnoreCase("\u{004E}\u{0303}\u{00E4}\u{00D1}", 'zzz') === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceLastIgnoreCase("\u{004E}\u{0303}\u{00E4}\u{00D2}", 'zzz') === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceLastBytesIgnoreCase("U") === " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303} 789 ") or \fail(__LINE__);
+((string) $testStrObj->replaceLastBytesIgnoreCase("Z") === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceLastBytesIgnoreCase("\u{004E}\u{0303}") === " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}u 789 ") or \fail(__LINE__);
+((string) $testStrObj->replaceLastBytesIgnoreCase("\u{004E}\u{0304}") === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceLastBytesIgnoreCase("\u{00D1}") === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceLastBytesIgnoreCase("\u{00D2}") === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceLastBytesIgnoreCase("\u{004E}\u{0303}\u{00E4}\u{00D1}") === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceLastBytesIgnoreCase("\u{004E}\u{0303}\u{00E4}\u{00D2}") === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceLastBytesIgnoreCase("U", 'zzz') === " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}zzz 789 ") or \fail(__LINE__);
+((string) $testStrObj->replaceLastBytesIgnoreCase("Z", 'zzz') === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceLastBytesIgnoreCase("\u{004E}\u{0303}", 'zzz') === " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}zzzu 789 ") or \fail(__LINE__);
+((string) $testStrObj->replaceLastBytesIgnoreCase("\u{004E}\u{0304}", 'zzz') === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceLastBytesIgnoreCase("\u{00D1}", 'zzz') === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceLastBytesIgnoreCase("\u{00D2}", 'zzz') === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceLastBytesIgnoreCase("\u{004E}\u{0303}\u{00E4}\u{00D1}", 'zzz') === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceLastBytesIgnoreCase("\u{004E}\u{0303}\u{00E4}\u{00D2}", 'zzz') === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceLastCodePointsIgnoreCase("U") === " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303} 789 ") or \fail(__LINE__);
+((string) $testStrObj->replaceLastCodePointsIgnoreCase("Z") === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceLastCodePointsIgnoreCase("\u{004E}\u{0303}") === " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}u 789 ") or \fail(__LINE__);
+((string) $testStrObj->replaceLastCodePointsIgnoreCase("\u{004E}\u{0304}") === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceLastCodePointsIgnoreCase("\u{00D1}") === " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+((string) $testStrObj->replaceLastCodePointsIgnoreCase("\u{00D2}") === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceLastCodePointsIgnoreCase("\u{004E}\u{0303}\u{00E4}\u{00D1}") === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceLastCodePointsIgnoreCase("\u{004E}\u{0303}\u{00E4}\u{00D2}") === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceLastCodePointsIgnoreCase("U", 'zzz') === " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}zzz 789 ") or \fail(__LINE__);
+((string) $testStrObj->replaceLastCodePointsIgnoreCase("Z", 'zzz') === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceLastCodePointsIgnoreCase("\u{004E}\u{0303}", 'zzz') === " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}zzzu 789 ") or \fail(__LINE__);
+((string) $testStrObj->replaceLastCodePointsIgnoreCase("\u{004E}\u{0304}", 'zzz') === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceLastCodePointsIgnoreCase("\u{00D1}", 'zzz') === " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 uzzz\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+((string) $testStrObj->replaceLastCodePointsIgnoreCase("\u{00D2}", 'zzz') === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceLastCodePointsIgnoreCase("\u{004E}\u{0303}\u{00E4}\u{00D1}", 'zzz') === $testStr) or \fail(__LINE__);
+((string) $testStrObj->replaceLastCodePointsIgnoreCase("\u{004E}\u{0303}\u{00E4}\u{00D2}", 'zzz') === $testStr) or \fail(__LINE__);
 
 // END BYTES VS CODE POINTS VS GRAPHEME CLUSTERS
 
