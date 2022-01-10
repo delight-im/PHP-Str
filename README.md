@@ -117,6 +117,8 @@ $str = \Delight\Str\Str::from('Hello w☺rld', 'UTF-8');
    * `replaceBytesIgnoreCase`
    * `replaceCodePointsIgnoreCase`
  * `replaceFirst`
+   * `replaceFirstBytes`
+   * `replaceFirstCodePoints`
  * `replaceFirstIgnoreCase`
  * `replacePrefix`
  * `replaceLast`
@@ -547,6 +549,8 @@ function replaceCodePointsIgnoreCase($searchFor, $replaceWith = null);
  * @return static a new instance of this class
  */
 function replaceFirst($searchFor, $replaceWith = null);
+function replaceFirstBytes($searchFor, $replaceWith = null);
+function replaceFirstCodePoints($searchFor, $replaceWith = null);
 
 
 ////////////////////////////////////////////////////////////////////////////////
