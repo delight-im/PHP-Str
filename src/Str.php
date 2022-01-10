@@ -983,7 +983,7 @@ final class Str implements \Countable {
 	}
 
 	/**
-	 * Replaces the specified part in this string only if it starts with that part
+	 * Replaces the specified part in this string only if it starts with that part based on bytes
 	 *
 	 * This operation is case-sensitive
 	 *
@@ -993,13 +993,44 @@ final class Str implements \Countable {
 	 * @param string $replaceWith the string to use as the replacement (optional)
 	 * @return static a new instance of this class
 	 */
-	public function replacePrefix($searchFor, $replaceWith = null) {
-		if ($this->startsWith($searchFor)) {
-			return $this->replaceFirst($searchFor, $replaceWith);
+	public function replacePrefixBytes($searchFor, $replaceWith = null) {
+		if ($this->startsWithBytes($searchFor)) {
+			return $this->replaceFirstBytes($searchFor, $replaceWith);
 		}
 		else {
 			return $this;
 		}
+	}
+
+	/**
+	 * Replaces the specified part in this string only if it starts with that part based on code points
+	 *
+	 * This operation is case-sensitive
+	 *
+	 * The empty string is not considered to be a part of any other string
+	 *
+	 * @param string $searchFor the string to search for
+	 * @param string $replaceWith the string to use as the replacement (optional)
+	 * @return static a new instance of this class
+	 */
+	public function replacePrefixCodePoints($searchFor, $replaceWith = null) {
+		if ($this->startsWithCodePoints($searchFor)) {
+			return $this->replaceFirstCodePoints($searchFor, $replaceWith);
+		}
+		else {
+			return $this;
+		}
+	}
+
+	/**
+	 * Alias of `replacePrefixCodePoints`
+	 *
+	 * @param string $searchFor
+	 * @param string $replaceWith
+	 * @return static
+	 */
+	public function replacePrefix($searchFor, $replaceWith = null) {
+		return $this->replacePrefixCodePoints($searchFor, $replaceWith);
 	}
 
 	/**
