@@ -912,7 +912,7 @@ final class Str implements \Countable {
 	 * @return static a new instance of this class
 	 */
 	public function replaceFirst($searchFor, $replaceWith = null) {
-		return $this->replaceOneInternal('mb_strpos', $searchFor, $replaceWith);
+		return $this->replaceOneInternal(false, true, 'mb_strpos', $searchFor, $replaceWith);
 	}
 
 	/**
@@ -927,7 +927,7 @@ final class Str implements \Countable {
 	 * @return static a new instance of this class
 	 */
 	public function replaceFirstIgnoreCase($searchFor, $replaceWith = null) {
-		return $this->replaceOneInternal('mb_stripos', $searchFor, $replaceWith);
+		return $this->replaceOneInternal(false, true, 'mb_stripos', $searchFor, $replaceWith);
 	}
 
 	/**
@@ -962,7 +962,7 @@ final class Str implements \Countable {
 	 * @return static a new instance of this class
 	 */
 	public function replaceLast($searchFor, $replaceWith = null) {
-		return $this->replaceOneInternal('mb_strrpos', $searchFor, $replaceWith);
+		return $this->replaceOneInternal(false, true, 'mb_strrpos', $searchFor, $replaceWith);
 	}
 
 	/**
@@ -977,7 +977,7 @@ final class Str implements \Countable {
 	 * @return static a new instance of this class
 	 */
 	public function replaceLastIgnoreCase($searchFor, $replaceWith = null) {
-		return $this->replaceOneInternal('mb_strripos', $searchFor, $replaceWith);
+		return $this->replaceOneInternal(false, true, 'mb_strripos', $searchFor, $replaceWith);
 	}
 
 	/**
@@ -1462,12 +1462,20 @@ final class Str implements \Countable {
 		return new static($rawString, $this->charset);
 	}
 
-	private function replaceOneInternal(callable $func, $searchFor, $replaceWith) {
+	private function replaceOneInternal($operateOnBytes, $operateOnCodePoints, callable $func, $searchFor, $replaceWith) {
 		if ($searchFor === '') {
 			return $this;
 		}
 
-		$pos = $func($this->rawString, $searchFor, 0, $this->charset);
+		if ($operateOnBytes) {
+			$pos = $func($this->rawString, $searchFor, 0);
+		}
+		elseif ($operateOnCodePoints) {
+			$pos = $func($this->rawString, $searchFor, 0, $this->charset);
+		}
+		else {
+			throw new \Exception("Either 'operateOnBytes' or 'operateOnCodePoints' must be 'true'");
+		}
 
 		if ($pos === false) {
 			return $this;
@@ -1477,9 +1485,21 @@ final class Str implements \Countable {
 				$replaceWith = '';
 			}
 
-			$rawString = \mb_substr($this->rawString, 0, $pos, $this->charset) . $replaceWith . \mb_substr($this->rawString, $pos + \mb_strlen($searchFor, $this->charset), null, $this->charset);
+			if ($operateOnBytes) {
+				$prefix = \substr($this->rawString, 0, $pos);
+				$searchForLength = \strlen($searchFor);
+				$suffix = \substr($this->rawString, $pos + $searchForLength);
+			}
+			elseif ($operateOnCodePoints) {
+				$prefix = \mb_substr($this->rawString, 0, $pos, $this->charset);
+				$searchForLength = \mb_strlen($searchFor, $this->charset);
+				$suffix = \mb_substr($this->rawString, $pos + $searchForLength, null, $this->charset);
+			}
+			else {
+				throw new \Exception("Either 'operateOnBytes' or 'operateOnCodePoints' must be 'true'");
+			}
 
-			return new static($rawString, $this->charset);
+			return new static($prefix . $replaceWith . $suffix, $this->charset);
 		}
 	}
 
