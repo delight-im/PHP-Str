@@ -2301,6 +2301,13 @@ $testStrObj = Str::from($testStr);
 (\implode('§', $testStrObj->splitCodePoints("\u{006E}\u{0303}", 2)) === " abc a\u{00F1}\u{00E4}§a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
 (\implode('§', $testStrObj->splitCodePoints("\u{006E}\u{0302}", 2)) === $testStr) or \fail(__LINE__);
 
+(\implode('§', Str::from(" abc aa def ghi jkl mno pqr 123 456 uu 789 ")->words()) === "abc§aa§def§ghi§jkl§mno§pqr§123§456§uu§789") or \fail(__LINE__);
+(\implode('§', Str::from(" abc a\u{00F1}\u{00E4}a def \u{231A} ghi \u{1F602} jkl mno pqr 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}u 789 ")->words()) === "abc§a\u{00F1}\u{00E4}a§def§\u{231A}§ghi§\u{1F602}§jkl§mno§pqr§123§\u{00C5}\u{00C4}\u{212B}§456§u\u{00F1}\u{00DC}u§789") or \fail(__LINE__);
+(\implode('§', Str::from(" abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ")->words()) === "abc§a\u{00F1}\u{00E4}\u{006E}\u{0303}a§def§\u{231A}§ghi§\u{1F602}§jkl§\u{1F1E6}\u{1F1F7}§mno§\u{1F468}\u{200D}\u{1F37C}§pqr§\u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F}§123§\u{00C5}\u{00C4}\u{212B}§456§u\u{00F1}\u{00DC}\u{006E}\u{0303}u§789") or \fail(__LINE__);
+(\implode('§', Str::from(" abc aa def ghi jkl mno pqr 123 456 uu 789 ")->words(9)) === "abc§aa§def§ghi§jkl§mno§pqr§123§456") or \fail(__LINE__);
+(\implode('§', Str::from(" abc a\u{00F1}\u{00E4}a def \u{231A} ghi \u{1F602} jkl mno pqr 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}u 789 ")->words(12)) === "abc§a\u{00F1}\u{00E4}a§def§\u{231A}§ghi§\u{1F602}§jkl§mno§pqr§123§\u{00C5}\u{00C4}\u{212B}§456") or \fail(__LINE__);
+(\implode('§', Str::from(" abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ")->words(15)) === "abc§a\u{00F1}\u{00E4}\u{006E}\u{0303}a§def§\u{231A}§ghi§\u{1F602}§jkl§\u{1F1E6}\u{1F1F7}§mno§\u{1F468}\u{200D}\u{1F37C}§pqr§\u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F}§123§\u{00C5}\u{00C4}\u{212B}§456") or \fail(__LINE__);
+
 // END BYTES VS CODE POINTS VS GRAPHEME CLUSTERS
 
 echo 'ALL TESTS PASSED' . "\n";
