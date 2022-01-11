@@ -1163,7 +1163,7 @@ final class Str implements \Countable {
 	}
 
 	/**
-	 * Splits this string into an array of substrings at the specified delimiter
+	 * Splits this string into an array of substrings at the specified delimiter based on bytes
 	 *
 	 * This operation is case-sensitive
 	 *
@@ -1173,7 +1173,7 @@ final class Str implements \Countable {
 	 * @param int|null $limit (optional) the maximum number of substrings to return
 	 * @return static[] the new instances of this class
 	 */
-	public function split($delimiter, $limit = null) {
+	public function splitBytes($delimiter, $limit = null) {
 		if ($delimiter === '') {
 			return [ $this ];
 		}
@@ -1183,6 +1183,32 @@ final class Str implements \Countable {
 		}
 
 		return self::fromArray(\explode($delimiter, $this->rawString, $limit));
+	}
+
+	/**
+	 * Splits this string into an array of substrings at the specified delimiter based on code points
+	 *
+	 * This operation is case-sensitive
+	 *
+	 * The empty string is not considered to be a part of any other string
+	 *
+	 * @param string $delimiter the delimiter to split the string at
+	 * @param int|null $limit (optional) the maximum number of substrings to return
+	 * @return static[] the new instances of this class
+	 */
+	public function splitCodePoints($delimiter, $limit = null) {
+		return $this->splitBytes($delimiter, $limit);
+	}
+
+	/**
+	 * Alias of `splitCodePoints`
+	 *
+	 * @param string $delimiter
+	 * @param int|null $limit
+	 * @return static[]
+	 */
+	public function split($delimiter, $limit = null) {
+		return $this->splitCodePoints($delimiter, $limit);
 	}
 
 	/**
