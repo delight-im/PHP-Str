@@ -135,6 +135,8 @@ $str = \Delight\Str\Str::from('Hello w☺rld', 'UTF-8');
    * `replaceSuffixBytes`
    * `replaceSuffixCodePoints`
  * `split`
+   * `splitBytes`
+   * `splitCodePoints`
  * `splitByRegex`
  * `words`
  * `beforeFirst`
@@ -653,6 +655,8 @@ function replaceSuffixCodePoints($searchFor, $replaceWith = null);
  * @return static[] an array containing the substrings (which are instances of this class as well)
  */
 function split($delimiter, $limit = null);
+function splitBytes($delimiter, $limit = null);
+function splitCodePoints($delimiter, $limit = null);
 
 
 ////////////////////////////////////////////////////////////////////////////////
