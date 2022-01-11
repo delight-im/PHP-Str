@@ -512,9 +512,21 @@ $japaneseEucJpStr = \mb_convert_encoding($japaneseUtf8Str, 'EUC-JP', 'UTF-8');
 (\count($testStrObj->split(' ')) === 4) or \fail(__LINE__);
 (\count($testStrObj->split(' ', 3)) === 3) or \fail(__LINE__);
 (\count($testStrObj->split(' ', 5)) === 4) or \fail(__LINE__);
-(\count($testStrObj->split(' Hello w☺rld ')) === 2) or \fail(__LINE__);
-(\count($testStrObj->split(' hello w☺rld ')) === 1) or \fail(__LINE__);
+(\count($testStrObj->split(' Hello w')) === 2) or \fail(__LINE__);
+(\count($testStrObj->split(' hello w')) === 1) or \fail(__LINE__);
 (\count($testStrObj->split('')) === 1) or \fail(__LINE__);
+(\count($testStrObj->splitBytes(' ')) === 4) or \fail(__LINE__);
+(\count($testStrObj->splitBytes(' ', 3)) === 3) or \fail(__LINE__);
+(\count($testStrObj->splitBytes(' ', 5)) === 4) or \fail(__LINE__);
+(\count($testStrObj->splitBytes(' Hello w')) === 2) or \fail(__LINE__);
+(\count($testStrObj->splitBytes(' hello w')) === 1) or \fail(__LINE__);
+(\count($testStrObj->splitBytes('')) === 1) or \fail(__LINE__);
+(\count($testStrObj->splitCodePoints(' ')) === 4) or \fail(__LINE__);
+(\count($testStrObj->splitCodePoints(' ', 3)) === 3) or \fail(__LINE__);
+(\count($testStrObj->splitCodePoints(' ', 5)) === 4) or \fail(__LINE__);
+(\count($testStrObj->splitCodePoints(' Hello w')) === 2) or \fail(__LINE__);
+(\count($testStrObj->splitCodePoints(' hello w')) === 1) or \fail(__LINE__);
+(\count($testStrObj->splitCodePoints('')) === 1) or \fail(__LINE__);
 
 (\count($testStrObj->splitByRegex('/ (?=[A-Z])|(?<=[a-z]) (?!.*? )/')) === 3) or \fail(__LINE__);
 (\count($testStrObj->splitByRegex('/ (?=[A-Z])|(?<=[a-z]) (?!.*? )/', 2)) === 2) or \fail(__LINE__);
@@ -1298,6 +1310,26 @@ $c = $b->split(' ');
 
 $b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
 $c = $b->split(' ', 5);
+((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
+(\gettype($b) !== \gettype($c)) or \fail(__LINE__);
+
+$b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
+$c = $b->splitBytes(' ');
+((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
+(\gettype($b) !== \gettype($c)) or \fail(__LINE__);
+
+$b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
+$c = $b->splitBytes(' ', 5);
+((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
+(\gettype($b) !== \gettype($c)) or \fail(__LINE__);
+
+$b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
+$c = $b->splitCodePoints(' ');
+((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
+(\gettype($b) !== \gettype($c)) or \fail(__LINE__);
+
+$b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
+$c = $b->splitCodePoints(' ', 5);
 ((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
 (\gettype($b) !== \gettype($c)) or \fail(__LINE__);
 
@@ -2219,6 +2251,55 @@ $testStrObj = Str::from($testStr);
 ((string) $testStrObj->replaceSuffixCodePoints("u\u{006E}\u{0303}\u{00DC}\u{00F1}u 789 ", 'zzz') === $testStr) or \fail(__LINE__);
 ((string) $testStrObj->replaceSuffixCodePoints("u\u{006E}\u{0303}\u{00DC}\u{00F1}u 789", 'zzz') === $testStr) or \fail(__LINE__);
 ((string) $testStrObj->replaceSuffixCodePoints("u\u{006E}\u{0303}\u{00DC}\u{00F1}u 78a ", 'zzz') === $testStr) or \fail(__LINE__);
+
+(\implode('§', $testStrObj->split("a")) === " §bc §\u{00F1}\u{00E4}\u{006E}\u{0303}§ def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+(\implode('§', $testStrObj->split("z")) === $testStr) or \fail(__LINE__);
+(\implode('§', $testStrObj->split("\u{00E4}")) === " abc a\u{00F1}§\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+(\implode('§', $testStrObj->split("\u{00E5}")) === $testStr) or \fail(__LINE__);
+(\implode('§', $testStrObj->split("\u{1F468}\u{200D}\u{1F37C}")) === " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno § pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+(\implode('§', $testStrObj->split("\u{1F468}\u{200D}\u{1F37D}")) === $testStr) or \fail(__LINE__);
+(\implode('§', $testStrObj->split("\u{006E}\u{0303}")) === " abc a\u{00F1}\u{00E4}§a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}§u 789 ") or \fail(__LINE__);
+(\implode('§', $testStrObj->split("\u{006E}\u{0302}")) === $testStr) or \fail(__LINE__);
+(\implode('§', $testStrObj->split("a", 2)) === " §bc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+(\implode('§', $testStrObj->split("z", 2)) === $testStr) or \fail(__LINE__);
+(\implode('§', $testStrObj->split("\u{00E4}", 2)) === " abc a\u{00F1}§\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+(\implode('§', $testStrObj->split("\u{00E5}", 2)) === $testStr) or \fail(__LINE__);
+(\implode('§', $testStrObj->split("\u{1F468}\u{200D}\u{1F37C}", 2)) === " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno § pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+(\implode('§', $testStrObj->split("\u{1F468}\u{200D}\u{1F37D}", 2)) === $testStr) or \fail(__LINE__);
+(\implode('§', $testStrObj->split("\u{006E}\u{0303}", 2)) === " abc a\u{00F1}\u{00E4}§a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+(\implode('§', $testStrObj->split("\u{006E}\u{0302}", 2)) === $testStr) or \fail(__LINE__);
+(\implode('§', $testStrObj->splitBytes("a")) === " §bc §\u{00F1}\u{00E4}\u{006E}\u{0303}§ def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+(\implode('§', $testStrObj->splitBytes("z")) === $testStr) or \fail(__LINE__);
+(\implode('§', $testStrObj->splitBytes("\u{00E4}")) === " abc a\u{00F1}§\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+(\implode('§', $testStrObj->splitBytes("\u{00E5}")) === $testStr) or \fail(__LINE__);
+(\implode('§', $testStrObj->splitBytes("\u{1F468}\u{200D}\u{1F37C}")) === " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno § pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+(\implode('§', $testStrObj->splitBytes("\u{1F468}\u{200D}\u{1F37D}")) === $testStr) or \fail(__LINE__);
+(\implode('§', $testStrObj->splitBytes("\u{006E}\u{0303}")) === " abc a\u{00F1}\u{00E4}§a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}§u 789 ") or \fail(__LINE__);
+(\implode('§', $testStrObj->splitBytes("\u{006E}\u{0302}")) === $testStr) or \fail(__LINE__);
+(\implode('§', $testStrObj->splitBytes("a", 2)) === " §bc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+(\implode('§', $testStrObj->splitBytes("z", 2)) === $testStr) or \fail(__LINE__);
+(\implode('§', $testStrObj->splitBytes("\u{00E4}", 2)) === " abc a\u{00F1}§\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+(\implode('§', $testStrObj->splitBytes("\u{00E5}", 2)) === $testStr) or \fail(__LINE__);
+(\implode('§', $testStrObj->splitBytes("\u{1F468}\u{200D}\u{1F37C}", 2)) === " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno § pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+(\implode('§', $testStrObj->splitBytes("\u{1F468}\u{200D}\u{1F37D}", 2)) === $testStr) or \fail(__LINE__);
+(\implode('§', $testStrObj->splitBytes("\u{006E}\u{0303}", 2)) === " abc a\u{00F1}\u{00E4}§a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+(\implode('§', $testStrObj->splitBytes("\u{006E}\u{0302}", 2)) === $testStr) or \fail(__LINE__);
+(\implode('§', $testStrObj->splitCodePoints("a")) === " §bc §\u{00F1}\u{00E4}\u{006E}\u{0303}§ def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+(\implode('§', $testStrObj->splitCodePoints("z")) === $testStr) or \fail(__LINE__);
+(\implode('§', $testStrObj->splitCodePoints("\u{00E4}")) === " abc a\u{00F1}§\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+(\implode('§', $testStrObj->splitCodePoints("\u{00E5}")) === $testStr) or \fail(__LINE__);
+(\implode('§', $testStrObj->splitCodePoints("\u{1F468}\u{200D}\u{1F37C}")) === " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno § pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+(\implode('§', $testStrObj->splitCodePoints("\u{1F468}\u{200D}\u{1F37D}")) === $testStr) or \fail(__LINE__);
+(\implode('§', $testStrObj->splitCodePoints("\u{006E}\u{0303}")) === " abc a\u{00F1}\u{00E4}§a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}§u 789 ") or \fail(__LINE__);
+(\implode('§', $testStrObj->splitCodePoints("\u{006E}\u{0302}")) === $testStr) or \fail(__LINE__);
+(\implode('§', $testStrObj->splitCodePoints("a", 2)) === " §bc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+(\implode('§', $testStrObj->splitCodePoints("z", 2)) === $testStr) or \fail(__LINE__);
+(\implode('§', $testStrObj->splitCodePoints("\u{00E4}", 2)) === " abc a\u{00F1}§\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+(\implode('§', $testStrObj->splitCodePoints("\u{00E5}", 2)) === $testStr) or \fail(__LINE__);
+(\implode('§', $testStrObj->splitCodePoints("\u{1F468}\u{200D}\u{1F37C}", 2)) === " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno § pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+(\implode('§', $testStrObj->splitCodePoints("\u{1F468}\u{200D}\u{1F37D}", 2)) === $testStr) or \fail(__LINE__);
+(\implode('§', $testStrObj->splitCodePoints("\u{006E}\u{0303}", 2)) === " abc a\u{00F1}\u{00E4}§a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+(\implode('§', $testStrObj->splitCodePoints("\u{006E}\u{0302}", 2)) === $testStr) or \fail(__LINE__);
 
 // END BYTES VS CODE POINTS VS GRAPHEME CLUSTERS
 
