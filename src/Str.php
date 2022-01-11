@@ -1245,7 +1245,7 @@ final class Str implements \Countable {
 		}
 
 		// split the string into words
-		$words = $this->splitByRegex('/[^\\w\']+/u', $limit, \PREG_SPLIT_NO_EMPTY);
+		$words = $this->splitByRegex('/(?![' . "\u{0027}\u{2019}" . '])[\\s\\p{P}]+/u', $limit, \PREG_SPLIT_NO_EMPTY);
 
 		// if a limit has been specified
 		if ($limit !== null) {
