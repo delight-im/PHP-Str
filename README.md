@@ -150,6 +150,8 @@ $str = \Delight\Str\Str::from('Hello w☺rld', 'UTF-8');
    * `afterFirstBytes`
    * `afterFirstCodePoints`
  * `afterLast`
+   * `afterLastBytes`
+   * `afterLastCodePoints`
  * `matches`
  * `equals`
  * `equalsIgnoreCase`
@@ -758,6 +760,8 @@ function afterFirstCodePoints($search);
  * @return static a new instance of this class
  */
 function afterLast($search);
+function afterLastBytes($search);
+function afterLastCodePoints($search);
 
 
 ////////////////////////////////////////////////////////////////////////////////
