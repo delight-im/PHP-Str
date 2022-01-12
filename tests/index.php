@@ -598,6 +598,21 @@ $japaneseEucJpStr = \mb_convert_encoding($japaneseUtf8Str, 'EUC-JP', 'UTF-8');
 ((string) $testStrObj->afterFirst('hello') === '') or \fail(__LINE__);
 ((string) $testStrObj->afterFirst('x') === '') or \fail(__LINE__);
 ((string) $testStrObj->afterFirst('') === '') or \fail(__LINE__);
+((string) $testStrObj->afterFirstBytes('Hello') === ' Hello w☺rld w☺rld') or \fail(__LINE__);
+((string) $testStrObj->afterFirstBytes('o H') === 'ello w☺rld w☺rld') or \fail(__LINE__);
+((string) $testStrObj->afterFirstBytes('d w☺rl') === 'd') or \fail(__LINE__);
+((string) $testStrObj->afterFirstBytes('w☺rld') === ' w☺rld') or \fail(__LINE__);
+((string) $testStrObj->afterFirstBytes('hello') === '') or \fail(__LINE__);
+((string) $testStrObj->afterFirstBytes('x') === '') or \fail(__LINE__);
+((string) $testStrObj->afterFirstBytes('') === '') or \fail(__LINE__);
+((string) $testStrObj->afterFirstCodePoints('Hello') === ' Hello w☺rld w☺rld') or \fail(__LINE__);
+((string) $testStrObj->afterFirstCodePoints('o H') === 'ello w☺rld w☺rld') or \fail(__LINE__);
+((string) $testStrObj->afterFirstCodePoints('d w☺rl') === 'd') or \fail(__LINE__);
+((string) $testStrObj->afterFirstCodePoints('w☺rld') === ' w☺rld') or \fail(__LINE__);
+((string) $testStrObj->afterFirstCodePoints('hello') === '') or \fail(__LINE__);
+((string) $testStrObj->afterFirstCodePoints('x') === '') or \fail(__LINE__);
+((string) $testStrObj->afterFirstCodePoints('') === '') or \fail(__LINE__);
+
 ((string) $testStrObj->afterLast('Hello') === ' w☺rld w☺rld') or \fail(__LINE__);
 ((string) $testStrObj->afterLast('o H') === 'ello w☺rld w☺rld') or \fail(__LINE__);
 ((string) $testStrObj->afterLast('d w☺rl') === 'd') or \fail(__LINE__);
@@ -1424,6 +1439,16 @@ $c = $b->between('o', 'l');
 
 $b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
 $c = $b->afterFirst('wor');
+((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
+((string) $b !== (string) $c && \gettype($b) === \gettype($c)) or \fail(__LINE__);
+
+$b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
+$c = $b->afterFirstBytes('wor');
+((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
+((string) $b !== (string) $c && \gettype($b) === \gettype($c)) or \fail(__LINE__);
+
+$b = Str::from(" § World 'world' \u{1F30D} & \u{1F30E} & \u{1F30F} 'world' world\rA!\r\nB!\nC! § ");
+$c = $b->afterFirstCodePoints('wor');
 ((string) $a === (string) $b && \gettype($a) === \gettype($b)) or \fail(__LINE__);
 ((string) $b !== (string) $c && \gettype($b) === \gettype($c)) or \fail(__LINE__);
 
@@ -2406,6 +2431,31 @@ $testStrObj = Str::from($testStr);
 ((string) $testStrObj->beforeLastCodePoints("\u{006E}\u{0304}") === "") or \fail(__LINE__);
 ((string) $testStrObj->beforeLastCodePoints("\u{00F1}") === " abc a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u") or \fail(__LINE__);
 ((string) $testStrObj->beforeLastCodePoints("\u{00F2}") === "") or \fail(__LINE__);
+
+((string) $testStrObj->afterFirst("c") === " a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+((string) $testStrObj->afterFirst("z") === "") or \fail(__LINE__);
+((string) $testStrObj->afterFirst("c a\u{00F1}") === "\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+((string) $testStrObj->afterFirst("c a\u{00F2}") === "") or \fail(__LINE__);
+((string) $testStrObj->afterFirst("c a\u{00F1}\u{00E4}\u{006E}\u{0303}") === "a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+((string) $testStrObj->afterFirst("c a\u{00F1}\u{00E4}\u{006E}\u{0304}") === "") or \fail(__LINE__);
+((string) $testStrObj->afterFirst("c a\u{006E}\u{0303}\u{00E4}\u{00F1}") === "") or \fail(__LINE__);
+((string) $testStrObj->afterFirst("c a\u{006E}\u{0303}\u{00E4}\u{00F2}") === "") or \fail(__LINE__);
+((string) $testStrObj->afterFirstBytes("c") === " a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+((string) $testStrObj->afterFirstBytes("z") === "") or \fail(__LINE__);
+((string) $testStrObj->afterFirstBytes("c a\u{00F1}") === "\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+((string) $testStrObj->afterFirstBytes("c a\u{00F2}") === "") or \fail(__LINE__);
+((string) $testStrObj->afterFirstBytes("c a\u{00F1}\u{00E4}\u{006E}\u{0303}") === "a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+((string) $testStrObj->afterFirstBytes("c a\u{00F1}\u{00E4}\u{006E}\u{0304}") === "") or \fail(__LINE__);
+((string) $testStrObj->afterFirstBytes("c a\u{006E}\u{0303}\u{00E4}\u{00F1}") === "") or \fail(__LINE__);
+((string) $testStrObj->afterFirstBytes("c a\u{006E}\u{0303}\u{00E4}\u{00F2}") === "") or \fail(__LINE__);
+((string) $testStrObj->afterFirstCodePoints("c") === " a\u{00F1}\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+((string) $testStrObj->afterFirstCodePoints("z") === "") or \fail(__LINE__);
+((string) $testStrObj->afterFirstCodePoints("c a\u{00F1}") === "\u{00E4}\u{006E}\u{0303}a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+((string) $testStrObj->afterFirstCodePoints("c a\u{00F2}") === "") or \fail(__LINE__);
+((string) $testStrObj->afterFirstCodePoints("c a\u{00F1}\u{00E4}\u{006E}\u{0303}") === "a def \u{231A} ghi \u{1F602} jkl \u{1F1E6}\u{1F1F7} mno \u{1F468}\u{200D}\u{1F37C} pqr \u{1F575}\u{FE0F}\u{200D}\u{2640}\u{FE0F} 123 \u{00C5}\u{00C4}\u{212B} 456 u\u{00F1}\u{00DC}\u{006E}\u{0303}u 789 ") or \fail(__LINE__);
+((string) $testStrObj->afterFirstCodePoints("c a\u{00F1}\u{00E4}\u{006E}\u{0304}") === "") or \fail(__LINE__);
+((string) $testStrObj->afterFirstCodePoints("c a\u{006E}\u{0303}\u{00E4}\u{00F1}") === "") or \fail(__LINE__);
+((string) $testStrObj->afterFirstCodePoints("c a\u{006E}\u{0303}\u{00E4}\u{00F2}") === "") or \fail(__LINE__);
 
 // END BYTES VS CODE POINTS VS GRAPHEME CLUSTERS
 
