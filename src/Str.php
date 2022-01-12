@@ -1778,7 +1778,12 @@ final class Str implements \Countable {
 			}
 
 			if ($operateOnBytes) {
-				$newRawString = \substr($this->rawString, $offset, $length);
+				if ($length !== null) {
+					$newRawString = \substr($this->rawString, $offset, $length);
+				}
+				else {
+					$newRawString = \substr($this->rawString, $offset);
+				}
 			}
 			elseif ($operateOnCodePoints) {
 				$newRawString = \mb_substr($this->rawString, $offset, $length, $this->charset);
