@@ -1420,7 +1420,7 @@ final class Str implements \Countable {
 	}
 
 	/**
-	 * Returns the part of this string *after* the *last* occurrence of the search string
+	 * Returns the part of this string *after* the *last* occurrence of the search string based on bytes
 	 *
 	 * This operation is case-sensitive
 	 *
@@ -1431,8 +1431,34 @@ final class Str implements \Countable {
 	 * @param string $search the search string that should delimit the start
 	 * @return static a new instance of this class
 	 */
-	public function afterLast($search) {
+	public function afterLastBytes($search) {
+		return $this->sideInternal(true, false, 'strrpos', $search, 1);
+	}
+
+	/**
+	 * Returns the part of this string *after* the *last* occurrence of the search string based on code points
+	 *
+	 * This operation is case-sensitive
+	 *
+	 * The empty string (as a search string) is not considered to be a part of any other string
+	 *
+	 * If the given search string is not found anywhere, an empty string is returned
+	 *
+	 * @param string $search the search string that should delimit the start
+	 * @return static a new instance of this class
+	 */
+	public function afterLastCodePoints($search) {
 		return $this->sideInternal(false, true, 'mb_strrpos', $search, 1);
+	}
+
+	/**
+	 * Alias of `afterLastCodePoints`
+	 *
+	 * @param string $search
+	 * @return static
+	 */
+	public function afterLast($search) {
+		return $this->afterLastCodePoints($search);
 	}
 
 	/**
