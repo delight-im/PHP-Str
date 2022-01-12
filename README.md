@@ -140,6 +140,8 @@ $str = \Delight\Str\Str::from('Hello w☺rld', 'UTF-8');
  * `splitByRegex`
  * `words`
  * `beforeFirst`
+   * `beforeFirstBytes`
+   * `beforeFirstCodePoints`
  * `beforeLast`
  * `between`
  * `afterFirst`
@@ -695,6 +697,8 @@ function words($limit = null);
  * @return static a new instance of this class
  */
 function beforeFirst($search);
+function beforeFirstBytes($search);
+function beforeFirstCodePoints($search);
 
 
 ////////////////////////////////////////////////////////////////////////////////
