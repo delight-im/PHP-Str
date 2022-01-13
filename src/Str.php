@@ -1357,24 +1357,9 @@ final class Str implements \Countable {
 	 * @return static a new instance of this class
 	 */
 	public function between($start, $end) {
-		if ($start === '' || $end === '') {
-			return new static('', $this->charset);
-		}
+		$afterStart = self::sideInternal($this->rawString, $this->charset, false, true, 'mb_strpos', $start, 1);
 
-		$beforeStart = \mb_strpos($this->rawString, $start, 0, $this->charset);
-
-		$rawString = '';
-
-		if ($beforeStart !== false) {
-			$afterStart = $beforeStart + \mb_strlen($start, $this->charset);
-			$beforeEnd = \mb_strrpos($this->rawString, $end, $afterStart, $this->charset);
-
-			if ($beforeEnd !== false) {
-				$rawString = \mb_substr($this->rawString, $afterStart, $beforeEnd - $afterStart, $this->charset);
-			}
-		}
-
-		return new static($rawString, $this->charset);
+		return self::sideInternal($afterStart, $this->charset, false, true, 'mb_strrpos', $end, -1);
 	}
 
 	/**
