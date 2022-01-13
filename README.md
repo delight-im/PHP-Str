@@ -146,6 +146,8 @@ $str = \Delight\Str\Str::from('Hello w☺rld', 'UTF-8');
    * `beforeLastBytes`
    * `beforeLastCodePoints`
  * `between`
+   * `betweenBytes`
+   * `betweenCodePoints`
  * `afterFirst`
    * `afterFirstBytes`
    * `afterFirstCodePoints`
@@ -734,6 +736,8 @@ function beforeLastCodePoints($search);
  * @return static a new instance of this class
  */
 function between($start, $end);
+function betweenBytes($start, $end);
+function betweenCodePoints($start, $end);
 
 
 ////////////////////////////////////////////////////////////////////////////////
