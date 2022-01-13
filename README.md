@@ -158,6 +158,8 @@ $str = \Delight\Str\Str::from('Hello w☺rld', 'UTF-8');
  * `equals`
  * `equalsIgnoreCase`
  * `compareTo`
+   * `compareToBytes`
+   * `compareToCodePoints`
  * `compareToIgnoreCase`
  * `escapeForHtml`
  * `normalizeLineEndings`
@@ -819,6 +821,8 @@ function equalsIgnoreCase($other);
  * @return int an indication whether this string is less than (< 0), equal (= 0) or greater (> 0)
  */
 function compareTo($other, $human = null);
+function compareToBytes($other, $human = null);
+function compareToCodePoints($other, $human = null);
 
 
 ////////////////////////////////////////////////////////////////////////////////
