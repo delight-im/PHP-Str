@@ -1795,32 +1795,32 @@ final class Str implements \Countable {
 		}
 	}
 
-	private function sideInternal($operateOnBytes, $operateOnCodePoints, callable $func, $substr, $direction) {
-		if ($substr === '') {
+	private function sideInternal($operateOnBytes, $operateOnCodePoints, callable $strposFunc, $delimiter, $direction) {
+		if ($delimiter === '') {
 			return new static('', $this->charset);
 		}
 
 		if ($operateOnBytes) {
-			$startPos = $func($this->rawString, $substr, 0);
+			$delimiterStartPos = $strposFunc($this->rawString, $delimiter, 0);
 		}
 		elseif ($operateOnCodePoints) {
-			$startPos = $func($this->rawString, $substr, 0, $this->charset);
+			$delimiterStartPos = $strposFunc($this->rawString, $delimiter, 0, $this->charset);
 		}
 		else {
 			throw new \Exception("Either 'operateOnBytes' or 'operateOnCodePoints' must be 'true'");
 		}
 
-		if ($startPos !== false) {
+		if ($delimiterStartPos !== false) {
 			if ($direction === -1) {
 				$offset = 0;
-				$length = $startPos;
+				$length = $delimiterStartPos;
 			}
 			else {
 				if ($operateOnBytes) {
-					$offset = $startPos + \strlen($substr);
+					$offset = $delimiterStartPos + \strlen($delimiter);
 				}
 				elseif ($operateOnCodePoints) {
-					$offset = $startPos + \mb_strlen($substr, $this->charset);
+					$offset = $delimiterStartPos + \mb_strlen($delimiter, $this->charset);
 				}
 				else {
 					throw new \Exception("Either 'operateOnBytes' or 'operateOnCodePoints' must be 'true'");
