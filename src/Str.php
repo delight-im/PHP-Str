@@ -1270,7 +1270,7 @@ final class Str implements \Countable {
 	 * @return static a new instance of this class
 	 */
 	public function beforeFirstBytes($search) {
-		return $this->sideInternal(true, false, 'strpos', $search, -1);
+		return self::sideInternal($this->rawString, $this->charset, true, false, 'strpos', $search, -1);
 	}
 
 	/**
@@ -1286,7 +1286,7 @@ final class Str implements \Countable {
 	 * @return static a new instance of this class
 	 */
 	public function beforeFirstCodePoints($search) {
-		return $this->sideInternal(false, true, 'mb_strpos', $search, -1);
+		return self::sideInternal($this->rawString, $this->charset, false, true, 'mb_strpos', $search, -1);
 	}
 
 	/**
@@ -1312,7 +1312,7 @@ final class Str implements \Countable {
 	 * @return static a new instance of this class
 	 */
 	public function beforeLastBytes($search) {
-		return $this->sideInternal(true, false, 'strrpos', $search, -1);
+		return self::sideInternal($this->rawString, $this->charset, true, false, 'strrpos', $search, -1);
 	}
 
 	/**
@@ -1328,7 +1328,7 @@ final class Str implements \Countable {
 	 * @return static a new instance of this class
 	 */
 	public function beforeLastCodePoints($search) {
-		return $this->sideInternal(false, true, 'mb_strrpos', $search, -1);
+		return self::sideInternal($this->rawString, $this->charset, false, true, 'mb_strrpos', $search, -1);
 	}
 
 	/**
@@ -1390,7 +1390,7 @@ final class Str implements \Countable {
 	 * @return static a new instance of this class
 	 */
 	public function afterFirstBytes($search) {
-		return $this->sideInternal(true, false, 'strpos', $search, 1);
+		return self::sideInternal($this->rawString, $this->charset, true, false, 'strpos', $search, 1);
 	}
 
 	/**
@@ -1406,7 +1406,7 @@ final class Str implements \Countable {
 	 * @return static a new instance of this class
 	 */
 	public function afterFirstCodePoints($search) {
-		return $this->sideInternal(false, true, 'mb_strpos', $search, 1);
+		return self::sideInternal($this->rawString, $this->charset, false, true, 'mb_strpos', $search, 1);
 	}
 
 	/**
@@ -1432,7 +1432,7 @@ final class Str implements \Countable {
 	 * @return static a new instance of this class
 	 */
 	public function afterLastBytes($search) {
-		return $this->sideInternal(true, false, 'strrpos', $search, 1);
+		return self::sideInternal($this->rawString, $this->charset, true, false, 'strrpos', $search, 1);
 	}
 
 	/**
@@ -1448,7 +1448,7 @@ final class Str implements \Countable {
 	 * @return static a new instance of this class
 	 */
 	public function afterLastCodePoints($search) {
-		return $this->sideInternal(false, true, 'mb_strrpos', $search, 1);
+		return self::sideInternal($this->rawString, $this->charset, false, true, 'mb_strrpos', $search, 1);
 	}
 
 	/**
@@ -1795,16 +1795,16 @@ final class Str implements \Countable {
 		}
 	}
 
-	private function sideInternal($operateOnBytes, $operateOnCodePoints, callable $strposFunc, $delimiter, $direction) {
+	private static function sideInternal($subject, $encoding, $operateOnBytes, $operateOnCodePoints, callable $strposFunc, $delimiter, $direction) {
 		if ($delimiter === '') {
-			return new static('', $this->charset);
+			return new static('', $encoding);
 		}
 
 		if ($operateOnBytes) {
-			$delimiterStartPos = $strposFunc($this->rawString, $delimiter, 0);
+			$delimiterStartPos = $strposFunc($subject, $delimiter, 0);
 		}
 		elseif ($operateOnCodePoints) {
-			$delimiterStartPos = $strposFunc($this->rawString, $delimiter, 0, $this->charset);
+			$delimiterStartPos = $strposFunc($subject, $delimiter, 0, $encoding);
 		}
 		else {
 			throw new \Exception("Either 'operateOnBytes' or 'operateOnCodePoints' must be 'true'");
@@ -1820,7 +1820,7 @@ final class Str implements \Countable {
 					$offset = $delimiterStartPos + \strlen($delimiter);
 				}
 				elseif ($operateOnCodePoints) {
-					$offset = $delimiterStartPos + \mb_strlen($delimiter, $this->charset);
+					$offset = $delimiterStartPos + \mb_strlen($delimiter, $encoding);
 				}
 				else {
 					throw new \Exception("Either 'operateOnBytes' or 'operateOnCodePoints' must be 'true'");
@@ -1831,14 +1831,14 @@ final class Str implements \Countable {
 
 			if ($operateOnBytes) {
 				if ($length !== null) {
-					$newRawString = \substr($this->rawString, $offset, $length);
+					$newRawString = \substr($subject, $offset, $length);
 				}
 				else {
-					$newRawString = \substr($this->rawString, $offset);
+					$newRawString = \substr($subject, $offset);
 				}
 			}
 			elseif ($operateOnCodePoints) {
-				$newRawString = \mb_substr($this->rawString, $offset, $length, $this->charset);
+				$newRawString = \mb_substr($subject, $offset, $length, $encoding);
 			}
 			else {
 				throw new \Exception("Either 'operateOnBytes' or 'operateOnCodePoints' must be 'true'");
@@ -1848,7 +1848,7 @@ final class Str implements \Countable {
 			$newRawString = '';
 		}
 
-		return new static($newRawString, $this->charset);
+		return new static($newRawString, $encoding);
 	}
 
 }
