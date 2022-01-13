@@ -1342,7 +1342,7 @@ final class Str implements \Countable {
 	}
 
 	/**
-	 * Returns the part of this string between the two specified substrings
+	 * Returns the part of this string between the two specified substrings based on bytes
 	 *
 	 * This operation is case-sensitive
 	 *
@@ -1356,10 +1356,42 @@ final class Str implements \Countable {
 	 * @param string $end the substring whose last occurrence should delimit the end
 	 * @return static a new instance of this class
 	 */
-	public function between($start, $end) {
+	public function betweenBytes($start, $end) {
+		$afterStart = self::sideInternal($this->rawString, $this->charset, true, false, 'strpos', $start, 1);
+
+		return self::sideInternal($afterStart, $this->charset, true, false, 'strrpos', $end, -1);
+	}
+
+	/**
+	 * Returns the part of this string between the two specified substrings based on code points
+	 *
+	 * This operation is case-sensitive
+	 *
+	 * If there are multiple occurrences, the part with the maximum length will be returned
+	 *
+	 * The empty string (as a search string) is not considered to be a part of any other string
+	 *
+	 * If one of the given search strings is not found anywhere, an empty string is returned
+	 *
+	 * @param string $start the substring whose first occurrence should delimit the start
+	 * @param string $end the substring whose last occurrence should delimit the end
+	 * @return static a new instance of this class
+	 */
+	public function betweenCodePoints($start, $end) {
 		$afterStart = self::sideInternal($this->rawString, $this->charset, false, true, 'mb_strpos', $start, 1);
 
 		return self::sideInternal($afterStart, $this->charset, false, true, 'mb_strrpos', $end, -1);
+	}
+
+	/**
+	 * Alias of `betweenCodePoints`
+	 *
+	 * @param string $start
+	 * @param string $end
+	 * @return static
+	 */
+	public function between($start, $end) {
+		return $this->betweenCodePoints($start, $end);
 	}
 
 	/**
