@@ -1810,42 +1810,41 @@ final class Str implements \Countable {
 			throw new \Exception("Either 'operateOnBytes' or 'operateOnCodePoints' must be 'true'");
 		}
 
-		if ($delimiterStartPos !== false) {
-			if ($direction === -1) {
-				$offset = 0;
-				$length = $delimiterStartPos;
-			}
-			else {
-				if ($operateOnBytes) {
-					$offset = $delimiterStartPos + \strlen($delimiter);
-				}
-				elseif ($operateOnCodePoints) {
-					$offset = $delimiterStartPos + \mb_strlen($delimiter, $encoding);
-				}
-				else {
-					throw new \Exception("Either 'operateOnBytes' or 'operateOnCodePoints' must be 'true'");
-				}
+		if ($delimiterStartPos === false) {
+			return new static('', $encoding);
+		}
 
-				$length = null;
-			}
-
+		if ($direction === -1) {
+			$offset = 0;
+			$length = $delimiterStartPos;
+		}
+		else {
 			if ($operateOnBytes) {
-				if ($length !== null) {
-					$newRawString = \substr($subject, $offset, $length);
-				}
-				else {
-					$newRawString = \substr($subject, $offset);
-				}
+				$offset = $delimiterStartPos + \strlen($delimiter);
 			}
 			elseif ($operateOnCodePoints) {
-				$newRawString = \mb_substr($subject, $offset, $length, $encoding);
+				$offset = $delimiterStartPos + \mb_strlen($delimiter, $encoding);
 			}
 			else {
 				throw new \Exception("Either 'operateOnBytes' or 'operateOnCodePoints' must be 'true'");
 			}
+
+			$length = null;
+		}
+
+		if ($operateOnBytes) {
+			if ($length !== null) {
+				$newRawString = \substr($subject, $offset, $length);
+			}
+			else {
+				$newRawString = \substr($subject, $offset);
+			}
+		}
+		elseif ($operateOnCodePoints) {
+			$newRawString = \mb_substr($subject, $offset, $length, $encoding);
 		}
 		else {
-			$newRawString = '';
+			throw new \Exception("Either 'operateOnBytes' or 'operateOnCodePoints' must be 'true'");
 		}
 
 		return new static($newRawString, $encoding);
