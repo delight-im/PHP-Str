@@ -1562,7 +1562,7 @@ final class Str implements \Countable {
 	}
 
 	/**
-	 * Compares this string to another string lexicographically
+	 * Compares this string to another string lexicographically based on bytes
 	 *
 	 * This operation is case-insensitive
 	 *
@@ -1570,13 +1570,45 @@ final class Str implements \Countable {
 	 * @param bool|null $human (optional) whether to use human sorting for numbers (e.g. `2` before `10`)
 	 * @return int an indication whether this string is less than (< 0), equal (= 0) or greater (> 0)
 	 */
-	public function compareToIgnoreCase($other, $human = null) {
+	public function compareToBytesIgnoreCase($other, $human = null) {
 		if ($human) {
 			return \strnatcasecmp($this->rawString, $other);
 		}
 		else {
 			return \strcasecmp($this->rawString, $other);
 		}
+	}
+
+	/**
+	 * Compares this string to another string lexicographically based on code points
+	 *
+	 * This operation is case-insensitive
+	 *
+	 * @param string $other the other string to compare to
+	 * @param bool|null $human (optional) whether to use human sorting for numbers (e.g. `2` before `10`)
+	 * @return int an indication whether this string is less than (< 0), equal (= 0) or greater (> 0)
+	 */
+	public function compareToCodePointsIgnoreCase($other, $human = null) {
+		$a = \mb_strtolower($this->rawString, $this->charset);
+		$b = \mb_strtolower($other, $this->charset);
+
+		if ($human) {
+			return \strnatcmp($a, $b);
+		}
+		else {
+			return \strcmp($a, $b);
+		}
+	}
+
+	/**
+	 * Alias of `compareToBytesIgnoreCase`
+	 *
+	 * @param string $other
+	 * @param bool|null $human
+	 * @return int
+	 */
+	public function compareToIgnoreCase($other, $human = null) {
+		return $this->compareToBytesIgnoreCase($other, $human);
 	}
 
 	/**
