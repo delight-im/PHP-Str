@@ -1520,7 +1520,7 @@ final class Str implements \Countable {
 	}
 
 	/**
-	 * Compares this string to another string lexicographically
+	 * Compares this string to another string lexicographically based on bytes
 	 *
 	 * This operation is case-sensitive
 	 *
@@ -1528,7 +1528,7 @@ final class Str implements \Countable {
 	 * @param bool|null $human (optional) whether to use human sorting for numbers (e.g. `2` before `10`)
 	 * @return int an indication whether this string is less than (< 0), equal (= 0) or greater (> 0)
 	 */
-	public function compareTo($other, $human = null) {
+	public function compareToBytes($other, $human = null) {
 		if ($human) {
 			return \strnatcmp($this->rawString, $other);
 		}
@@ -1537,6 +1537,29 @@ final class Str implements \Countable {
 		}
 	}
 
+	/**
+	 * Compares this string to another string lexicographically based on code points
+	 *
+	 * This operation is case-sensitive
+	 *
+	 * @param string $other the other string to compare to
+	 * @param bool|null $human (optional) whether to use human sorting for numbers (e.g. `2` before `10`)
+	 * @return int an indication whether this string is less than (< 0), equal (= 0) or greater (> 0)
+	 */
+	public function compareToCodePoints($other, $human = null) {
+		return $this->compareToBytes($other, $human);
+	}
+
+	/**
+	 * Alias of `compareToCodePoints`
+	 *
+	 * @param string $other
+	 * @param bool|null $human
+	 * @return int
+	 */
+	public function compareTo($other, $human = null) {
+		return $this->compareToCodePoints($other, $human);
+	}
 
 	/**
 	 * Compares this string to another string lexicographically
